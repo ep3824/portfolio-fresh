@@ -7,7 +7,6 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -16,11 +15,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DescriptionIcon from '@mui/icons-material/Description';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
+import CodeIcon from '@mui/icons-material/Code';
 
 const drawerWidth = 240;
 
@@ -90,7 +88,7 @@ export default function PersistentDrawerLeft() {
       case 2:
         return <ContactPageIcon />;
       default:
-        return <MailIcon />;
+        return <CodeIcon />;
     }
   }
 
