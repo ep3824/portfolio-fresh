@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, ThemeProvider, Box } from '@mui/material';
+import { apiKey } from '../.apiKey';
 
-export default function Weather() {
+export default function Weather({ data }) {
+
+    const temperatureF = data ? (data.data.values.temperature * 9/5) + 32 : null;
+      
   return (
     <Box>
-        <p>The weather is 71 degrees F and sunny. The weather is 71 degrees F and sunny The weather is 71 degrees F and sunny The weather is 71 degrees F and sunny</p>
-    </Box>
+    {data ? (
+      <p>The weather in Frisco, TX is: {temperatureF}</p>
+    ) : (
+      <p>Loading weather data...</p>
+    )}
+    {/* Add any additional UI elements or logic based on the presence of data */}
+  </Box>
   );
 };

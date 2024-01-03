@@ -4,6 +4,8 @@ import Weather from './Weather';
 import { styled } from '@mui/material/styles';
 import TrafficCount from './TrafficCount';
 import Music from './Music';
+import { apiKey } from '../.apiKey';
+import { useEffect } from 'react';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -13,7 +15,29 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+
+
 export default function Dashboard() {
+
+    const [data, setData] = React.useState(null);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(`https://api.tomorrow.io/v4/weather/realtime?location=frisco&apikey=${apiKey}`);
+            if (response.ok) {
+              const result = await response.json();
+              setData(result);
+            } else {
+              console.error(`Failed to fetch weather data. Status: ${response.status}`);
+            }
+          } catch (error) {
+            console.error('Error fetching weather data:', error);
+          }
+        };
+    
+        fetchData();
+      }, []); // The empty dependency array ensures that the effect runs once when the component mounts
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -22,7 +46,7 @@ export default function Dashboard() {
             <Item><Music /></Item>
           </Grid>
           <Grid item xs={6}>
-            <Item><Weather /></Item>
+            <Item><Weather data={data}/></Item>
           </Grid>
           <Grid item xs>
             <Item><TrafficCount /></Item>
