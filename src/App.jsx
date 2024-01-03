@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Navbar from './Navbar.jsx'
 import Button from '@mui/material/Button';
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
         <Button variant ="contained" onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </Button>
+        <Navbar>
+
+        </Navbar>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
