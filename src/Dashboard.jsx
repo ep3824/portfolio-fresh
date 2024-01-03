@@ -1,41 +1,34 @@
 import React from 'react';
-import { Grid, ThemeProvider, Box } from '@mui/material';
+import { Grid, ThemeProvider, Box, Paper } from '@mui/material';
+import Weather from './Weather';
+import { styled } from '@mui/material/styles';
+import TrafficCount from './TrafficCount';
+import Music from './Music';
 
-const CustomBox = () => {
-  return (
-    <ThemeProvider
-      theme={{
-        palette: {
-          primary: {
-            main: '#007FFF',
-            dark: '#0066CC',
-          },
-        },
-      }}
-    >
-      <Box
-        sx={{
-          width: 100,
-          height: 100,
-          borderRadius: 1,
-          bgcolor: 'primary.main',
-          '&:hover': {
-            bgcolor: 'primary.dark',
-          },
-        }}
-      />
-    </ThemeProvider>
-  );
-};
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Dashboard() {
-  return (
-    <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-      {[1, 2, 3, 4].map((item) => (
-        <Grid item xs={6} key={item}>
-          <CustomBox />
+
+    return (
+        <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid item xs>
+            <Item><Music /></Item>
+          </Grid>
+          <Grid item xs={6}>
+            <Item><Weather /></Item>
+          </Grid>
+          <Grid item xs>
+            <Item><TrafficCount /></Item>
+          </Grid>
         </Grid>
-      ))}
-    </Grid>
-  );
-};
+      </Box>
+            
+    );
+}

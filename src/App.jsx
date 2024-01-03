@@ -3,30 +3,53 @@ import { useState } from 'react'
 
 import './App.css'
 import Navbar from './Navbar.jsx'
-import Button from '@mui/material/Button';
 import Dashboard from './Dashboard.jsx'
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Unstable_Grid2';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Projects from './Projects.jsx';
+import Resume from './Resume.jsx';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 
 function App() {
   const [count, setCount] = useState(1)
 
   return (
     <>
-      <h1>TBD Portfolio Website</h1>
+      <Grid container spacing={2} columns={1}>
+        <Grid xs={8}>
+            <Item><h1>TBD Portfolio Website</h1></Item>
+        </Grid>
+        <Grid xs={8}>
+          <Item>
+            <Dashboard></Dashboard>
+          </Item>
+          <Item>
+            <Projects />
+          </Item>
+          <Item>
+            <Resume />
+          </Item>
+        </Grid>
+      </Grid>
+      
       <div className="card">
         <Button variant ="contained" onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </Button>
         <Navbar>
-
         </Navbar>
-        <Dashboard></Dashboard>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
