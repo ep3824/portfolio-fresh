@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Grid, ThemeProvider, Box } from '@mui/material';
-import { apiKey } from '../.apiKey';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from '@mui/icons-material/Cloud';
 import { BarChart } from '@mui/x-charts/BarChart';

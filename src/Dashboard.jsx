@@ -4,8 +4,8 @@ import Weather from './Weather';
 import { styled } from '@mui/material/styles';
 import TrafficCount from './TrafficCount';
 import Music from './Music';
-import { apiKey } from '../.apiKey';
 import { useEffect } from 'react';
+const apiKey = import.meta.env.VITE_API_KEY;
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -32,7 +32,7 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch(`https://api.tomorrow.io/v4/weather/realtime?location=frisco&apikey=${apiKey}`);
+            const response = await fetch('/api/realtime?location=frisco&apikey=' + apiKey);
             if (response.ok) {
               const result = await response.json();
               setData(result);
@@ -46,7 +46,7 @@ export default function Dashboard() {
 
         const fetchData2 = async () => {
           try {
-            const response = await fetch(`https://api.tomorrow.io/v4/weather/history/recent?location=frisco&apikey=${apiKey}`);
+            const response = await fetch('/api/history/recent?location=frisco&apikey=' + apiKey);
             if (response.ok) {
               const result = await response.json();
               setData2(result);
