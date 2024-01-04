@@ -5,6 +5,8 @@ import { styled } from '@mui/material/styles';
 import TrafficCount from './TrafficCount';
 import Music from './Music';
 import { useEffect } from 'react';
+import realtimeData from '../apiRealtimeData';
+import forecastData from '../apiForecastData';
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -25,42 +27,56 @@ const Item = styled(Paper)(({ theme }) => ({
  */
 
 export default function Dashboard() {
+  const [realtimeDataState, setRealtimeDataState] = React.useState(null);
+  const [forecastDataState, setForecastDataState] = React.useState(null);
 
-    const [data, setData] = React.useState(null);
-    const [data2, setData2] = React.useState(null);
-    
+
+
+
+    // I have to comment this out in Dev. because of API rate limits
+    // For now, I am using a local JSON file to test the Weather component
+
+    // const [data, setData] = React.useState(null);
+    // const [data2, setData2] = React.useState(null);
+
     useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch('/api/realtime?location=frisco&apikey=' + apiKey);
-            if (response.ok) {
-              const result = await response.json();
-              setData(result);
-            } else {
-              console.error(`Failed to fetch weather data. Status: ${response.status}`);
-            }
-          } catch (error) {
-            console.error('Error fetching weather data:', error);
-          }
-        };
-
-        const fetchData2 = async () => {
-          try {
-            const response = await fetch('/api/forecast?location=frisco&timesteps=1d&apikey=' + apiKey);
-            if (response.ok) {
-              const result = await response.json();
-              setData2(result);
-            } else {
-              console.error(`Failed to fetch weather data. Status: ${response.status}`);
-            }
-          } catch (error) {
-            console.error('Error fetching weather data:', error);
-          }
-        };
+      apiRealtimeData().then((data) => setRealtimeDataState(data));
+      apiForecastData().then((data) => setForecastDataState(data));
+    }, []);
     
-        fetchData();
-        fetchData2();
-      }, []); // The empty dependency array ensures that the effect runs once when the component mounts
+    
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //       try {
+    //         const response = await fetch('/api/realtime?location=frisco&apikey=' + apiKey);
+    //         if (response.ok) {
+    //           const result = await response.json();
+    //           setData(result);
+    //         } else {
+    //           console.error(`Failed to fetch weather data. Status: ${response.status}`);
+    //         }
+    //       } catch (error) {
+    //         console.error('Error fetching weather data:', error);
+    //       }
+    //     };
+
+    //     const fetchData2 = async () => {
+    //       try {
+    //         const response = await fetch('/api/forecast?location=frisco&timesteps=1d&apikey=' + apiKey);
+    //         if (response.ok) {
+    //           const result = await response.json();
+    //           setData2(result);
+    //         } else {
+    //           console.error(`Failed to fetch weather data. Status: ${response.status}`);
+    //         }
+    //       } catch (error) {
+    //         console.error('Error fetching weather data:', error);
+    //       }
+    //     };
+    
+    //     fetchData();
+    //     fetchData2();
+    //   }, []); // The empty dependency array ensures that the effect runs once when the component mounts
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -69,7 +85,7 @@ export default function Dashboard() {
             <Item><Music /></Item>
           </Grid>
           <Grid item xs={6}>
-            <Item><Weather data={data} data2={data2}/></Item>
+            <Item><Weather realtimeData={realtimeData} forecastData={forecastData}/></Item>
           </Grid>
           <Grid item xs>
             <Item><TrafficCount /></Item>

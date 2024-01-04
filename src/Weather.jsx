@@ -3,26 +3,28 @@ import { Grid, ThemeProvider, Box } from '@mui/material';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from '@mui/icons-material/Cloud';
 import { LineChart } from '@mui/x-charts/LineChart';
+import forecastData from '../apiForecastData';
+import realtimeData from '../apiRealtimeData';
 
 
-export default function Weather({ data, data2 }) {
-  console.log('Data:', data);
-  console.log('Data2:', data2);
+export default function Weather({ realtimeData, forecastData }) {
+  console.log('realtimeData', realtimeData);
+  console.log('forecastData', forecastData);
 
-  const temperatureF = data ? (data.data.values.temperature * 9 / 5) + 32 : null;
-  const temperatureC = data ? data.data.values.temperature : null;
-  const cloudCover = data ? data.data.values.cloudCover : null;
+  const temperatureF = realtimeData ? (realtimeData.data.values.temperature * 9 / 5) + 32 : null;
+  const temperatureC = realtimeData ? realtimeData.data.values.temperature : null;
+  const cloudCover = realtimeData ? realtimeData.data.values.cloudCover : null;
   const weatherImg = cloudCover ? (cloudCover > 50 ? <CloudIcon /> : <WbSunnyIcon />) : null;
 
   const tempData = {}
-  data2 ? data2.timelines.daily.map((day) => tempData[day].time = day.temperatureAvg) : null;
+  forecastData ? forecastData.timelines.daily.map((day) => tempData[day].time = day.temperatureAvg) : null;
 
   const cloudCoverData = {};
-  data2 ? data2.timelines.daily.map((day) => cloudCoverData[day].time = day.cloudCoverAvg) : null;
+  forecastData ? forecastData.timelines.daily.map((day) => cloudCoverData[day].time = day.cloudCoverAvg) : null;
 
   return (
     <Box>
-    {data ? (
+    {realtimeData ? (
       <Grid>
         <p>The weather in Frisco, TX is: {temperatureF} °F or {temperatureC} °C.</p>
         <p>Cloud cover is at {cloudCover} %</p>
@@ -80,7 +82,7 @@ export default function Weather({ data, data2 }) {
     ) : (
       <p>Loading weather data...</p>
     )}
-    {data ? (
+    {realtimeData ? (
       <p>{weatherImg}</p>
     ) : (
       <p>Loading weather data...</p>
