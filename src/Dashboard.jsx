@@ -27,8 +27,25 @@ const Item = styled(Paper)(({ theme }) => ({
  */
 
 export default function Dashboard() {
+
+  //This is the version that uses the local files, NOT the API:
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
   const [forecastDataState, setForecastDataState] = React.useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setRealtimeDataState(realtimeData);
+    }
+
+    const fetchData2 = async () => {
+      setForecastDataState(forecastData);
+    }
+
+    fetchData();
+    fetchData2();
+  }, []); // The empty dependency array ensures that the effect runs once when the component mounts
+    
+
 
 
 
@@ -39,10 +56,7 @@ export default function Dashboard() {
     // const [data, setData] = React.useState(null);
     // const [data2, setData2] = React.useState(null);
 
-    useEffect(() => {
-      apiRealtimeData().then((data) => setRealtimeDataState(data));
-      apiForecastData().then((data) => setForecastDataState(data));
-    }, []);
+    
     
     
     // useEffect(() => {
@@ -85,7 +99,7 @@ export default function Dashboard() {
             <Item><Music /></Item>
           </Grid>
           <Grid item xs={6}>
-            <Item><Weather realtimeData={realtimeData} forecastData={forecastData}/></Item>
+            <Item><Weather realtimeData={realtimeDataState} forecastData={forecastDataState}/></Item>
           </Grid>
           <Grid item xs>
             <Item><TrafficCount /></Item>
