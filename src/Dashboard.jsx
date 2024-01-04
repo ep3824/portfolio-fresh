@@ -46,7 +46,7 @@ export default function Dashboard() {
 
         const fetchData2 = async () => {
           try {
-            const response = await fetch('/api/history/recent?location=frisco&apikey=' + apiKey);
+            const response = await fetch('/api/forecast?location=frisco&timesteps=1d&apikey=' + apiKey);
             if (response.ok) {
               const result = await response.json();
               setData2(result);

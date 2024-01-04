@@ -13,10 +13,10 @@ export default defineConfig({
           'Content-Type': 'application/json',
         },
       },
-      '/api/history/recent': {
-        target: 'https://api.tomorrow.io/v4/weather/history/recent',
+      '/api/forecast': {
+        target: 'https://api.tomorrow.io/v4/weather/forecast',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/history\/recent/, ''),
+        rewrite: (path) => path.replace(/^\/api\/forecast/, ''),
         headers: {
           'Content-Type': 'application/json',
         },
