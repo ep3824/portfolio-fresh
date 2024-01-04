@@ -17,9 +17,17 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
+/**
+ * Renders the Dashboard component.
+ * Fetches weather data from the Tomorrow.io API and displays it along with other components.
+ *
+ * @returns {JSX.Element} The rendered Dashboard component.
+ */
+
 export default function Dashboard() {
 
     const [data, setData] = React.useState(null);
+    const [data2, setData2] = React.useState(null);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -35,8 +43,23 @@ export default function Dashboard() {
             console.error('Error fetching weather data:', error);
           }
         };
+
+        const fetchData2 = async () => {
+          try {
+            const response = await fetch(`https://api.tomorrow.io/v4/weather/history/recent?location=frisco&apikey=${apiKey}`);
+            if (response.ok) {
+              const result = await response.json();
+              setData2(result);
+            } else {
+              console.error(`Failed to fetch weather data. Status: ${response.status}`);
+            }
+          } catch (error) {
+            console.error('Error fetching weather data:', error);
+          }
+        };
     
         fetchData();
+        fetchData2();
       }, []); // The empty dependency array ensures that the effect runs once when the component mounts
 
     return (
@@ -46,7 +69,7 @@ export default function Dashboard() {
             <Item><Music /></Item>
           </Grid>
           <Grid item xs={6}>
-            <Item><Weather data={data}/></Item>
+            <Item><Weather data={data} data2={data2}/></Item>
           </Grid>
           <Grid item xs>
             <Item><TrafficCount /></Item>
