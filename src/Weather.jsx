@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid, createTheme, ThemeProvider, Box } from '@mui/material';
+import { Grid, createTheme, ThemeProvider, Box, Typography } from '@mui/material';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from '@mui/icons-material/Cloud';
 import { LineChart } from '@mui/x-charts/LineChart';
@@ -51,8 +51,16 @@ export default function Weather({ realtimeData, forecastData }) {
         {realtimeData ? (
           <Grid >
             <Grid >
-              <p>The weather in Frisco, TX is: {temperatureF} °F or {temperatureC} °C.</p>
-              <p>Cloud cover is at {cloudCover} %</p>
+              <Typography variant="h5" component="div" gutterBottom>
+                Weather
+              </Typography>
+              <Typography variant="h7" component="div" gutterBottom>
+                The weather in Frisco, TX is: {temperatureF} °F or {temperatureC} °C.
+              </Typography>
+              <Typography variant="h7" component="div" gutterBottom>
+                Cloud cover is at {cloudCover} %.
+              </Typography>
+
               {realtimeData ? (
                 <p>{weatherImg}</p>
               ) : (
@@ -77,7 +85,7 @@ export default function Weather({ realtimeData, forecastData }) {
                       data: days,
                       scaleType: 'point',
                       orientation: 'bottom',
-                      
+
                     }
                   ]}
                   yAxis={[
@@ -85,10 +93,10 @@ export default function Weather({ realtimeData, forecastData }) {
                       type: 'linear',
                       orientation: 'left',
                       id: 'temperature',
-
-                      name: 'Temperature (°C)',
+                      name: 'Temperature (°F)',
                       unit: '°C',
-                      
+                      label: 'Temperature (°F)',
+
                     }
                   ]}
                   series={[
@@ -113,12 +121,13 @@ export default function Weather({ realtimeData, forecastData }) {
                     path: {
                       strokeWidth: 4,
                     },
-                    
+
                   }}
-                  
+
+
                 >
-                  
-                  
+
+
                 </LineChart>
               ) : (
                 <p>No forecast data available.</p>
