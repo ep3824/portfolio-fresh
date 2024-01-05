@@ -3,21 +3,32 @@ import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { Grid, createTheme, ThemeProvider, Box, Typography } from '@mui/material';
 
-export default function GitHub() {
+export default function GitHub({GitHubData}) {
+    
+    console.log("This is what gitHubCommitOutput looks like: ", gitHubCommitOutput)
     let dates = [];
     let commits = [];
     const commitCounter = {};
 
-    gitHubCommitOutput.forEach((commit) => {
-        const utcDate = new Date(commit.commit.author.date)
-        const formattedDate = utcDate.toLocaleDateString('en-US', {
-            day: 'numeric',
-            month: 'short',
-            timeSonze: 'UTC',
-        });
+    {GitHubData ? (
+        GitHubData.forEach((commit) => {
+            const utcDate = new Date(commit.commit.author.date)
+            const formattedDate = utcDate.toLocaleDateString('en-US', {
+                day: 'numeric',
+                month: 'short',
+                timeSonze: 'UTC',
+            });
+            
+            commitCounter[formattedDate] = (commitCounter[formattedDate] || 0) + 1; // Increment the count for the specific date
+        })
         
-        commitCounter[formattedDate] = (commitCounter[formattedDate] || 0) + 1; // Increment the count for the specific date
-    });
+    ) : (
+        <div>
+            <p>GitHub data loading....</p>
+        </div>
+    )}
+
+    
 
     // Display the commit count for each day
     const commitCountByDay = Object.entries(commitCounter).forEach(([date, count]) => (
@@ -37,6 +48,7 @@ export default function GitHub() {
     return (
         <ThemeProvider theme={darkTheme}>
             <Box>
+                {GitHubData ? (
                 <Grid>
                     <Grid >
                         <Typography variant="h5" component="div" gutterBottom>
@@ -87,6 +99,11 @@ export default function GitHub() {
                     </Box>
                     <Box />
                 </Grid>
+                ) : (
+                    <div>
+                        <p>GitHub data loading....</p>
+                    </div>
+                )}
             </Box>
         </ThemeProvider>
     );

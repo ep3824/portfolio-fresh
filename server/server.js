@@ -2,7 +2,8 @@ import expresss from 'express';
 const app = expresss();
 const port = 3000;
 import config from './config.js';
-const apiKey = config;
+const apiKey = config.weatherApiKey;
+const gitHubToken = config.gitHubToken;
 import mcache from 'memory-cache';
 import cors from 'cors';
 
@@ -55,3 +56,21 @@ app.get('/api/forecast', cache(86400), (req, res) => {
             console.error('Error:', error);
         });
 });
+
+app.get('/api/gitCommits', cache(86400), (req, res) => {
+    console.log('Querying GitHub data...')
+    fetch('https://api.github.com/repos/ep3824/portfolio-dash-3/commits', {
+        method: 'GET',
+        headers: {
+            "Accept": "application/vnd.github+json",
+            "Authorization": `Bearer ${gitHubToken}`,
+            "X-GitHub-Api-Version": "2022-11-28",
+        }
+    })
+        .then((response) => response.json())
+        .then((data) => res.json(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+});
+

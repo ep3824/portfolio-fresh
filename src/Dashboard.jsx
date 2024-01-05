@@ -59,14 +59,13 @@ export default function Dashboard() {
 
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
   const [forecastDataState, setForecastDataState] = React.useState(null);
+  const [GitHubDataState, setGitHubDataState] = React.useState(null);
 
 
 
   useEffect(() => {
     const fetchRealtimeData = async () => {
       try {
-        // Harcoding this for now,
-        // const response = await fetch('http://localhost:3000/api/forecast');
         const response = await fetch('/api/realtime');
             if (response.ok) {
           const realtimeData = await response.json();
@@ -75,14 +74,12 @@ export default function Dashboard() {
           console.error(`Failed to fetch weather data. Status: ${response.status}`);
         }
       } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.error('Error fetching realtime weather data:', error);
       }
     };
 
     const fetchForecastData = async () => {
       try {
-        // Harcoding this for now,
-        // const response = await fetch('http://localhost:3000/api/forecast');
         const response = await fetch('/api/forecast');
             if (response.ok) {
           const forecastData = await response.json();
@@ -91,19 +88,34 @@ export default function Dashboard() {
           console.error(`Failed to fetch weather data. Status: ${response.status}`);
         }
       } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.error('Error fetching Forecast data:', error);
+      }
+    };
+
+    const fetchGitHubData = async () => {
+      try {
+        const response = await fetch('/api/gitCommits');
+            if (response.ok) {
+          const GitHubData = await response.json();
+          setGitHubDataState(GitHubData);
+        } else {
+          console.error(`Failed to fetch weather data. Status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error fetching GitHub data:', error);
       }
     };
 
     fetchRealtimeData();
     fetchForecastData();
+    fetchGitHubData();
   }, []); // The empty dependency array ensures that the effect runs once when the component mounts
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item xs>
-          <Item><GitHub /></Item>
+          <Item><GitHub GitHubData={GitHubDataState}/></Item>
         </Grid>
         <Grid item xs={6}>
           <Item><Weather realtimeData={realtimeDataState} forecastData={forecastDataState} /></Item>
