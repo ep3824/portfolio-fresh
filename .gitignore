@@ -26,3 +26,7 @@ dist-ssr
 # ENV Variables
 .env
 config.js
+
+# ExampleData
+gitHubCommitOutput.js
+gitHubCurl.txt

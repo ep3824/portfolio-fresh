@@ -4,6 +4,7 @@ import Weather from './Weather';
 import { styled } from '@mui/material/styles';
 import TrafficCount from './TrafficCount';
 import Music from './Music';
+import GitHub from './GitHub';
 import { useEffect } from 'react';
 // import realtimeData from '../apiRealtimeData';
 // import forecastData from '../apiForecastData';
@@ -102,7 +103,7 @@ export default function Dashboard() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item xs>
-          <Item><Music /></Item>
+          <Item><GitHub /></Item>
         </Grid>
         <Grid item xs={6}>
           <Item><Weather realtimeData={realtimeDataState} forecastData={forecastDataState} /></Item>

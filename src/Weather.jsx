@@ -71,7 +71,7 @@ export default function Weather({ realtimeData, forecastData }) {
                 borderRadius: 5,
                 p: 2,
                 boxShadow: '0 4px 8px rgba(0, 0, 0, .5)',
-                backgroundImage: 'linear-gradient(to bottom, #3498db, #2980b9)', //blue to blue
+                backgroundImage: 'linear-gradient(to right bottom, #2980b9, #3498db)', //blue to blue
               }}
             >
               {realtimeData && forecastData && forecastData.timelines.daily.length > 0 ? (
