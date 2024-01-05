@@ -16,8 +16,8 @@ export default function Weather({ realtimeData, forecastData }) {
   console.log('realtimeData', realtimeData);
   console.log('forecastData', forecastData);
 
-  const temperatureF = realtimeData ? (realtimeData.data.values.temperature * 9 / 5) + 32 : null;
-  const temperatureC = realtimeData ? realtimeData.data.values.temperature : null;
+  const temperatureF = realtimeData ? (Math.round(realtimeData.data.values.temperature * 9 / 5) + 32) : null;
+  const temperatureC = realtimeData ? Math.round(realtimeData.data.values.temperature) : null;
   const cloudCover = realtimeData ? realtimeData.data.values.cloudCover : null;
   const weatherImg = cloudCover ? (cloudCover > 50 ? <CloudIcon /> : <WbSunnyIcon />) : null;
 
@@ -27,7 +27,7 @@ export default function Weather({ realtimeData, forecastData }) {
   forecastData ? forecastData.timelines.daily.map((day) => days.push(formatDateWithoutYear(day.time))) : [];
 
   //Convert temp data to F
-  tempData.map((temp, index) => tempData[index] = (temp * 9 / 5) + 32);
+  tempData.map((temp, index) => tempData[index] = Math.round((temp * 9 / 5) + 32));
 
 
   const cloudCoverData = [];
@@ -54,18 +54,15 @@ export default function Weather({ realtimeData, forecastData }) {
               <Typography variant="h5" component="div" gutterBottom>
                 Weather
               </Typography>
-              <Typography variant="h7" component="div" gutterBottom>
-                The weather in Frisco, TX is: {temperatureF} °F or {temperatureC} °C.
-              </Typography>
+              <Box>
+                <Typography variant="h7" component="div" gutterBottom>
+                  Frisco, TX is {temperatureF} °F / {temperatureC} °C.
+                </Typography>
+                {weatherImg}
+              </Box>
               <Typography variant="h7" component="div" gutterBottom>
                 Cloud cover is at {cloudCover} %.
               </Typography>
-
-              {realtimeData ? (
-                <p>{weatherImg}</p>
-              ) : (
-                <p>Loading weather data...</p>
-              )}
             </Grid>
 
             <Box

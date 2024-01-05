@@ -6,21 +6,14 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/realtime': {
-        target: 'https://api.tomorrow.io/v4/weather/realtime',
+        target: 'http://localhost:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/realtime/, ''),
-        headers: {
-          'Content-Type': 'application/json',
-        },
       },
       '/api/forecast': {
-        target: 'https://api.tomorrow.io/v4/weather/forecast',
+        target: 'http://localhost:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/forecast/, ''),
-        headers: {
-          'Content-Type': 'application/json',
-        },
       },
     },
+    logLevel: 'debug',
   },
 });
