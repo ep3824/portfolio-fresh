@@ -38,9 +38,6 @@ export default function Weather({ realtimeData, forecastData }) {
     },
   });
 
-  console.log("this is temp data, inside the series in Weather:", tempData)
-  console.log("this is days data, inside the series in Weather:", days)
-
   return (
     <ThemeProvider theme={darkTheme}>
       <Box >

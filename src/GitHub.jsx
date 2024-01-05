@@ -15,9 +15,7 @@ export default function GitHub() {
             month: 'short',
             timeSonze: 'UTC',
         });
-        console.log("This is the formatted date", formattedDate)
         
-        // const commitDate = commit.commit.author.date.split('T')[0]; // Extract the date from the commit's timestamp
         commitCounter[formattedDate] = (commitCounter[formattedDate] || 0) + 1; // Increment the count for the specific date
     });
 
@@ -28,39 +26,6 @@ export default function GitHub() {
 
     Object.entries(commitCounter).forEach(([date, count]) => ( dates.unshift(date) ));
 
-    
-    console.log('This is what commits arr looks liek:', commits)
-    console.log("This is the commit array", commitCountByDay)
-
-    //Just for testing some data
-    const testData = [
-        { date: 'Jan 5', commits: 2 },
-        { date: 'Jan 4', commits: 7 },
-        { date: 'Jan 3', commits: 5 },
-    ]
-
-    const testData2 = [
-        {
-            "commit": {
-                "author": {
-                    "date": "2021-10-04T17:19:32Z"
-                }
-            }
-        }
-    ]
-
-    console.log("this is the day data in GitHub:", dates)
-    console.log("this is the commit data in GitHub:", commits)
-    
-
-    // for (let i = 0; i < testData.length; i++) {
-    //     dates.unshift(testData[i].date)
-    //     commits.unshift(testData[i].commits)
-    // }
-
-    const testDataArr = [
-
-    ]
     // Create a dark theme
     const darkTheme = createTheme({
         palette: {
