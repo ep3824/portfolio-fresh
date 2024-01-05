@@ -13,9 +13,6 @@ export default function Weather({ realtimeData, forecastData }) {
     return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' }).format(new Date(inputDate));
   }
 
-  console.log('realtimeData', realtimeData);
-  console.log('forecastData', forecastData);
-
   const temperatureF = realtimeData ? (Math.round(realtimeData.data.values.temperature * 9 / 5) + 32) : null;
   const temperatureC = realtimeData ? Math.round(realtimeData.data.values.temperature) : null;
   const cloudCover = realtimeData ? realtimeData.data.values.cloudCover : null;
@@ -33,10 +30,6 @@ export default function Weather({ realtimeData, forecastData }) {
   const cloudCoverData = [];
   forecastData ? forecastData.timelines.daily.map((day) => cloudCoverData.push(day.values.cloudCoverAvg)) : [];
 
-  console.log("tempData is:", tempData);
-  console.log("days is:", days);
-  console.log("cloudCoverData is:", cloudCoverData);
-
   // Create a dark theme
   const darkTheme = createTheme({
     palette: {
@@ -44,6 +37,9 @@ export default function Weather({ realtimeData, forecastData }) {
       // You can customize other theme options here
     },
   });
+
+  console.log("this is temp data, inside the series in Weather:", tempData)
+  console.log("this is days data, inside the series in Weather:", days)
 
   return (
     <ThemeProvider theme={darkTheme}>
