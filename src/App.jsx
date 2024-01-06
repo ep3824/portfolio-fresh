@@ -47,12 +47,12 @@ function App() {
     <ThemeProvider theme={darkTheme} >
 
 
-      <div style={{ padding: '0rem' }}>
-        <Grid container spacing={2} >
+      <div className="App">
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid xs={12} md={8}>
             <Item><h1>TBD Portfolio Website</h1></Item>
           </Grid>
-          <Grid xs={8} md={8}>
+          <Grid xs={8} md={8} flexGrow={.9}>
             <Item>
               <Dashboard ></Dashboard>
             </Item>
@@ -72,7 +72,8 @@ function App() {
           <Navbar>
           </Navbar>
         </div>
-      </div >
+      </div>
+
     </ThemeProvider>
   );
 }
