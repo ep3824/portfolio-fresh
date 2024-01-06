@@ -1,11 +1,10 @@
-import gitHubCommitOutput from "../gitHubCommitOutput";
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { Grid, createTheme, ThemeProvider, Box, Typography } from '@mui/material';
 
 export default function GitHub({GitHubData}) {
     
-    console.log("This is what gitHubCommitOutput looks like: ", gitHubCommitOutput)
+    
     let dates = [];
     let commits = [];
     const commitCounter = {};
@@ -46,7 +45,7 @@ export default function GitHub({GitHubData}) {
     });
 
     return (
-        <ThemeProvider theme={darkTheme}>
+        
             <Box>
                 {GitHubData ? (
                 <Grid>
@@ -105,7 +104,7 @@ export default function GitHub({GitHubData}) {
                     </div>
                 )}
             </Box>
-        </ThemeProvider>
+        
     );
 }
 

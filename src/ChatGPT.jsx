@@ -5,7 +5,7 @@ import { Grid, Box, Paper } from '@mui/material';
 import { createTheme, ThemeProvider, Typography } from '@mui/material';
 import { FormControl, useFormControlContext } from '@mui/base/FormControl';
 import { Input, inputClasses } from '@mui/base/Input';
-import { styled } from '@mui/system';
+import styled from '@mui/system/styled';
 import clsx from 'clsx';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -30,7 +30,7 @@ export default function ChatGPT() {
 
   // main();
   return (
-    <ThemeProvider theme={darkTheme}>
+    
       <Box>
         <Grid>
           <Paper
@@ -69,18 +69,12 @@ export default function ChatGPT() {
           </Paper>
         </Grid>
       </Box>
-    </ThemeProvider>
+    
 
 
   )
 }
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    // You can customize other theme options here
-  },
-});
 
 const StyledInput = styled(Input)(
   ({ theme }) => `

@@ -30,16 +30,10 @@ export default function Weather({ realtimeData, forecastData }) {
   const cloudCoverData = [];
   forecastData ? forecastData.timelines.daily.map((day) => cloudCoverData.push(day.values.cloudCoverAvg)) : [];
 
-  // Create a dark theme
-  const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-      // You can customize other theme options here
-    },
-  });
+
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    
       <Box >
         {realtimeData ? (
           <Grid >
@@ -132,7 +126,7 @@ export default function Weather({ realtimeData, forecastData }) {
         )}
 
       </Box>
-    </ThemeProvider>
+    
   );
 
 };

@@ -11,7 +11,8 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Projects from './Projects.jsx';
 import Resume from './Resume.jsx';
-import { makeStyles as makeStyles } from '@mui/system';
+// import { makeStyles } from '@mui/system';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -22,27 +23,38 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: '0rem',
+// const useNoPaddingStyles = makeStyles((theme) => ({
+//   root: {
+//     padding: '0rem',
+//   },
+// }));
+
+ // Create a dark theme
+ const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    // You can customize other theme options here
   },
-}));
+});
 
 
 function App() {
   const [count, setCount] = useState(1)
 
-  const classes = useStyles();
+  // const classes = useNoPaddingStyles();
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={2} columns={1} >
+    <ThemeProvider theme={darkTheme}>
+
+    
+    <div style={{ padding: '0rem' }}>
+      <Grid spacing={2} columns={1} >
         <Grid xs={8}>
             <Item><h1>TBD Portfolio Website</h1></Item>
         </Grid>
         <Grid xs={8}>
           <Item>
-            <Dashboard></Dashboard>
+            <Dashboard ></Dashboard>
           </Item>
           <Item>
             <Projects />
@@ -61,6 +73,7 @@ function App() {
         </Navbar>
       </div>
     </div >
+    </ThemeProvider>
   );
 }
 
