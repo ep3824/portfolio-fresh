@@ -1,7 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
 import OpenAI from "openai";
 import CHATGPT_API_KEY from "../deleteLater.js";
-import { Grid, Box, Paper } from '@mui/material';
+import { Grid, Box, Paper, TextField } from '@mui/material';
 import { createTheme, ThemeProvider, Typography } from '@mui/material';
 import { FormControl, useFormControlContext } from '@mui/base/FormControl';
 import { Input, inputClasses } from '@mui/base/Input';
@@ -13,6 +14,8 @@ import Stack from '@mui/material/Stack';
 const openai = new OpenAI({ apiKey: CHATGPT_API_KEY, dangerouslyAllowBrowser: true });
 
 export default function ChatGPT() {
+  const [inputValue, setInputValue] = useState('');
+  const [submittedValue, setSubmittedQuery] = useState(null);
 
   async function main() {
     const completion = await openai.chat.completions.create({
@@ -25,51 +28,54 @@ export default function ChatGPT() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('submitHandler');
+    const userInput = e.target[0].value;
+    console.log(e.target[0].value);
+    setSubmittedQuery(userInput);
   }
+
+
 
   // main();
   return (
-    
-      <Box>
-        <Grid>
-          <Paper
-            sx={{
-              height: 260,
-              borderRadius: 5,
-              p: 2,
-              boxShadow: '0 4px 8px rgba(0, 0, 0, .5)',
-              backgroundImage: 'linear-gradient(to right bottom, red, magenta)', 
-            }}
-          >
-            <Typography variant="h5" component="div" gutterBottom>
-              Ethandroid 5000
-            </Typography>
-            <Typography variant="h7" component="div" gutterBottom>
-              Ask it something:
-            </Typography>
 
-            <FormControl defaultValue="" required label="input text" onSubmit={submitHandler}>
-              <StyledInput placeholder="Ask me anything!" />
-              <HelperText />
-              {/* <Stack direction="row" spacing={2}>
-                <Button variant="outlined">Primary</Button>
-                <Button variant="outlined" disabled>
-                  Disabled
-                </Button>
-                <Button variant="outlined" href="#outlined-buttons">
-                  Link
-                </Button>
+    <Box>
+      <Grid>
+        <Paper
+          sx={{
+            height: 260,
+            borderRadius: 5,
+            p: 2,
+            boxShadow: '0 4px 8px rgba(0, 0, 0, .5)',
+            backgroundImage: 'linear-gradient(to right bottom, red, magenta)',
+          }}
+        >
+          <Typography variant="h5" component="div" gutterBottom>
+            Ethandroid 5000
+          </Typography>
+
+
+
+          <form onSubmit={e => submitHandler(e)} sx={{ maxWidth: 300 }}>
+            {/* <StyledInput placeholder="Ask me anything!" /> */}
+            <TextField label="Ask me anything!" />
+            <Button variant="outlined" type="submit">Submit</Button>
+          </form>
+          {/* <Stack direction="row" spacing={2}>
+                <Button variant="outlined" type="submit">Send</Button>
               </Stack> */}
-            </FormControl>
 
+          { submittedValue !== null && (
             <Typography variant="h7" component="div" gutterBottom>
-              I will respond when I'm ready...
+              {submittedValue}
             </Typography>
-          </Paper>
-        </Grid>
-      </Box>
-    
+          )}
+          <Typography variant="h7" component="div" gutterBottom>
+            I will respond when I'm ready...
+          </Typography>
+        </Paper>
+      </Grid>
+    </Box>
+
 
 
   )
