@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Box, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import ChatGPT from './ChatGPT';
 
 
 
@@ -19,7 +20,7 @@ export default function Projects() {
             <h2>Projects</h2>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 <Grid item xs>
-                    <Item>Project 1</Item>
+                    <Item><ChatGPT /></Item>
                 </Grid>
                 <Grid item xs={6}>
                     <Item>Project 2</Item>

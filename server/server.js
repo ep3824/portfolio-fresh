@@ -57,7 +57,7 @@ app.get('/api/forecast', cache(86400), (req, res) => {
         });
 });
 
-app.get('/api/gitCommits', cache(86400), (req, res) => {
+app.get('/api/gitCommits', cache(3600), (req, res) => {
     console.log('Querying GitHub data...')
     fetch('https://api.github.com/repos/ep3824/portfolio-dash-3/commits', {
         method: 'GET',
