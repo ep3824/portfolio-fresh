@@ -7,6 +7,8 @@ import { FormControl, useFormControlContext } from '@mui/base/FormControl';
 import { Input, inputClasses } from '@mui/base/Input';
 import { styled } from '@mui/system';
 import clsx from 'clsx';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 const openai = new OpenAI({ apiKey: CHATGPT_API_KEY, dangerouslyAllowBrowser: true });
 
@@ -21,25 +23,52 @@ export default function ChatGPT() {
     console.log(completion.choices[0]);
   }
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log('submitHandler');
+  }
+
   // main();
   return (
     <ThemeProvider theme={darkTheme}>
-    <Box>
-      <Grid>
-        <Paper>
-          <Typography variant="h5" component="div" gutterBottom>
-            ChatGPT Bot
-          </Typography>
-          <Typography variant="h7" component="div" gutterBottom>
-            Ask it something:
-          </Typography>
-          <FormControl defaultValue="" required label="input text">
-            <StyledInput placeholder="Ask me anything!" />
-            <HelperText />
-          </FormControl>
-        </Paper>
-      </Grid>
-    </Box>
+      <Box>
+        <Grid>
+          <Paper
+            sx={{
+              height: 260,
+              borderRadius: 5,
+              p: 2,
+              boxShadow: '0 4px 8px rgba(0, 0, 0, .5)',
+              backgroundImage: 'linear-gradient(to right bottom, red, magenta)', 
+            }}
+          >
+            <Typography variant="h5" component="div" gutterBottom>
+              Ethandroid 5000
+            </Typography>
+            <Typography variant="h7" component="div" gutterBottom>
+              Ask it something:
+            </Typography>
+
+            <FormControl defaultValue="" required label="input text" onSubmit={submitHandler}>
+              <StyledInput placeholder="Ask me anything!" />
+              <HelperText />
+              {/* <Stack direction="row" spacing={2}>
+                <Button variant="outlined">Primary</Button>
+                <Button variant="outlined" disabled>
+                  Disabled
+                </Button>
+                <Button variant="outlined" href="#outlined-buttons">
+                  Link
+                </Button>
+              </Stack> */}
+            </FormControl>
+
+            <Typography variant="h7" component="div" gutterBottom>
+              I will respond when I'm ready...
+            </Typography>
+          </Paper>
+        </Grid>
+      </Box>
     </ThemeProvider>
 
 

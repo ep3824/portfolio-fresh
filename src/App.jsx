@@ -11,6 +11,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Projects from './Projects.jsx';
 import Resume from './Resume.jsx';
+import { makeStyles as makeStyles } from '@mui/system';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -21,13 +22,21 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: '0rem',
+  },
+}));
+
 
 function App() {
   const [count, setCount] = useState(1)
 
+  const classes = useStyles();
+
   return (
-    <>
-      <Grid container spacing={2} columns={1}>
+    <div className={classes.root}>
+      <Grid container spacing={2} columns={1} >
         <Grid xs={8}>
             <Item><h1>TBD Portfolio Website</h1></Item>
         </Grid>
@@ -51,8 +60,8 @@ function App() {
         <Navbar>
         </Navbar>
       </div>
-    </>
-  )
+    </div >
+  );
 }
 
 export default App
