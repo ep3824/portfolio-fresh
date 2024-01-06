@@ -29,8 +29,8 @@ const Item = styled(Paper)(({ theme }) => ({
 //   },
 // }));
 
- // Create a dark theme
- const darkTheme = createTheme({
+// Create a dark theme
+const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     // You can customize other theme options here
@@ -44,35 +44,35 @@ function App() {
   // const classes = useNoPaddingStyles();
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={darkTheme} >
 
-    
-    <div style={{ padding: '0rem' }}>
-      <Grid spacing={2} columns={1} >
-        <Grid xs={8}>
+
+      <div style={{ padding: '0rem' }}>
+        <Grid container spacing={2} >
+          <Grid xs={12} md={8}>
             <Item><h1>TBD Portfolio Website</h1></Item>
+          </Grid>
+          <Grid xs={8} md={8}>
+            <Item>
+              <Dashboard ></Dashboard>
+            </Item>
+            <Item>
+              <Projects />
+            </Item>
+            <Item>
+              <Resume />
+            </Item>
+          </Grid>
         </Grid>
-        <Grid xs={8}>
-          <Item>
-            <Dashboard ></Dashboard>
-          </Item>
-          <Item>
-            <Projects />
-          </Item>
-          <Item>
-            <Resume />
-          </Item>
-        </Grid>
-      </Grid>
-      
-      <div className="card">
-        <Button variant ="contained" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <Navbar>
-        </Navbar>
-      </div>
-    </div >
+
+        <div className="card">
+          <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
+            count is {count}
+          </Button>
+          <Navbar>
+          </Navbar>
+        </div>
+      </div >
     </ThemeProvider>
   );
 }
