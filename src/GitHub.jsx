@@ -1,53 +1,69 @@
 import * as React from 'react';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { BarChart } from '@mui/x-charts';
 import { Grid, createTheme, ThemeProvider, Box, Typography } from '@mui/material';
+import { DataArraySharp } from '@mui/icons-material';
+// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+// import { Curve } from 'recharts/lib/shape/Curve';
 
-export default function GitHub({GitHubData}) {
-    
-    
+export default function GitHub({ GitHubData }) {
+
+
     let dates = [];
     let commits = [];
     const commitCounter = {};
 
-    {GitHubData ? (
-        GitHubData.forEach((commit) => {
-            const utcDate = new Date(commit.commit.author.date)
-            const formattedDate = utcDate.toLocaleDateString('en-US', {
-                day: 'numeric',
-                month: 'short',
-                timeSonze: 'UTC',
-            });
-            
-            commitCounter[formattedDate] = (commitCounter[formattedDate] || 0) + 1; // Increment the count for the specific date
-        })
-        
-    ) : (
-        <div>
-            <p>GitHub data loading....</p>
-        </div>
-    )}
+    {
+        GitHubData ? (
+            GitHubData.forEach((commit) => {
+                const utcDate = new Date(commit.commit.author.date)
+                const formattedDate = utcDate.toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    timeSonze: 'UTC',
+                });
 
-    
+                commitCounter[formattedDate] = (commitCounter[formattedDate] || 0) + 1; // Increment the count for the specific date
+            })
+
+        ) : (
+            <div>
+                <p>GitHub data loading....</p>
+            </div>
+        )
+    }
+
+
 
     // Display the commit count for each day
+    // If more than 4 days of commits, shorten to 4
     const commitCountByDay = Object.entries(commitCounter).forEach(([date, count]) => (
         commits.unshift(count)
     ));
 
-    Object.entries(commitCounter).forEach(([date, count]) => ( dates.unshift(date) ));
+    Object.entries(commitCounter).forEach(([date, count]) => (dates.unshift(date)));
 
-    // Create a dark theme
-    const darkTheme = createTheme({
-        palette: {
-            mode: 'dark',
-            // You can customize other theme options here
-        },
-    });
+    if (commits.length && dates.length > 4) {
+        commits.length = 4;
+        dates.length = 4;
+    }
+
+
+    //Test data from BarPlot to make rounded corners:
+    const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
+    const xLabels = [
+        "Page A",
+        "Page B",
+        "Page C",
+        "Page D",
+        "Page E",
+        "Page F",
+        "Page G"
+    ];
 
     return (
-        
-            <Box>
-                {GitHubData ? (
+
+        <Box>
+            {GitHubData ? (
                 <Grid>
                     <Grid >
                         <Typography variant="h5" component="div" gutterBottom>
@@ -55,12 +71,12 @@ export default function GitHub({GitHubData}) {
                         </Typography>
                         <Box>
                             <Typography variant="h7" component="div" gutterBottom>
-                                Sample text
+                                Displays last 4 days of updates
                             </Typography>
 
                         </Box>
                         <Typography variant="h7" component="div" gutterBottom>
-                            Sample text
+                            Uses commit data from GitHub API
                         </Typography>
                         <Typography variant="h7" component="div" gutterBottom>
                             Image
@@ -91,20 +107,18 @@ export default function GitHub({GitHubData}) {
                                 top: 20,
                                 bottom: 20,
                             }}
-                            sx={{
-                                borderRadius: 15,
-                            }}
+
                         />
                     </Box>
                     <Box />
                 </Grid>
-                ) : (
-                    <div>
-                        <p>GitHub data loading....</p>
-                    </div>
-                )}
-            </Box>
-        
+            ) : (
+                <div>
+                    <p>GitHub data loading....</p>
+                </div>
+            )}
+        </Box>
+
     );
 }
 
