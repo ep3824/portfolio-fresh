@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import OpenAI from "openai";
 import CHATGPT_API_KEY from "../deleteLater.js";
@@ -10,27 +11,83 @@ import styled from '@mui/system/styled';
 import clsx from 'clsx';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import { render } from 'react-dom';
 
 const openai = new OpenAI({ apiKey: CHATGPT_API_KEY, dangerouslyAllowBrowser: true });
 
 export default function ChatGPT() {
   const [inputValue, setInputValue] = useState('');
-  const [submittedValue, setSubmittedQuery] = useState(null);
+  const [chatAnswer, setChatAnswer] = useState(null);
+  const [pokemonData, setPokemonData] = useState(null);
+  const [pokemonImages, setPokemonImages] = useState(null);
 
-  async function main() {
+  async function askChatGPT(userInput) {
     const completion = await openai.chat.completions.create({
-      messages: [{ role: "system", content: "Give me a fun project I can do to showcase my React skills." }],
-      model: "gpt-4",
+      messages: [{ role: "system", content: userInput }],
+      model: "gpt-3.5-turbo",
     });
 
+    if (completion) {
+      setChatAnswer(completion.choices[0].message.content)
+    }
+
     console.log(completion.choices[0]);
+  }
+
+  useEffect(() => {
+    const getPokemonData = async () => {
+      try {
+        const response = await fetch('/api/listPokemon');
+        if (response.ok) {
+          const pokemonData = await response.json();
+          setPokemonData(pokemonData);
+        } else {
+          console.error(`Failed to fetch pokemon data. Status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error fetching Pokemon data:', error);
+      }
+    };
+
+    getPokemonData();
+  }, []); // The empty dependency array ensures that the effect runs once when the component mounts
+
+  // fire the render image fn when chatAnswer is updated
+  useEffect(() => {
+    if (chatAnswer && pokemonData) {
+      renderPokemonImage();
+    }
+
+  }, [chatAnswer, pokemonData]);
+
+
+  const renderPokemonImage = async () => {
+    const pokeNames = [];
+    const pokeImages = [];
+    pokemonData.results.map((pokemon) => pokeNames.push(pokemon.name.toLowerCase()));
+    for (let i = 0; i < pokeNames.length; i++) {
+      if (chatAnswer.toLowerCase().includes(pokeNames[i])) {
+        const pokemonName = pokeNames[i];
+        const pokemonImage = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+          .then((response) => response.json())
+          .then((data) => data.sprites.front_default);
+        console.log(pokemonImage);
+        pokeImages.push({ name: pokemonName, image: pokemonImage });
+        console.log('poke image array', pokeImages);
+        // return pokemonImage;
+      } else {
+        console.log('No Pokemon found in answer')
+      }
+    }
+    setPokemonImages(pokeImages);
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
     const userInput = e.target[0].value;
     console.log(e.target[0].value);
-    setSubmittedQuery(userInput);
+    // Probably don't need to set state right here, will delete later if not needed
+    askChatGPT(userInput)
   }
 
 
@@ -64,14 +121,26 @@ export default function ChatGPT() {
                 <Button variant="outlined" type="submit">Send</Button>
               </Stack> */}
 
-          { submittedValue !== null && (
+          {chatAnswer !== null ? (
             <Typography variant="h7" component="div" gutterBottom>
-              {submittedValue}
+              {chatAnswer}
+            </Typography>
+          ) : (
+            <Typography variant="h7" component="div" gutterBottom>
+              I will respond when I'm ready...
             </Typography>
           )}
-          <Typography variant="h7" component="div" gutterBottom>
-            I will respond when I'm ready...
-          </Typography>
+
+          {pokemonImages !== null ? (
+            <Typography variant="h7" component="div" gutterBottom>
+              {pokemonImages.map((pokemon) => <img src={pokemon.image} alt={pokemon.name} />)}
+            </Typography>
+          ) : (
+            <Typography variant="h7" component="div" gutterBottom>
+              Try asking me about Pokemon!
+            </Typography>
+          )
+          }
         </Paper>
       </Grid>
     </Box>

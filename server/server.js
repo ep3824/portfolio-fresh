@@ -74,3 +74,15 @@ app.get('/api/gitCommits', cache(3600), (req, res) => {
         });
 });
 
+app.get('/api/listPokemon', cache(86400), (req, res) => {
+    console.log('Querying Pokemon name data...')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=2000', {
+        method: 'GET',
+    })
+        .then((response) => response.json())
+        .then((data) => res.json(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+});
+
