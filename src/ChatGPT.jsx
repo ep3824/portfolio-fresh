@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { render } from 'react-dom';
+import Divider from '@mui/material/Divider';
 
 const openai = new OpenAI({ apiKey: CHATGPT_API_KEY, dangerouslyAllowBrowser: true });
 
@@ -94,7 +95,6 @@ export default function ChatGPT() {
 
   // main();
   return (
-
     <Box>
       <Grid>
         <Paper
@@ -112,14 +112,28 @@ export default function ChatGPT() {
 
 
 
-          <form onSubmit={e => submitHandler(e)} sx={{ maxWidth: 300 }}>
+          <form onSubmit={e => submitHandler(e)} >
             {/* <StyledInput placeholder="Ask me anything!" /> */}
-            <TextField label="Ask me anything!" />
-            <Button variant="outlined" type="submit">Submit</Button>
+
+
+              <Stack
+              
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+                direction="row"
+                divider={<Divider orientation="vertical" sx={{ borderBottomWidth: 50, borderColor: '#c765b4' }} />}
+                spacing={1.5}
+              >
+                <TextField label="Ask me anything!" />
+                <Button variant="outlined" type="submit">Submit</Button>
+              </Stack>
+
+
           </form>
-          {/* <Stack direction="row" spacing={2}>
-                <Button variant="outlined" type="submit">Send</Button>
-              </Stack> */}
+
 
           {chatAnswer !== null ? (
             <Typography variant="h7" component="div" gutterBottom>
