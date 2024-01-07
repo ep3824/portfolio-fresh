@@ -16,9 +16,9 @@ import Divider from '@mui/material/Divider';
 
 const openai = new OpenAI({ apiKey: CHATGPT_API_KEY, dangerouslyAllowBrowser: true });
 
-export default function ChatGPT() {
+export default function ChatGPT( { chatAnswer, setChatAnswer }) {
   const [inputValue, setInputValue] = useState('');
-  const [chatAnswer, setChatAnswer] = useState(null);
+  
   const [pokemonData, setPokemonData] = useState(null);
   const [pokemonImages, setPokemonImages] = useState(null);
 
@@ -30,6 +30,7 @@ export default function ChatGPT() {
 
     if (completion) {
       setChatAnswer(completion.choices[0].message.content)
+
     }
 
     console.log(completion.choices[0]);
@@ -86,7 +87,6 @@ export default function ChatGPT() {
   const submitHandler = (e) => {
     e.preventDefault();
     const userInput = e.target[0].value;
-    console.log(e.target[0].value);
     // Probably don't need to set state right here, will delete later if not needed
     askChatGPT(userInput)
   }

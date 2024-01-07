@@ -2,15 +2,16 @@ import React from 'react';
 
 
 
-export default function PokeDex({ pokemon }) {
+export default function PokeDex({ chatAnswer }) {
     //For now just faking this data
-    pokemon = {
+    const pokemon = {
         name: "Pikachu",
         image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
         type: "Electric",
         height: "1'4",
         weight: "13.2 lbs"
     }
+    console.log('chatAnswer', chatAnswer)
     return (
         <div>
             <h1>Pokedex</h1>
