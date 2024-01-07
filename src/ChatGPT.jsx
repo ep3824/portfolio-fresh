@@ -68,7 +68,9 @@ export default function ChatGPT( { chatAnswer, setChatAnswer }) {
     const pokeImages = [];
     pokemonData.results.map((pokemon) => pokeNames.push(pokemon.name.toLowerCase()));
     for (let i = 0; i < pokeNames.length; i++) {
-      if (chatAnswer.toLowerCase().includes(pokeNames[i])) {
+      // the regex here is so we can avoid matching to words that aren't actually poke  names
+      // and at the same time so we can grab names in a comma seperated list
+      if (chatAnswer.toLowerCase().split(/[ ,]+/).includes(pokeNames[i])) {
         const pokemonName = pokeNames[i];
         const pokemonImage = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
           .then((response) => response.json())
