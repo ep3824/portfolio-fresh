@@ -99,7 +99,7 @@ export default function ChatGPT() {
       <Grid>
         <Paper
           sx={{
-            height: 260,
+            // height: 260,
             borderRadius: 5,
             p: 2,
             boxShadow: '0 4px 8px rgba(0, 0, 0, .5)',
