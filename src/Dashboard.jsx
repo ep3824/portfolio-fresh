@@ -29,39 +29,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Dashboard() {
 
-  //This is the version that uses the local files, NOT the API:
-  // const [realtimeDataState, setRealtimeDataState] = React.useState(null);
-  // const [forecastDataState, setForecastDataState] = React.useState(null);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setRealtimeDataState(realtimeData);
-  //   }
-
-  //   const fetchData2 = async () => {
-  //     setForecastDataState(forecastData);
-  //   }
-
-  //   fetchData();
-  //   fetchData2();
-  // }, []); // The empty dependency array ensures that the effect runs once when the component mounts
-
-
-
-
-
-
-  // I have to comment this out in Dev. because of API rate limits
-  // For now, I am using a local JSON file to test the Weather component
-
-  // const [data, setData] = React.useState(null);
-  // const [data2, setData2] = React.useState(null);
-
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
   const [forecastDataState, setForecastDataState] = React.useState(null);
   const [GitHubDataState, setGitHubDataState] = React.useState(null);
-
-
 
   useEffect(() => {
     const fetchRealtimeData = async () => {
@@ -109,7 +79,7 @@ export default function Dashboard() {
     fetchRealtimeData();
     fetchForecastData();
     fetchGitHubData();
-  }, []); // The empty dependency array ensures that the effect runs once when the component mounts
+  }, []); // The empty dependency => effect runs once when the component mounts
 
   return (
     <Box sx={{ flexGrow: 1 }}>

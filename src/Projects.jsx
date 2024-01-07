@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Box, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ChatGPT from './ChatGPT';
+import PokeDex from './Pokedex';
 
 
 
@@ -23,7 +24,7 @@ export default function Projects() {
                     <Item><ChatGPT /></Item>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <Item>Project 2</Item>
+                    <Item><PokeDex /></Item>
                 </Grid>
 
                     

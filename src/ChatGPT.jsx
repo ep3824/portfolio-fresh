@@ -116,20 +116,20 @@ export default function ChatGPT() {
             {/* <StyledInput placeholder="Ask me anything!" /> */}
 
 
-              <Stack
-              
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-                direction="row"
-                divider={<Divider orientation="vertical" sx={{ borderBottomWidth: 50, borderColor: '#c765b4' }} />}
-                spacing={1.5}
-              >
-                <TextField label="Ask me anything!" />
-                <Button variant="outlined" type="submit">Submit</Button>
-              </Stack>
+            <Stack
+
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              direction="row"
+              divider={<Divider orientation="vertical" sx={{ borderBottomWidth: 50, borderColor: '#c765b4' }} />}
+              spacing={1.5}
+            >
+              <TextField label="Ask me anything!" />
+              <Button variant="outlined" type="submit">Submit</Button>
+            </Stack>
 
 
           </form>
