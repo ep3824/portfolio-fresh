@@ -6,6 +6,7 @@ import { LineChart } from '@mui/x-charts/LineChart';
 import Paper from '@mui/material/Paper';
 import { ChartsReferenceLine } from '@mui/x-charts/ChartsReferenceLine';
 import apiForecastData from '../apiForecastData';
+import Button from '@mui/material/Button';
 
 
 export default function Weather() {
@@ -36,9 +37,10 @@ export default function Weather() {
           const forecastData = await response.json();
           //THIS LINE SHOULD BE DELETED BEFORE PROD
           // This is a workaround for the Tomorrow.io API rate limit
-          console.log('apiForecastData', apiForecastData)
           setForecastDataState(apiForecastData);
           // setForecastDataState(forecastData);
+          console.log("forecastData", forecastData)
+          console.log("forecastDataState", forecastDataState)
         } else {
           console.error(`Failed to fetch weather data. Status: ${response.status}`);
         }
@@ -177,9 +179,12 @@ export default function Weather() {
             )}
 
           </Box>
-          <Typography variant="h7" component="div" padding={2} gutterBottom>
-            Test
-          </Typography>
+          <Button variant="outlined">
+            Daily
+          </Button>
+          <Button variant="outlined">
+            Hourly
+          </Button>
 
 
         </Grid>

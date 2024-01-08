@@ -29,8 +29,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Dashboard() {
 
-  const [realtimeDataState, setRealtimeDataState] = React.useState(null);
-  const [forecastDataState, setForecastDataState] = React.useState(null);
   const [GitHubDataState, setGitHubDataState] = React.useState(null);
 
   useEffect(() => {
