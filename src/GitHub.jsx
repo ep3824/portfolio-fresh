@@ -53,20 +53,17 @@ export default function GitHub({ GitHubData }) {
             {GitHubData ? (
                 <Grid>
                     <Grid >
-                        <Typography variant="h5" component="div" gutterBottom>
+                        <Typography variant="h4" component="div" gutterBottom>
                             Website Updates
                         </Typography>
                         <Box>
-                            <Typography variant="h7" component="div" gutterBottom>
+                            <Typography variant="h6" component="div" gutterBottom>
                                 Displays last 4 days of updates
                             </Typography>
 
                         </Box>
                         <Typography variant="h7" component="div" gutterBottom>
                             Uses commit data from GitHub API
-                        </Typography>
-                        <Typography variant="h7" component="div" gutterBottom>
-                            Image
                         </Typography>
                     </Grid>
                     <Box

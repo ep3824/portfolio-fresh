@@ -87,9 +87,7 @@ export default function Dashboard() {
         <Grid item xs>
           <Item><GitHub GitHubData={GitHubDataState}/></Item>
         </Grid>
-        <Grid item xs={6}>
-          <Item><Weather realtimeData={realtimeDataState} forecastData={forecastDataState} /></Item>
-        </Grid>
+        
         <Grid item xs>
           <Item><TrafficCount /></Item>
         </Grid>

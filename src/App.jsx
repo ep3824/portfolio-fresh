@@ -13,6 +13,7 @@ import Projects from './Projects.jsx';
 import Resume from './Resume.jsx';
 // import { makeStyles } from '@mui/system';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -50,7 +51,7 @@ function App() {
       <div className="App">
         <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid xs={12} md={8}>
-            <Item><h1>TBD Portfolio Website</h1></Item>
+            <Item><Typography variant="h1">ethanparent.com</Typography></Item>
           </Grid>
           <Grid xs={8} md={8} flexGrow={.9}>
             <Item>

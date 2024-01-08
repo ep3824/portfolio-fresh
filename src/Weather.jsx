@@ -7,35 +7,88 @@ import Paper from '@mui/material/Paper';
 import { ChartsReferenceLine } from '@mui/x-charts/ChartsReferenceLine';
 
 
-export default function Weather({ realtimeData, forecastData }) {
+export default function Weather() {
+
+
+  const [realtimeDataState, setRealtimeDataState] = React.useState(null);
+  const [forecastDataState, setForecastDataState] = React.useState(null);
+  const [GitHubDataState, setGitHubDataState] = React.useState(null);
+
+  useEffect(() => {
+    const fetchRealtimeData = async () => {
+      try {
+        const response = await fetch('/api/realtime');
+            if (response.ok) {
+          const realtimeData = await response.json();
+          setRealtimeDataState(realtimeData);
+        } else {
+          console.error(`Failed to fetch weather data. Status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error fetching realtime weather data:', error);
+      }
+    };
+
+    const fetchForecastData = async () => {
+      try {
+        const response = await fetch('/api/forecast');
+            if (response.ok) {
+          const forecastData = await response.json();
+          setForecastDataState(forecastData);
+        } else {
+          console.error(`Failed to fetch weather data. Status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error fetching Forecast data:', error);
+      }
+    };
+
+    const fetchGitHubData = async () => {
+      try {
+        const response = await fetch('/api/gitCommits');
+            if (response.ok) {
+          const GitHubData = await response.json();
+          setGitHubDataState(GitHubData);
+        } else {
+          console.error(`Failed to fetch weather data. Status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error fetching GitHub data:', error);
+      }
+    };
+
+    fetchRealtimeData();
+    fetchForecastData();
+    fetchGitHubData();
+  }, []); // The empty dependency => effect runs once when the component mounts
 
   function formatDateWithoutYear(inputDate) {
     return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' }).format(new Date(inputDate));
   }
 
-  const temperatureF = realtimeData ? (Math.round(realtimeData.data.values.temperature * 9 / 5) + 32) : null;
-  const temperatureC = realtimeData ? Math.round(realtimeData.data.values.temperature) : null;
-  const cloudCover = realtimeData ? realtimeData.data.values.cloudCover : null;
+  const temperatureF = realtimeDataState ? (Math.round(realtimeDataState.data.values.temperature * 9 / 5) + 32) : null;
+  const temperatureC = realtimeDataState ? Math.round(realtimeDataState.data.values.temperature) : null;
+  const cloudCover = realtimeDataState ? realtimeDataState.data.values.cloudCover : null;
   const weatherImg = cloudCover ? (cloudCover > 50 ? <CloudIcon /> : <WbSunnyIcon />) : null;
 
   const tempData = [];
   const days = [];
-  forecastData ? forecastData.timelines.daily.map((day) => tempData.push(day.values.temperatureMax)) : [];
-  forecastData ? forecastData.timelines.daily.map((day) => days.push(formatDateWithoutYear(day.time))) : [];
+  forecastDataState ? forecastDataState.timelines.daily.map((day) => tempData.push(day.values.temperatureMax)) : [];
+  forecastDataState ? forecastDataState.timelines.daily.map((day) => days.push(formatDateWithoutYear(day.time))) : [];
 
   //Convert temp data to F
   tempData.map((temp, index) => tempData[index] = Math.round((temp * 9 / 5) + 32));
 
 
   const cloudCoverData = [];
-  forecastData ? forecastData.timelines.daily.map((day) => cloudCoverData.push(day.values.cloudCoverAvg)) : [];
+  forecastDataState ? forecastDataState.timelines.daily.map((day) => cloudCoverData.push(day.values.cloudCoverAvg)) : [];
 
 
 
   return (
     
       <Box >
-        {realtimeData ? (
+        {realtimeDataState ? (
           <Grid >
             <Grid >
               <Typography variant="h5" component="div" gutterBottom>
@@ -61,7 +114,7 @@ export default function Weather({ realtimeData, forecastData }) {
                 backgroundImage: 'linear-gradient(to right bottom, #2980b9, #3498db)', //blue to blue
               }}
             >
-              {realtimeData && forecastData && forecastData.timelines.daily.length > 0 ? (
+              {realtimeDataState && forecastDataState && forecastDataState.timelines.daily.length > 0 ? (
                 <LineChart
                   xAxis={[
                     {
