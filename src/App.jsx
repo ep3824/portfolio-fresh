@@ -14,6 +14,7 @@ import Resume from './Resume.jsx';
 // import { makeStyles } from '@mui/system';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import Contact from './Contact.jsx';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -50,10 +51,11 @@ function App() {
 
       <div className="App">
         <Grid container spacing={2} justifyContent="center" alignItems="center">
-          <Grid xs={12} md={8}>
-            <Item><Typography variant="h1">ethanparent.com</Typography></Item>
-          </Grid>
-          <Grid xs={8} md={8} flexGrow={.9}>
+
+            
+
+          <Grid xs={12} md={8} >
+          <Item><Typography variant="h1">ethanparent.com</Typography></Item>
             <Item>
               <Dashboard ></Dashboard>
             </Item>
@@ -62,6 +64,9 @@ function App() {
             </Item>
             <Item>
               <Resume />
+            </Item>
+            <Item>
+              <Contact />
             </Item>
           </Grid>
         </Grid>
