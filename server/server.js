@@ -47,7 +47,7 @@ app.get('/api/realtime', cache(86400), (req, res) => {
 
 app.get('/api/forecast', cache(86400), (req, res) => {
     console.log('Querying forecast data...')
-    fetch('https://api.tomorrow.io/v4/weather/forecast?location=frisco&timesteps=1d&apikey=' + apiKey, {
+    fetch('https://api.tomorrow.io/v4/weather/forecast?location=frisco&apikey=' + apiKey, {
         method: 'GET',
     })
         .then((response) => response.json())

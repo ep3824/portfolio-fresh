@@ -5,6 +5,7 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import { LineChart } from '@mui/x-charts/LineChart';
 import Paper from '@mui/material/Paper';
 import { ChartsReferenceLine } from '@mui/x-charts/ChartsReferenceLine';
+import apiForecastData from '../apiForecastData';
 
 
 export default function Weather() {
@@ -12,13 +13,12 @@ export default function Weather() {
 
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
   const [forecastDataState, setForecastDataState] = React.useState(null);
-  const [GitHubDataState, setGitHubDataState] = React.useState(null);
 
   useEffect(() => {
     const fetchRealtimeData = async () => {
       try {
         const response = await fetch('/api/realtime');
-            if (response.ok) {
+        if (response.ok) {
           const realtimeData = await response.json();
           setRealtimeDataState(realtimeData);
         } else {
@@ -32,9 +32,13 @@ export default function Weather() {
     const fetchForecastData = async () => {
       try {
         const response = await fetch('/api/forecast');
-            if (response.ok) {
+        if (response.ok) {
           const forecastData = await response.json();
-          setForecastDataState(forecastData);
+          //THIS LINE SHOULD BE DELETED BEFORE PROD
+          // This is a workaround for the Tomorrow.io API rate limit
+          console.log('apiForecastData', apiForecastData)
+          setForecastDataState(apiForecastData);
+          // setForecastDataState(forecastData);
         } else {
           console.error(`Failed to fetch weather data. Status: ${response.status}`);
         }
@@ -43,23 +47,10 @@ export default function Weather() {
       }
     };
 
-    const fetchGitHubData = async () => {
-      try {
-        const response = await fetch('/api/gitCommits');
-            if (response.ok) {
-          const GitHubData = await response.json();
-          setGitHubDataState(GitHubData);
-        } else {
-          console.error(`Failed to fetch weather data. Status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error('Error fetching GitHub data:', error);
-      }
-    };
+
 
     fetchRealtimeData();
     fetchForecastData();
-    fetchGitHubData();
   }, []); // The empty dependency => effect runs once when the component mounts
 
   function formatDateWithoutYear(inputDate) {
@@ -72,12 +63,17 @@ export default function Weather() {
   const weatherImg = cloudCover ? (cloudCover > 50 ? <CloudIcon /> : <WbSunnyIcon />) : null;
 
   const tempData = [];
+  const tempsMax = [];
+  const tempsMin = [];
   const days = [];
-  forecastDataState ? forecastDataState.timelines.daily.map((day) => tempData.push(day.values.temperatureMax)) : [];
+
+  forecastDataState ? forecastDataState.timelines.daily.map((day) => tempsMax.push(day.values.temperatureMax)) : [];
+  forecastDataState ? forecastDataState.timelines.daily.map((day) => tempsMin.push(day.values.temperatureMin)) : [];
   forecastDataState ? forecastDataState.timelines.daily.map((day) => days.push(formatDateWithoutYear(day.time))) : [];
 
   //Convert temp data to F
-  tempData.map((temp, index) => tempData[index] = Math.round((temp * 9 / 5) + 32));
+  tempsMax.map((temp, index) => tempsMax[index] = Math.round((temp * 9 / 5) + 32));
+  tempsMin.map((temp, index) => tempsMin[index] = Math.round((temp * 9 / 5) + 32));
 
 
   const cloudCoverData = [];
@@ -86,100 +82,113 @@ export default function Weather() {
 
 
   return (
-    
-      <Box >
-        {realtimeDataState ? (
+
+    <Box >
+      {realtimeDataState ? (
+        <Grid >
           <Grid >
-            <Grid >
-              <Typography variant="h5" component="div" gutterBottom>
-                Weather
-              </Typography>
-              <Box>
-                <Typography variant="h7" component="div" gutterBottom>
-                  Frisco, TX is {temperatureF} °F / {temperatureC} °C.
-                </Typography>
-                {weatherImg}
-              </Box>
+            <Typography variant="h5" component="div" gutterBottom>
+              Weather
+            </Typography>
+            <Box>
               <Typography variant="h7" component="div" gutterBottom>
-                Cloud cover is at {cloudCover} %.
+                Frisco, TX is {temperatureF} °F / {temperatureC} °C.
               </Typography>
-            </Grid>
-
-            <Box
-              sx={{
-                height: 260,
-                borderRadius: 5,
-                p: 2,
-                boxShadow: '0 4px 8px rgba(0, 0, 0, .5)',
-                backgroundImage: 'linear-gradient(to right bottom, #2980b9, #3498db)', //blue to blue
-              }}
-            >
-              {realtimeDataState && forecastDataState && forecastDataState.timelines.daily.length > 0 ? (
-                <LineChart
-                  xAxis={[
-                    {
-                      type: 'time',
-                      data: days,
-                      scaleType: 'point',
-                      orientation: 'bottom',
-
-                    }
-                  ]}
-                  yAxis={[
-                    {
-                      type: 'linear',
-                      orientation: 'left',
-                      id: 'temperature',
-                      name: 'Temperature (°F)',
-                      unit: '°C',
-                      label: 'Temperature (°F)',
-
-                    }
-                  ]}
-                  series={[
-                    {
-                      curve: 'linear',
-                      type: 'line',
-                      data: tempData,
-
-                      yAxisId: 'temperature',
-                      name: 'Temperature',
-                      color: '#fff',
-                      strokeWidth: 3,
-                    }
-                  ]}
-                  padding={{
-                    left: 5,
-                    right: 5,
-                    top: 20,
-                    bottom: 20,
-                  }}
-                  sx={{
-                    path: {
-                      strokeWidth: 4,
-                    },
-
-                  }}
-
-
-                >
-
-
-                </LineChart>
-              ) : (
-                <p>No forecast data available.</p>
-              )}
-
+              {weatherImg}
             </Box>
-
-
+            <Typography variant="h7" component="div" gutterBottom>
+              Cloud cover is at {cloudCover} %.
+            </Typography>
           </Grid>
-        ) : (
-          <p>Loading weather data...</p>
-        )}
 
-      </Box>
-    
+          <Box
+            sx={{
+              height: 260,
+              borderRadius: 5,
+              p: 2,
+              boxShadow: '0 4px 8px rgba(0, 0, 0, .5)',
+              backgroundImage: 'linear-gradient(to right bottom, #2980b9, #3498db)', //blue to blue
+            }}
+          >
+            {realtimeDataState && forecastDataState && forecastDataState.timelines.daily.length > 0 ? (
+              <LineChart
+                xAxis={[
+                  {
+                    type: 'time',
+                    data: days,
+                    scaleType: 'point',
+                    orientation: 'bottom',
+
+                  }
+                ]}
+                yAxis={[
+                  {
+                    type: 'linear',
+                    orientation: 'left',
+                    id: 'temperature',
+                    name: 'Temperature (°F)',
+                    unit: '°C',
+                    label: 'Temperature (°F)',
+
+                  }
+                ]}
+                series={[
+                  {
+                    curve: 'linear',
+                    type: 'line',
+                    data: tempsMax,
+                    label: 'Max Temp (°F)',
+
+                    yAxisId: 'temperature',
+                    name: 'Temperature',
+                    color: 'pink',
+                    strokeWidth: 3,
+                  },
+                  {
+                    curve: 'linear',
+                    type: 'line',
+                    data: tempsMin,
+                    label: 'Min Temp (°F)',
+
+                    yAxisId: 'temperature',
+                    name: 'Temperature',
+                    color: 'lightblue',
+                    strokeWidth: 3,
+                  }
+                ]}
+                padding={{
+                  left: 5,
+                  right: 5,
+                  top: 20,
+                  bottom: 20,
+                }}
+                sx={{
+                  path: {
+                    strokeWidth: 4,
+                  },
+
+                }}
+              >
+
+
+              </LineChart>
+            ) : (
+              <p>No forecast data available.</p>
+            )}
+
+          </Box>
+          <Typography variant="h7" component="div" padding={2} gutterBottom>
+            Test
+          </Typography>
+
+
+        </Grid>
+      ) : (
+        <p>Loading weather data...</p>
+      )}
+
+    </Box>
+
   );
 
 };

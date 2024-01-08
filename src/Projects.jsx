@@ -33,7 +33,7 @@ export default function Projects() {
                 <Grid item xs={12} md={6}>
                     <Item><PokeDex chatAnswer={chatAnswer} /></Item>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Item><Weather /></Item>
                 </Grid>
                 <Grid item xs={12} md={6}>

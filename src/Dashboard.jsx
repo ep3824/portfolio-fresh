@@ -34,34 +34,6 @@ export default function Dashboard() {
   const [GitHubDataState, setGitHubDataState] = React.useState(null);
 
   useEffect(() => {
-    const fetchRealtimeData = async () => {
-      try {
-        const response = await fetch('/api/realtime');
-            if (response.ok) {
-          const realtimeData = await response.json();
-          setRealtimeDataState(realtimeData);
-        } else {
-          console.error(`Failed to fetch weather data. Status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error('Error fetching realtime weather data:', error);
-      }
-    };
-
-    const fetchForecastData = async () => {
-      try {
-        const response = await fetch('/api/forecast');
-            if (response.ok) {
-          const forecastData = await response.json();
-          setForecastDataState(forecastData);
-        } else {
-          console.error(`Failed to fetch weather data. Status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error('Error fetching Forecast data:', error);
-      }
-    };
-
     const fetchGitHubData = async () => {
       try {
         const response = await fetch('/api/gitCommits');
@@ -76,19 +48,18 @@ export default function Dashboard() {
       }
     };
 
-    fetchRealtimeData();
-    fetchForecastData();
+  
     fetchGitHubData();
   }, []); // The empty dependency => effect runs once when the component mounts
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item xs>
+        <Grid item xs={12} md={6}>
           <Item><GitHub GitHubData={GitHubDataState}/></Item>
         </Grid>
         
-        <Grid item xs>
+        <Grid item xs={12} md={6}>
           <Item><TrafficCount /></Item>
         </Grid>
       </Grid>
