@@ -7,6 +7,8 @@ import Paper from '@mui/material/Paper';
 import { ChartsReferenceLine } from '@mui/x-charts/ChartsReferenceLine';
 import apiForecastData from '../apiForecastData';
 import Button from '@mui/material/Button';
+import HourlyWeatherChart from './HourlyWeatherChart';
+import DailyWeatherChart from './DailyWeatherChart';
 
 
 export default function Weather() {
@@ -14,6 +16,7 @@ export default function Weather() {
 
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
   const [forecastDataState, setForecastDataState] = React.useState(null);
+  const [isDaily, setIsDaily] = React.useState(true);
 
   useEffect(() => {
     const fetchRealtimeData = async () => {
@@ -39,8 +42,8 @@ export default function Weather() {
           // This is a workaround for the Tomorrow.io API rate limit
           setForecastDataState(apiForecastData);
           // setForecastDataState(forecastData);
-          console.log("forecastData", forecastData)
-          console.log("forecastDataState", forecastDataState)
+          // console.log("forecastData", forecastData)
+          // console.log("forecastDataState", forecastDataState)
         } else {
           console.error(`Failed to fetch weather data. Status: ${response.status}`);
         }
@@ -81,6 +84,16 @@ export default function Weather() {
   const cloudCoverData = [];
   forecastDataState ? forecastDataState.timelines.daily.map((day) => cloudCoverData.push(day.values.cloudCoverAvg)) : [];
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(e.target[0].value)
+    if (e.target[0].value === "Daily") {
+      setIsDaily(true);
+    } else if (e.target[0].value === "Hourly") {
+      setIsDaily(false);
+    }
+  }
+
 
 
   return (
@@ -112,79 +125,38 @@ export default function Weather() {
               backgroundImage: 'linear-gradient(to right bottom, #2980b9, #3498db)', //blue to blue
             }}
           >
-            {realtimeDataState && forecastDataState && forecastDataState.timelines.daily.length > 0 ? (
-              <LineChart
-                xAxis={[
-                  {
-                    type: 'time',
-                    data: days,
-                    scaleType: 'point',
-                    orientation: 'bottom',
-
-                  }
-                ]}
-                yAxis={[
-                  {
-                    type: 'linear',
-                    orientation: 'left',
-                    id: 'temperature',
-                    name: 'Temperature (°F)',
-                    unit: '°C',
-                    label: 'Temperature (°F)',
-
-                  }
-                ]}
-                series={[
-                  {
-                    curve: 'linear',
-                    type: 'line',
-                    data: tempsMax,
-                    label: 'Max Temp (°F)',
-
-                    yAxisId: 'temperature',
-                    name: 'Temperature',
-                    color: 'pink',
-                    strokeWidth: 3,
-                  },
-                  {
-                    curve: 'linear',
-                    type: 'line',
-                    data: tempsMin,
-                    label: 'Min Temp (°F)',
-
-                    yAxisId: 'temperature',
-                    name: 'Temperature',
-                    color: 'lightblue',
-                    strokeWidth: 3,
-                  }
-                ]}
-                padding={{
-                  left: 5,
-                  right: 5,
-                  top: 20,
-                  bottom: 20,
-                }}
-                sx={{
-                  path: {
-                    strokeWidth: 4,
-                  },
-
-                }}
-              >
-
-
-              </LineChart>
+            {forecastDataState && isDaily && forecastDataState.timelines.daily.length > 0 ? (
+              <DailyWeatherChart forecastDataState={forecastDataState} />
             ) : (
-              <p>No forecast data available.</p>
+              null
             )}
 
+            {forecastDataState && !isDaily && forecastDataState.timelines.daily.length > 0 ? (
+              <HourlyWeatherChart forecastDataState={forecastDataState} />
+            ) : (
+              null
+            )}
+
+            {!forecastDataState ? (
+              <p>Forecast data is loading...</p>
+            ) : (
+              null
+            )}
+
+
+
           </Box>
-          <Button variant="outlined">
-            Daily
-          </Button>
-          <Button variant="outlined">
-            Hourly
-          </Button>
+
+          <form onSubmit={e => submitHandler(e)} >
+            <Button variant="outlined" type="submit" value="Hourly">
+              Hourly
+            </Button>
+          </form>
+          <form onSubmit={e => submitHandler(e)} >
+            <Button variant="outlined" type="submit" value="Daily">
+              Daily
+            </Button>
+          </form>
 
 
         </Grid>

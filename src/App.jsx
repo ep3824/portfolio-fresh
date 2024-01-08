@@ -55,7 +55,7 @@ function App() {
             
 
           <Grid xs={12} md={8} >
-          <Item><Typography variant="h1">ethanparent.com</Typography></Item>
+          <Item><Typography variant="h1" >ethanparent.com</Typography></Item>
             <Item>
               <Dashboard ></Dashboard>
             </Item>
