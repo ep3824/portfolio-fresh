@@ -23,30 +23,30 @@ export default function Projects() {
     return (
 
         // Here we lift up state from child (ChatGPT) to projects, back down to child (PokeDex)
+        <div id="Projects">
+            <Box sx={{ flexGrow: 1 }}>
+                <Typography variant="h2" padding={4}>Projects</Typography>
+                <Grid container >
+                    <Grid item xs={12} md={6}>
+                        <Item><ChatGPT chatAnswer={chatAnswer} setChatAnswer={setChatAnswer} /></Item>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Item><PokeDex chatAnswer={chatAnswer} /></Item>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Item><Weather /></Item>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Item>Project 3 </Item>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Item>Project 4</Item>
+                    </Grid>
 
-        <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="h2" padding={4}>Projects</Typography>
-            <Grid container >
-                <Grid item xs={12} md={6}>
-                    <Item><ChatGPT chatAnswer={chatAnswer} setChatAnswer={setChatAnswer} /></Item>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Item><PokeDex chatAnswer={chatAnswer} /></Item>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Item><Weather /></Item>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Item>Project 3 </Item>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Item>Project 4</Item>
-                </Grid>
 
 
-
-            </Grid>
-        </Box>
-
+                </Grid>
+            </Box>
+        </div>
     );
 }

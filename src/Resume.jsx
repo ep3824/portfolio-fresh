@@ -7,7 +7,7 @@ export default function Resume() {
         <Box padding="1rem">
             <Grid style={{ width: '100%', height: '100vh', overflow: 'auto' }}>
                 <Typography variant="h2">
-                    Resume
+                    <div id="Resume">Resume</div>
                 </Typography>
                 <iframe
                     src="../EthanParentJan9Resume.pdf"

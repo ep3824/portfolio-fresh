@@ -1,13 +1,9 @@
 import React from 'react';
 import { Grid, ThemeProvider, Box, Paper } from '@mui/material';
-import Weather from './Weather';
 import { styled } from '@mui/material/styles';
 import TrafficCount from './TrafficCount';
-import Music from './Music';
 import GitHub from './GitHub';
 import { useEffect } from 'react';
-// import realtimeData from '../apiRealtimeData';
-// import forecastData from '../apiForecastData';
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -35,7 +31,7 @@ export default function Dashboard() {
     const fetchGitHubData = async () => {
       try {
         const response = await fetch('/api/gitCommits');
-            if (response.ok) {
+        if (response.ok) {
           const GitHubData = await response.json();
           setGitHubDataState(GitHubData);
         } else {
@@ -46,22 +42,23 @@ export default function Dashboard() {
       }
     };
 
-  
+
     fetchGitHubData();
   }, []); // The empty dependency => effect runs once when the component mounts
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item xs={12} md={6}>
-          <Item><GitHub GitHubData={GitHubDataState}/></Item>
-        </Grid>
-        
-        <Grid item xs={12} md={6}>
-          <Item><TrafficCount /></Item>
-        </Grid>
-      </Grid>
-    </Box>
+    <div id="Dashboard">
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid item xs={12} md={6}>
+            <Item><GitHub GitHubData={GitHubDataState} /></Item>
+          </Grid>
 
+          <Grid item xs={12} md={6}>
+            <Item><TrafficCount /></Item>
+          </Grid>
+        </Grid>
+      </Box>
+    </div>
   );
 }

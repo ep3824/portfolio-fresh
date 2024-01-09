@@ -20,6 +20,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import CodeIcon from '@mui/icons-material/Code';
 
+
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -66,6 +67,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
+
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
@@ -130,11 +138,11 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </DrawerHeader>
         <List>
-          {['Dashboard', 'Resume', 'Contact', 'Projects'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {['About', 'Dashboard', 'Projects', 'Resume', 'Contact', ].map((text, index) => (
+            <ListItem key={text} disablePadding onClick={() => scrollToSection(text)}>
               <ListItemButton>
                 <ListItemIcon>
-                    {renderSwitch(index)}
+                  {renderSwitch(index)}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>

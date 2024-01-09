@@ -18,6 +18,7 @@ import Contact from './Contact.jsx';
 import About from './About.jsx';
 
 
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -39,17 +40,24 @@ function App() {
   const [count, setCount] = useState(1)
 
   return (
+
+
+
+
+
+
     <ThemeProvider theme={darkTheme} >
 
 
       <div className="App">
         <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid xs={12} md={8} >
-          <Item><Typography variant="h1" >ethanparent.com</Typography></Item>
-          <Item>
-            <About />
-          </Item>
+            <Item><Typography variant="h1" >ethanparent.com</Typography></Item>
             <Item>
+              <About />
+            </Item>
+            <Item>
+              <div id="Dashboard"></div>
               <Dashboard ></Dashboard>
             </Item>
             <Item>
@@ -60,6 +68,7 @@ function App() {
             </Item>
             <Item>
               <Contact />
+
             </Item>
           </Grid>
         </Grid>
@@ -71,6 +80,8 @@ function App() {
       </div>
 
     </ThemeProvider>
+
+
   );
 }
 
