@@ -15,6 +15,7 @@ import Resume from './Resume.jsx';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Contact from './Contact.jsx';
+import About from './About.jsx';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -24,12 +25,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-
-// const useNoPaddingStyles = makeStyles((theme) => ({
-//   root: {
-//     padding: '0rem',
-//   },
-// }));
 
 // Create a dark theme
 const darkTheme = createTheme({
@@ -43,19 +38,17 @@ const darkTheme = createTheme({
 function App() {
   const [count, setCount] = useState(1)
 
-  // const classes = useNoPaddingStyles();
-
   return (
     <ThemeProvider theme={darkTheme} >
 
 
       <div className="App">
         <Grid container spacing={2} justifyContent="center" alignItems="center">
-
-            
-
           <Grid xs={12} md={8} >
           <Item><Typography variant="h1" >ethanparent.com</Typography></Item>
+          <Item>
+            <About />
+          </Item>
             <Item>
               <Dashboard ></Dashboard>
             </Item>
@@ -72,9 +65,6 @@ function App() {
         </Grid>
 
         <div className="card">
-          <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </Button>
           <Navbar>
           </Navbar>
         </div>

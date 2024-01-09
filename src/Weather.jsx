@@ -40,8 +40,8 @@ export default function Weather() {
           const forecastData = await response.json();
           //THIS LINE SHOULD BE DELETED BEFORE PROD
           // This is a workaround for the Tomorrow.io API rate limit
-          setForecastDataState(apiForecastData);
-          // setForecastDataState(forecastData);
+          // setForecastDataState(apiForecastData);
+          setForecastDataState(forecastData);
           // console.log("forecastData", forecastData)
           // console.log("forecastDataState", forecastDataState)
         } else {

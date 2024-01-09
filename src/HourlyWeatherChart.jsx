@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 export default function DailyWeatherChart({ forecastDataState }) {
 
     const hourlyTemps = [];
-
     const hours = [];
 
     function formatDateWithoutYear(inputDate) {
@@ -15,7 +14,6 @@ export default function DailyWeatherChart({ forecastDataState }) {
     }
 
     forecastDataState ? forecastDataState.timelines.hourly.map((hour) => hourlyTemps.push(hour.values.temperature)) : [];
- 
     forecastDataState ? forecastDataState.timelines.hourly.map((hour) => hours.push(formatDateWithoutYear(hour.time))) : [];
 
     //Convert temp data to F
