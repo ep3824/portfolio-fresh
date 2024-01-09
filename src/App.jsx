@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import Projects from './Projects.jsx';
 import Resume from './Resume.jsx';
 // import { makeStyles } from '@mui/system';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Contact from './Contact.jsx';
 import About from './About.jsx';
@@ -28,12 +28,14 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 // Create a dark theme
-const darkTheme = createTheme({
+let darkTheme = createTheme({
   palette: {
     mode: 'dark',
     // You can customize other theme options here
   },
 });
+
+darkTheme = responsiveFontSizes(darkTheme);
 
 
 function App() {
