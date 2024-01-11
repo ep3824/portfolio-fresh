@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
 
-import Resume from "./Resume.jsx";
+import Skills from "./Skills.jsx";
 // import { makeStyles } from '@mui/system';
 
 import Typography from "@mui/material/Typography";
@@ -52,7 +52,7 @@ function App() {
             <ProjectsSection />
           </Item>
           <Item>
-            <Resume />
+            <Skills />
           </Item>
           <Item>
             <Contact />

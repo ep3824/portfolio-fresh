@@ -8,19 +8,21 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 export default function Contact() {
   return (
     <div id="Contact">
-      <Box>
-        <Grid padding="2rem">
-          <Typography variant="h2">Contact</Typography>
+      <Grid>
           <Grid
             container
-            columnSpacing={2}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            padding="4rem"
+            spacing={3}
+            justifyContent="space-between"
+            alignItems="flex-start"
+            sx={{ maxWidth: 1200, margin: "0 auto" }}
           >
+            <Grid item xs={12}>
+              <Typography variant="h3" pb={4} textAlign={"left"}>
+                Contact
+              </Typography>
+            </Grid>
             <Grid item>
-              <EmailIcon style={{ fontSize: 60 }}/>
+              <EmailIcon style={{ fontSize: 60 }} />
               <div>
                 <a href="ma&#105;lto&#58;%65&#116;&#37;68an&#46;&#112;&#97;&#114;ent&#37;31&#37;40g&#109;&#97;il&#46;c%&#54;F%6D">
                   eth&#97;n&#46;p&#97;re&#110;t&#49;&#64;&#103;mail&#46;com
@@ -28,7 +30,7 @@ export default function Contact() {
               </div>
             </Grid>
             <Grid item>
-              <LinkedInIcon style={{ fontSize: 60 }}/>
+              <LinkedInIcon style={{ fontSize: 60 }} />
               <div>
                 <a href="https://www.linkedin.com/in/ethanparent/">
                   linkedin.com/in/ethanparent
@@ -36,14 +38,13 @@ export default function Contact() {
               </div>
             </Grid>
             <Grid item>
-              <GitHubIcon style={{ fontSize: 60 }}/>
+              <GitHubIcon style={{ fontSize: 60 }} />
               <div>
                 <a href="https://www.github.com/ep3824">github.com/ep3824</a>
               </div>
             </Grid>
           </Grid>
         </Grid>
-      </Box>
     </div>
   );
 }
