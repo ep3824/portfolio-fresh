@@ -5,13 +5,18 @@ export default function About() {
   return (
     <div id="About">
       <Container>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="body1" component="p" align="center" pb={20} sx={{color: "#808998"}}>
-              Former Sales Engineer, seeking to apply my 1337 skills to a new
-              arena.
-            </Typography>
-          </Grid>
+      <Grid
+        container
+        spacing={3}
+        justifyContent="space-between"
+        alignItems="flex-start"
+        sx={{ maxWidth: 700, margin: "0 auto" }}
+      >
+        <Grid item xs={12}>
+          <Typography variant="h4" pb={4}  textAlign={"left"}>
+            fullstack software developer
+          </Typography>
+        </Grid>
           <Grid item xs={12}>
             <Button
               variant="contained"

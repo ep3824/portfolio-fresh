@@ -5,7 +5,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
-
 import Skills from "./Skills.jsx";
 // import { makeStyles } from '@mui/system';
 
@@ -27,24 +26,27 @@ const Item = styled(Paper)(({ theme }) => ({
 function App() {
   return (
     <div className="App">
-      <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid xs={12} md={8}>
-          <Item>
-            <Typography
-              variant="h1"
-              sx={{
-                backgroundcolor: "primary",
-                backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
-                backgroundSize: "100%",
-                backgroundRepeat: "repeat",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              hello, I&apos;m ethan, full stack developer
-            </Typography>
-          </Item>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="left"
+        sx={{ maxWidth: 700, margin: "0 auto" }}
+      >
+        <Grid item xs={12}>
+          <Typography
+            variant="h1"
+            sx={{
+              backgroundcolor: "primary",
+              backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
+              backgroundSize: "100%",
+              backgroundRepeat: "repeat",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            hello, I&apos;m ethan,
+          </Typography>
           <Item>
             <About />
           </Item>
