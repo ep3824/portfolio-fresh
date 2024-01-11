@@ -4,6 +4,8 @@ import { styled } from "@mui/material/styles";
 import TrafficCount from "./TrafficCount";
 import GitHub from "./GitHub";
 import { useEffect } from "react";
+import Weather from "./Weather";
+import ChatGPT from "./ChatGPT";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -60,6 +62,12 @@ export default function Dashboard() {
           <Grid item xs={12} md={6}>
             <Item>
               <TrafficCount />
+            </Item>
+            <Item>
+              <Weather />
+            </Item>
+            <Item>
+              <ChatGPT />
             </Item>
           </Grid>
         </Grid>

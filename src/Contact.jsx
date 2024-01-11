@@ -20,7 +20,7 @@ export default function Contact() {
             padding="4rem"
           >
             <Grid item>
-              <EmailIcon />
+              <EmailIcon style={{ fontSize: 60 }}/>
               <div>
                 <a href="ma&#105;lto&#58;%65&#116;&#37;68an&#46;&#112;&#97;&#114;ent&#37;31&#37;40g&#109;&#97;il&#46;c%&#54;F%6D">
                   eth&#97;n&#46;p&#97;re&#110;t&#49;&#64;&#103;mail&#46;com
@@ -28,7 +28,7 @@ export default function Contact() {
               </div>
             </Grid>
             <Grid item>
-              <LinkedInIcon />
+              <LinkedInIcon style={{ fontSize: 60 }}/>
               <div>
                 <a href="https://www.linkedin.com/in/ethanparent/">
                   linkedin.com/in/ethanparent
@@ -36,9 +36,9 @@ export default function Contact() {
               </div>
             </Grid>
             <Grid item>
-              <GitHubIcon />
+              <GitHubIcon style={{ fontSize: 60 }}/>
               <div>
-                <a href="github.com/ep3824>">github.com/ep3824</a>
+                <a href="https://www.github.com/ep3824">github.com/ep3824</a>
               </div>
             </Grid>
           </Grid>

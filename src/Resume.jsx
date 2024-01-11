@@ -4,17 +4,12 @@ import { Typography } from "@mui/material";
 
 export default function Resume() {
   return (
-    <Box padding="1rem">
-      <Grid style={{ width: "100%", height: "100vh", overflow: "auto" }}>
+    <Box padding="10rem">
+      <Grid>
         <Typography variant="h2">
-          <div id="Resume">Resume</div>
+          <div id="Resume">Probably Will Delete Later</div>
         </Typography>
-        <iframe
-          src="../EthanParentJan9Resume.pdf"
-          frameBorder="0"
-          scrolling="auto"
-          style={{ width: "100%", height: "100%", border: "none" }}
-        ></iframe>
+        
       </Grid>
     </Box>
   );

@@ -1,21 +1,33 @@
 import { Container, Grid, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 
 export default function About() {
   return (
     <div id="About">
       <Container>
-        <Grid container spacing={2}>
+        <Grid container>
           <Grid item xs={12}>
-            <Typography variant="h2" component="h1" align="center" pt={20}>
-              About Me
+            <Typography variant="body1" component="p" align="center" pb={20} sx={{color: "#808998"}}>
+              Former Sales Engineer, seeking to apply my 1337 skills to a new
+              arena.
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="body1" component="p" align="center" pb={20}>
-              Hi, I&apos;m Ethan! I&apos;m a passionate software developer with
-              experience in JavaScript and React. I love building web
-              applications that are user-friendly and visually appealing.
-            </Typography>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
+                color: 'white',
+                boxShadow: "0 0 20px 1px #15a8c4",
+                "&:hover": {
+                    boxShadow: "0 0 10px 8px #15a8c4", // Adjust glow on hover
+                  },
+                textTransform: "none",
+                fontSize: ".9rem",
+              }}
+            >
+              Download Resume
+            </Button>
           </Grid>
         </Grid>
       </Container>
