@@ -28,8 +28,6 @@ function App() {
     <div className="App">
       <Grid
         container
-        justifyContent="space-between"
-        alignItems="left"
         sx={{ maxWidth: 700, margin: "0 auto" }}
       >
         <Grid item xs={12}>
