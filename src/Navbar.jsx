@@ -19,8 +19,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import CodeIcon from "@mui/icons-material/Code";
-import HailIcon from '@mui/icons-material/Hail';
-
+import HailIcon from "@mui/icons-material/Hail";
 
 const drawerWidth = 240;
 
@@ -70,6 +69,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const scrollToSection = (sectionId) => {
+  // This is a hacky way to scroll to the top of the page
+  // when about is clicked.
+  // Could be cleaned up by moving some about me CSS to the root
+  if (sectionId === "About") sectionId = "root";
   const element = document.getElementById(sectionId);
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });
@@ -102,21 +105,36 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <Box sx={{ display: "flex" }} >
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} enableColorOnDark sx={{ background: 'transparent' }}>
+      <AppBar
+        position="fixed"
+        open={open}
+        enableColorOnDark
+        sx={{ background: "transparent" }}
+      >
         <Toolbar>
           <IconButton
-            color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
+            sx={{ mr: 2, ...(open && { display: "none" }), color: "#8f67dc" }}
           >
             <MenuIcon />
           </IconButton>
           {/* this is where the icon goes */}
-          <HailIcon />
+          <Typography color="#8f67dc" pr={2}>
+            E.P. Portfolio
+          </Typography>
+
+          <HailIcon
+            style={{
+              color: "#8f67dc",
+              cursor: "pointer",
+            }}
+            
+            onClick={() => scrollToSection("root")}
+          ></HailIcon>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -142,20 +160,18 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </DrawerHeader>
         <List>
-          {["About", "Dashboard", "Projects", "Resume", "Contact"].map(
-            (text, index) => (
-              <ListItem
-                key={text}
-                disablePadding
-                onClick={() => scrollToSection(text)}
-              >
-                <ListItemButton>
-                  <ListItemIcon>{renderSwitch(index)}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
+          {["About", "Projects", "Skills", "Contact"].map((text, index) => (
+            <ListItem
+              key={text}
+              disablePadding
+              onClick={() => scrollToSection(text)}
+            >
+              <ListItemButton>
+                <ListItemIcon>{renderSwitch(index)}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </Drawer>
       <Main open={open}>

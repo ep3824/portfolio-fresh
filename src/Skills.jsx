@@ -7,6 +7,7 @@ import SkillBar from "./SkillBar.jsx";
 
 export default function Skills() {
   return (
+    <div id="Skills">
     <Grid>
       <Grid
         container
@@ -32,5 +33,6 @@ export default function Skills() {
         </Grid>
       </Grid>
     </Grid>
+    </div>
   );
 }

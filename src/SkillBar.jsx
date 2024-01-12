@@ -30,11 +30,13 @@ export default function SkillBar({ skill, value }) {
             {skill}
           </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h7" textAlign="right">
+        {/* Not sure if I want to display these words anyway, 
+        plus the design is off between mobile and desktop */}
+        {/* <Grid item xs={6} textAlign="right">
+          <Typography variant="h7" >
             {skillLevel}
           </Typography>
-        </Grid>
+        </Grid> */}
       </Grid>
       <Button
         variant="contained"

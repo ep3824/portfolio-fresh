@@ -13,12 +13,10 @@ import Contact from "./Contact.jsx";
 import About from "./About.jsx";
 import ProjectsSection from "./ProjectsSection.jsx";
 
+//This probably needs to be deleted, I don't think I want the elevation that comes with Paper
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#0f1724" : "#fff",
   ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "left",
-  color: theme.palette.text.secondary,
   //Made this change to get one uniform background color
   backgroundImage: "none",
 }));
@@ -44,7 +42,9 @@ function App() {
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
+              ml: "20px"
             }}
+
           >
             hello, I&apos;m ethan,
           </Typography>
