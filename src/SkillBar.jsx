@@ -1,22 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import PropTypes from "prop-types";
 
-export default function SkillBar({ skill, value }) {
-  let skillLevelChart = {
-    25: "Beginner",
-    50: "Intermediate",
-    75: "Advanced",
-  };
-  let skillLevel;
+export default function SkillBar({skill, value}) {
 
-  if (value >= 75) {
-    skillLevel = skillLevelChart[75];
-  } else if (value >= 50) {
-    skillLevel = skillLevelChart[50];
-  } else if (value >= 0) {
-    skillLevel = skillLevelChart[25];
-  }
 
   return (
     <Box pb={5}>
@@ -30,13 +18,7 @@ export default function SkillBar({ skill, value }) {
             {skill}
           </Typography>
         </Grid>
-        {/* Not sure if I want to display these words anyway, 
-        plus the design is off between mobile and desktop */}
-        {/* <Grid item xs={6} textAlign="right">
-          <Typography variant="h7" >
-            {skillLevel}
-          </Typography>
-        </Grid> */}
+       
       </Grid>
       <Button
         variant="contained"
@@ -55,3 +37,9 @@ export default function SkillBar({ skill, value }) {
     </Box>
   );
 }
+
+SkillBar.propTypes = {
+  skill: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+};
+

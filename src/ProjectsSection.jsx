@@ -1,6 +1,8 @@
 import { Grid } from "@mui/material";
 import ProjectCard from "./ProjectCard.jsx";
 import Typography from "@mui/material/Typography";
+import EPWebsiteSS from "../EPWebsiteSS.png";
+import dashPic from "../dashPic.png";
 
 export default function ProjectsSection() {
   return (
@@ -8,10 +10,10 @@ export default function ProjectsSection() {
       <Grid>
         <Grid
           container
-          spacing={3}
+          spacing={1}
           justifyContent="space-between"
           alignItems="flex-start"
-          sx={{ maxWidth: 700, margin: "0 auto" }}
+          sx={{ width: '100%'}}
           pb={30}
         >
           <Grid item xs={12}>
@@ -20,19 +22,19 @@ export default function ProjectsSection() {
             </Typography>
           </Grid>
           <ProjectCard
-            image={`https://picsum.photos/id/237/536/354`}
-            title={"Project 1"}
-            description={"description"}
+            image={`${dashPic}`}
+            title={"Dashboard App"}
+            description={"A dashboard app that displays widgets. (WIP)"} 
+          />
+          <ProjectCard
+            image={`${EPWebsiteSS}`}
+            title={"This Website"}
+            description={"Created with React, Material UI, and deployed on AWS (WIP)"}
           />
           <ProjectCard
             image={`https://picsum.photos/id/237/536/354`}
-            title={"Project 2"}
-            description={"description"}
-          />
-          <ProjectCard
-            image={`https://picsum.photos/id/237/536/354`}
-            title={"Project 3"}
-            description={"description"}
+            title={"Automation Scripts"}
+            description={"PowerShell and Python scripts to automate tasks."}
           />
         </Grid>
       </Grid>

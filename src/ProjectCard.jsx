@@ -30,14 +30,16 @@ export default function ReusableCard({ image, title, description }) {
   }));
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} md={6} >
       <Box
         sx={{
           maxWidth: 375,
           border: "1px solid #7a72d8",
           padding: "20px",
           borderRadius: "15px",
+          height: "24rem",
         }}
+        
       >
         <CardMedia component="img" alt={title} height="140" image={image} />
 

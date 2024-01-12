@@ -19,6 +19,8 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   //Made this change to get one uniform background color
   backgroundImage: "none",
+  padding: 0,
+  boxShadow: "none",
 }));
 
 function App() {
@@ -42,7 +44,6 @@ function App() {
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              ml: "20px"
             }}
 
           >

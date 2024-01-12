@@ -1,8 +1,5 @@
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
-import Stack from "@mui/material/Stack";
-import LinearProgress from "@mui/material/LinearProgress";
-import Box from "@mui/material/Box";
 import SkillBar from "./SkillBar.jsx";
 
 export default function Skills() {

@@ -5,7 +5,6 @@ import "@fontsource-variable/red-hat-text";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import { lime } from "@mui/material/colors";
 
 // Create a dark theme
 let darkTheme = createTheme({
