@@ -14,25 +14,28 @@ export default function SkillBar({ skill, value }) {
     skillLevel = skillLevelChart[75];
   } else if (value >= 50) {
     skillLevel = skillLevelChart[50];
-  } else if (value >= 25) {
+  } else if (value >= 0) {
     skillLevel = skillLevelChart[25];
   }
 
   return (
-    <Box>
-      <Grid container alignItems="ceneter">
+    <Box pb={5}>
+      <Grid
+        container
+        alignItems="center"
+        sx={{ display: "flex", justifyContent: "space-between" }}
+      >
         <Grid item xs={6}>
           <Typography variant="h6" pb={1} textAlign="left">
             {skill}
           </Typography>
         </Grid>
-        <Grid item xs={6} sx={{ textAlign: "right" }}>
-          <Typography variant="h7">
-            {skillLevel
-            }</Typography>
+        <Grid item xs={6}>
+          <Typography variant="h7" textAlign="right">
+            {skillLevel}
+          </Typography>
         </Grid>
       </Grid>
-
       <Button
         variant="contained"
         sx={{
@@ -44,9 +47,7 @@ export default function SkillBar({ skill, value }) {
           },
           textTransform: "none",
           fontSize: ".9rem",
-          marginRight: "100%",
           width: `${value}%`,
-          textAlign: "right",
         }}
       ></Button>
     </Box>

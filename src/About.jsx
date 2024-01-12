@@ -3,9 +3,9 @@ import Button from "@mui/material/Button";
 
 export default function About() {
   return (
-    <div id="About">
+    <div id="About" >
       <Container>
-        <Grid container sx={{ maxWidth: 700, margin: "0 auto" }} pb={20}>
+        <Grid container sx={{ maxWidth: 700, margin: "0 auto" }} pb={30}>
           <Grid item xs={12}>
             <Typography variant="h4" pb={4} textAlign="left">
               fullstack software developer

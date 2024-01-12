@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#0f1724" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: "center",
+  textAlign: "left",
   color: theme.palette.text.secondary,
   //Made this change to get one uniform background color
   backgroundImage: "none",
@@ -25,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" >
       <div className="card">
         <Navbar></Navbar>
       </div>

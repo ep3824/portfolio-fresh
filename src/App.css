@@ -1,9 +1,11 @@
 #root {
   margin: auto auto;
   padding: 5rem 0rem 0rem 0rem;
-  text-align: center;
+  text-align: left;
   background-color: #0f1724;
 }
+
+
 
 .logo {
   height: 6em;
