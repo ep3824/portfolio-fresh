@@ -1,19 +1,23 @@
-
 import ReactDOM from "react-dom/client";
 import App from "../App.jsx";
 import "../index.css";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import "@fontsource-variable/red-hat-text";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
+import { lime } from "@mui/material/colors";
 
 // Create a dark theme
 let darkTheme = createTheme({
   palette: {
     mode: "dark",
+    primary: {
+      main: "#0f1724",
+    },
+  },
+  background: {
+    default: "#0f1724",
+    paper: "#0f1724",
   },
   components: {
     MuiButton: {
@@ -25,6 +29,9 @@ let darkTheme = createTheme({
         },
       },
     },
+  },
+  typography: {
+    fontFamily: `"Red Hat Text Variable", sans-serif`,
   },
 });
 

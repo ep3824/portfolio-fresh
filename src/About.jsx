@@ -5,9 +5,9 @@ export default function About() {
   return (
     <div id="About">
       <Container>
-        <Grid container sx={{ maxWidth: 700, margin: "0 auto" }}>
+        <Grid container sx={{ maxWidth: 700, margin: "0 auto" }} pb={20}>
           <Grid item xs={12}>
-            <Typography variant="h4" pb={4} textAlign={"left"}>
+            <Typography variant="h4" pb={4} textAlign="left">
               fullstack software developer
             </Typography>
           </Grid>
@@ -24,7 +24,6 @@ export default function About() {
                 textTransform: "none",
                 fontSize: ".9rem",
               }}
-              
             >
               Download Resume
             </Button>

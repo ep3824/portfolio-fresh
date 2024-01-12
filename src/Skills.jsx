@@ -12,7 +12,7 @@ export default function Skills() {
         sx={{ maxWidth: 700, margin: "0 auto" }}
       >
         <Grid item xs={12}>
-          <Typography variant="h3" pb={4}  textAlign={"left"}>
+          <Typography variant="h3" pb={4}  textAlign="left">
             Skills
           </Typography>
         </Grid>

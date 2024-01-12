@@ -19,6 +19,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import CodeIcon from "@mui/icons-material/Code";
+import HailIcon from '@mui/icons-material/Hail';
+
 
 const drawerWidth = 240;
 
@@ -100,9 +102,9 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} >
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} enableColorOnDark sx={{ background: 'transparent' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -113,9 +115,8 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Insert Logo Here, link it to homepage
-          </Typography>
+          {/* this is where the icon goes */}
+          <HailIcon />
         </Toolbar>
       </AppBar>
       <Drawer
