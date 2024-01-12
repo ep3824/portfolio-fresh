@@ -31,7 +31,8 @@ function App() {
       </div>
       <Grid
         container
-        sx={{ maxWidth: 700, margin: "0 auto" }}
+        sx={{ maxWidth: 700, margin: "0 auto"}}
+        padding={3}
       >
         <Grid item xs={12}>
           <Typography

@@ -10,7 +10,6 @@ export default function Contact() {
       <Grid>
         <Grid
           container
-          spacing={3}
           justifyContent="space-between"
           alignItems="flex-start"
           sx={{ maxWidth: 700, margin: "0 auto" }}

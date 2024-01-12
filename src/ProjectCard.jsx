@@ -37,7 +37,7 @@ export default function ReusableCard({ image, title, description }) {
           border: "1px solid #7a72d8",
           padding: "20px",
           borderRadius: "15px",
-          height: "24rem",
+          height: "26rem",
         }}
         
       >

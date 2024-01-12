@@ -5,10 +5,9 @@ import SkillBar from "./SkillBar.jsx";
 export default function Skills() {
   return (
     <div id="Skills">
-    <Grid>
+
       <Grid
         container
-        spacing={3}
         justifyContent="space-between"
         alignItems="flex-start"
         sx={{ maxWidth: 700, margin: "0 auto" }}
@@ -26,10 +25,8 @@ export default function Skills() {
           <SkillBar skill={"HTML & CSS"} value={40} />
           <SkillBar skill={"Material UI"} value={30} />
           <SkillBar skill={"Docker"} value={30} />
-
         </Grid>
       </Grid>
-    </Grid>
     </div>
   );
 }
