@@ -17,7 +17,7 @@ export default function GitHub({ GitHubData }) {
           timeSonze: "UTC",
         });
 
-        commitCounter[formattedDate] = (commitCounter[formattedDate] || 0) + 1; // Increment the count for the specific date
+        commitCounter[formattedDate] = (commitCounter[formattedDate] || 0) + 1;
       })
     ) : (
       <div>
@@ -29,14 +29,19 @@ export default function GitHub({ GitHubData }) {
   // Display the commit count for each day
   // If more than 4 days of commits, shorten to 4
   Object.entries(commitCounter).forEach(([date, count]) => {
-    commits.unshift(count);
-    dates.unshift(date);
+    commits.push(count);
+    dates.push(date);
   });
+
+  
 
   if (commits.length && dates.length > 4) {
     commits.length = 4;
     dates.length = 4;
   }
+  // Reverse the order of the arrays so that the most recent commits are displayed first
+  commits = commits.reverse();
+  dates = dates.reverse();
 
   GitHub.propTypes = {
     GitHubData: PropTypes.array,

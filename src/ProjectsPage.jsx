@@ -43,10 +43,10 @@ export default function ProjectsPage() {
                 <Dashboard></Dashboard>
               </Item>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={12}>
               <Item>Project 3 </Item>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={12}>
               <Item>Project 4</Item>
             </Grid>
           </Grid>
