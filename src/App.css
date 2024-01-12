@@ -5,6 +5,11 @@
   background-color: #0f1724;
 }
 
+/* This is a hacky way to ignore the gap on the right  */
+html, body {
+  overflow-x: hidden
+}
+
 
 
 .logo {

@@ -15,6 +15,7 @@ export default function Contact() {
           justifyContent="space-between"
           alignItems="flex-start"
           sx={{ maxWidth: 700, margin: "0 auto" }}
+          pb={5}
         >
           <Grid item xs={12}>
             <Typography variant="h3" pb={4} textAlign={"left"}>

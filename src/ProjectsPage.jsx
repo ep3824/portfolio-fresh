@@ -1,5 +1,6 @@
 import { Grid, Box, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import "@fontsource-variable/red-hat-text";
 
 
 
@@ -19,6 +20,9 @@ let darkTheme = createTheme({
   palette: {
     mode: "dark",
     // You can customize other theme options here
+  },
+  typography: {
+    fontFamily: `"Red Hat Text Variable", sans-serif`,
   },
 });
 

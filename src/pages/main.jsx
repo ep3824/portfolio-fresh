@@ -12,10 +12,6 @@ let darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
-  background: {
-    default: "#0f1724",
-    paper: "#0f1724",
-  },
   components: {
     MuiButton: {
       styleOverrides: {
