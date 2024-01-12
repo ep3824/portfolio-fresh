@@ -11,7 +11,7 @@ export default function About() {
               fullstack software developer
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item >
             <Button
               variant="contained"
               sx={{

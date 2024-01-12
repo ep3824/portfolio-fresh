@@ -12,7 +12,7 @@ export default function ReusableCard({ image, title, description }) {
       boxShadow: "0 0 10px 8px #15a8c4", // Adjust glow on hover
     },
     textTransform: "none",
-    fontSize: "1rem",
+    fontSize: ".8rem",
     margin: "10px",
   }));
 
@@ -24,7 +24,7 @@ export default function ReusableCard({ image, title, description }) {
       boxShadow: "0 0 10px 8px #15a8c4", // Adjust glow on hover
     },
     textTransform: "none",
-    fontSize: "1rem",
+    fontSize: ".8rem",
     margin: "10px",
   }));
 
@@ -33,11 +33,9 @@ export default function ReusableCard({ image, title, description }) {
       <Box
         sx={{
           maxWidth: 375,
-          border: "3px solid transparent",
+          border: "1px solid #7a72d8",
           padding: "20px",
-          borderRadius: "10px",
-          borderImageSource: `linear-gradient(45deg, #9a61de, #15a8c4)`,
-          borderImageSlice: 1,
+          borderRadius: "15px",
         }}
       >
         <CardMedia component="img" alt={title} height="140" image={image} />

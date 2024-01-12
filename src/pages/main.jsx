@@ -11,9 +11,6 @@ import { lime } from "@mui/material/colors";
 let darkTheme = createTheme({
   palette: {
     mode: "dark",
-    primary: {
-      main: "#0f1724",
-    },
   },
   background: {
     default: "#0f1724",
@@ -25,7 +22,7 @@ let darkTheme = createTheme({
         root: {
           borderRadius: "20px",
           padding: "10px",
-          minWidth: "150px",
+          minWidth: "120px",
         },
       },
     },

@@ -26,6 +26,9 @@ const Item = styled(Paper)(({ theme }) => ({
 function App() {
   return (
     <div className="App">
+      <div className="card">
+        <Navbar></Navbar>
+      </div>
       <Grid
         container
         sx={{ maxWidth: 700, margin: "0 auto" }}
@@ -59,9 +62,7 @@ function App() {
           </Item>
         </Grid>
       </Grid>
-      <div className="card">
-        <Navbar></Navbar>
-      </div>
+      
     </div>
   );
 }
