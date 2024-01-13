@@ -35,9 +35,9 @@ export default function ReusableCard({ image, title, description }) {
         sx={{
           maxWidth: 375,
           border: "1px solid #7a72d8",
-          padding: "20px",
+          padding: "15px",
           borderRadius: "15px",
-          height: "26rem",
+          height: "24rem",
         }}
         
       >
@@ -57,6 +57,7 @@ export default function ReusableCard({ image, title, description }) {
           color="#9299ab"
           textAlign={"left"}
           mb="20px"
+          pb={2}
         >
           {description}
         </Typography>
