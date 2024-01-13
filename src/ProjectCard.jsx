@@ -3,7 +3,7 @@ import { Grid, Box, CardMedia, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
-export default function ReusableCard({ image, title, description }) {
+export default function ReusableCard({ image, title, description, pageLink }) {
   //Demo Button
   const CustomButton = styled(Button)(() => ({
     backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
@@ -63,7 +63,7 @@ export default function ReusableCard({ image, title, description }) {
         </Typography>
         {/* For now, these projects will all just link to the same Projects Page,
         Eventually they will each get their own page */}
-        <a href="/projects-page" target="_blank" rel="noreferrer">
+        <a href={pageLink} target="_blank" rel="noreferrer">
           <CustomButton size="small">Demo</CustomButton>
         </a>
         {/* And for now, these will just link to my general GitHub page */}
@@ -79,4 +79,5 @@ ReusableCard.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  pageLink: PropTypes.string.isRequired,
 };

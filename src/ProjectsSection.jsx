@@ -24,17 +24,20 @@ export default function ProjectsSection() {
           <ProjectCard
             image={`${dashPic}`}
             title={"Dashboard App"}
-            description={"A dashboard app that displays widgets. (WIP)"} 
+            description={"/dashboard-page"} 
+            pageLink={"/dashboard-page"}
           />
           <ProjectCard
             image={`${EPWebsiteSS}`}
             title={"This Website"}
             description={"Created with React, Material UI, and deployed on AWS (WIP)"}
+            pageLink={"/"}
           />
           <ProjectCard
             image={`https://picsum.photos/id/237/536/354`}
             title={"Automation Scripts"}
             description={"PowerShell and Python scripts to automate tasks."}
+            pageLink={"/"}
           />
         </Grid>
       </Grid>

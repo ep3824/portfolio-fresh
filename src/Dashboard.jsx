@@ -50,9 +50,17 @@ export default function Dashboard() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          spacing={1}
+          justifyContent="space-between"
+          alignItems="flex-start"
+          sx={{ width: "100%" }}
+          pb={30}
         >
+          <Grid item xs={12}>
+            <Item>
+              <Weather xs={12} />
+            </Item>
+          </Grid>
           <Grid item xs={12} md={6}>
             <Item>
               <GitHub GitHubData={GitHubDataState} />
@@ -62,12 +70,6 @@ export default function Dashboard() {
           <Grid item xs={12} md={6}>
             <Item>
               <TrafficCount />
-            </Item>
-            <Item>
-              <Weather />
-            </Item>
-            <Item>
-              <ChatGPT />
             </Item>
           </Grid>
         </Grid>
