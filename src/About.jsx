@@ -7,8 +7,11 @@ export default function About() {
     <div id="About">
         <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} pb={30} >
           <Grid item xs={12} >
-            <Typography variant="h2" pb={4} textAlign="left">
+            <Typography variant="h2" textAlign="left">
               software developer
+            </Typography>
+            <Typography variant="h4" pb={4} textAlign="left">
+              <p>welcome to my portfolio. this is where I have projects.</p>
             </Typography>
           </Grid>
           <Grid item>

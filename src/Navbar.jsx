@@ -111,25 +111,25 @@ export default function PersistentDrawerLeft() {
         position="fixed"
         open={open}
         enableColorOnDark
-        sx={{ background: "transparent" }}
+        sx={{ background: "linear-gradient(45deg, #9a61de, #15a8c4)" }}
       >
         <Toolbar>
           <IconButton
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }), color: "#8f67dc" }}
+            sx={{ mr: 2, ...(open && { display: "none" }), color: "white" }}
           >
             <MenuIcon />
           </IconButton>
           {/* this is where the icon goes */}
-          <Typography color="#8f67dc" pr={2}>
+          <Typography color="white" pr={2}>
             E.P. Portfolio
           </Typography>
 
           <HailIcon
             style={{
-              color: "#8f67dc",
+              color: "white",
               cursor: "pointer",
             }}
             
