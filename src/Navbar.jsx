@@ -39,6 +39,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
       }),
       marginLeft: 0,
     }),
+    
   })
 );
 
@@ -66,6 +67,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
+  
 }));
 
 const scrollToSection = (sectionId) => {
@@ -111,7 +113,7 @@ export default function PersistentDrawerLeft() {
         position="fixed"
         open={open}
         enableColorOnDark
-        sx={{ background: "linear-gradient(45deg, #9a61de, #15a8c4)" }}
+        sx={{ background: "#0c121c" }}
       >
         <Toolbar>
           <IconButton
@@ -144,6 +146,7 @@ export default function PersistentDrawerLeft() {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            backgroundColor: "#0c121c"
           },
         }}
         variant="persistent"
