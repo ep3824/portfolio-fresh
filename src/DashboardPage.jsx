@@ -36,12 +36,12 @@ export default function DashboardPage() {
     // !!!! Need to check on the below, not sure if I'm still doing that after edits
     // Here we lift up state from child (ChatGPT) to projects, back down to child (PokeDex)
     <ThemeProvider theme={darkTheme}>
-      <div id="Projects">
+      <div id="Dashboard">
         <div className="card">
           <Navbar></Navbar>
         </div>
         <Item>
-          <Grid container sx={{ maxWidth: 700, margin: "0 auto" }} padding={3}>
+          <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} padding={3}>
             <Grid item xs={12}>
               <Typography
                 variant="h2"

@@ -5,6 +5,9 @@ import CloudIcon from "@mui/icons-material/Cloud";
 import Button from "@mui/material/Button";
 import HourlyWeatherChart from "./HourlyWeatherChart";
 import DailyWeatherChart from "./DailyWeatherChart";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import Stack from "@mui/material/Stack";
 
 export default function Weather() {
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
@@ -113,11 +116,11 @@ export default function Weather() {
     : [];
 
   const submitHandler = (e) => {
+    console.log(e.target);
     e.preventDefault();
-    console.log(e.target[0].value);
-    if (e.target[0].value === "Daily") {
+    if (e.target.value === "Daily") {
       setIsDaily(true);
-    } else if (e.target[0].value === "Hourly") {
+    } else if (e.target.value === "Hourly") {
       setIsDaily(false);
     }
   };
@@ -140,42 +143,58 @@ export default function Weather() {
               Cloud cover is at {cloudCover} %.
             </Typography>
           </Grid>
-
-          <Box
-            sx={{
-              height: 260,
-              borderRadius: 5,
-              p: 2,
-              boxShadow: "0 4px 8px rgba(0, 0, 0, .5)",
-              backgroundImage:
-                "linear-gradient(to right bottom, #2980b9, #3498db)", //blue to blue
-            }}
+          <Grid
+            container
+            spacing={1}
+            margin={0}
+            justifyContent="space-between"
+            alignItems="flex-start"
+            sx={{ width: "100%" }}
+            pb={10}
           >
-            {forecastDataState &&
-            isDaily &&
-            forecastDataState.timelines.daily.length > 0 ? (
-              <DailyWeatherChart forecastDataState={forecastDataState} />
-            ) : null}
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  height: 260,
+                  borderRadius: 5,
+                  p: 2,
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, .5)",
+                  backgroundImage:
+                    "linear-gradient(to right bottom, #2980b9, #3498db)", //blue to blue
+                  flexGrow: 1,
+                }}
+              >
+                <Grid>
+                  {/* This is the hourly/daily switcher */}
+                  <Stack flexWrap="wrap" useFlexGap position="absolute">
+                    <TextField
+                      select
+                      label="Timeframe"
+                      value={isDaily ? "Daily" : "Hourly"}
+                      onChange={(e) => submitHandler(e)}
+                      sx={{ minWidth: 150, width: "25%" }}
+                    >
+                      <MenuItem value={"Hourly"}>Hourly</MenuItem>
+                      <MenuItem value={"Daily"}>Daily</MenuItem>
+                    </TextField>
+                  </Stack>
+                </Grid>
+                {forecastDataState &&
+                isDaily &&
+                forecastDataState.timelines.daily.length > 0 ? (
+                  <DailyWeatherChart forecastDataState={forecastDataState} />
+                ) : null}
 
-            {forecastDataState &&
-            !isDaily &&
-            forecastDataState.timelines.daily.length > 0 ? (
-              <HourlyWeatherChart forecastDataState={forecastDataState} />
-            ) : null}
+                {forecastDataState &&
+                !isDaily &&
+                forecastDataState.timelines.daily.length > 0 ? (
+                  <HourlyWeatherChart forecastDataState={forecastDataState} />
+                ) : null}
 
-            {!forecastDataState ? <p>Forecast data is loading...</p> : null}
-          </Box>
-
-          <form onSubmit={(e) => submitHandler(e)}>
-            <Button variant="outlined" type="submit" value="Hourly">
-              Hourly
-            </Button>
-          </form>
-          <form onSubmit={(e) => submitHandler(e)}>
-            <Button variant="outlined" type="submit" value="Daily">
-              Daily
-            </Button>
-          </form>
+                {!forecastDataState ? <p>Forecast data is loading...</p> : null}
+              </Box>
+            </Grid>
+          </Grid>
         </Grid>
       ) : (
         <p>Loading weather data...</p>

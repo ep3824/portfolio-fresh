@@ -33,7 +33,7 @@ export default function ReusableCard({ image, title, description, pageLink }) {
     <Grid item xs={12} md={6} >
       <Box
         sx={{
-          maxWidth: 375,
+          maxWidth: 700,
           border: "1px solid #7a72d8",
           padding: "15px",
           borderRadius: "15px",

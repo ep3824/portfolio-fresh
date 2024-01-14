@@ -5,7 +5,7 @@ import EthanParentResume from "../EthanParentResume.pdf";
 export default function About() {
   return (
     <div id="About">
-        <Grid container sx={{ maxWidth: 700, margin: "0 auto" }} pb={30} >
+        <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} pb={30} >
           <Grid item xs={12} >
             <Typography variant="h2" pb={4} textAlign="left">
               software developer

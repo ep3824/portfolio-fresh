@@ -12,7 +12,7 @@ export default function Contact() {
           container
           justifyContent="space-between"
           alignItems="flex-start"
-          sx={{ maxWidth: 700, margin: "0 auto" }}
+          sx={{ maxWidth: 1400, margin: "0 auto" }}
           pb={5}
         >
           <Grid item xs={12}>

@@ -58,7 +58,7 @@ export default function Dashboard() {
         >
           <Grid item xs={12}>
             <Item>
-              <Weather xs={12} />
+              <Weather />
             </Item>
           </Grid>
           <Grid item xs={12} md={6}>

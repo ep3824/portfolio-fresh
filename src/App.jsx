@@ -13,6 +13,7 @@ import Contact from "./Contact.jsx";
 import About from "./About.jsx";
 import ProjectsSection from "./ProjectsSection.jsx";
 
+
 //This probably needs to be deleted, I don't think I want the elevation that comes with Paper
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#0f1724" : "#fff",
@@ -31,7 +32,7 @@ function App() {
       </div>
       <Grid
         container
-        sx={{ maxWidth: 700, margin: "0 auto"}}
+        sx={{ maxWidth: 1400, margin: "0 auto"}}
         padding={3}
       >
         <Grid item xs={12}>
@@ -59,6 +60,7 @@ function App() {
           <Item>
             <Skills />
           </Item>
+          
           <Item>
             <Contact />
           </Item>
