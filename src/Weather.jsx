@@ -157,22 +157,22 @@ export default function Weather() {
                 sx={{
                   height: 260,
                   borderRadius: 5,
-                  p: 2,
+                  p: 5,
                   boxShadow: "0 4px 8px rgba(0, 0, 0, .5)",
                   backgroundImage:
                     "linear-gradient(to right bottom, #2980b9, #3498db)", //blue to blue
                   flexGrow: 1,
                 }}
               >
-                <Grid>
+                <Grid item xs={12}>
                   {/* This is the hourly/daily switcher */}
-                  <Stack flexWrap="wrap" useFlexGap position="absolute">
+                  <Stack flexWrap="wrap" useFlexGap>
                     <TextField
                       select
                       label="Timeframe"
                       value={isDaily ? "Daily" : "Hourly"}
                       onChange={(e) => submitHandler(e)}
-                      sx={{ minWidth: 150, width: "25%" }}
+                      sx={{ minWidth: 150, width: "25%", zIndex: 9000}}
                     >
                       <MenuItem value={"Hourly"}>Hourly</MenuItem>
                       <MenuItem value={"Daily"}>Daily</MenuItem>
