@@ -8,6 +8,7 @@ import DailyWeatherChart from "./DailyWeatherChart";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
+import apiForecastData from "../apiForecastData.js";
 
 export default function Weather() {
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
@@ -38,8 +39,8 @@ export default function Weather() {
           const forecastData = await response.json();
           //THIS LINE SHOULD BE DELETED BEFORE PROD
           // This is a workaround for the Tomorrow.io API rate limit
-          // setForecastDataState(apiForecastData);
-          setForecastDataState(forecastData);
+          setForecastDataState(apiForecastData);
+          // setForecastDataState(forecastData);
           // console.log("forecastData", forecastData)
           // console.log("forecastDataState", forecastDataState)
         } else {
@@ -126,22 +127,21 @@ export default function Weather() {
   };
 
   return (
-    <Box>
+    <Box  >
       {realtimeDataState ? (
-        <Grid>
+        <Grid >
           <Grid>
-            <Typography variant="h5" component="div" gutterBottom>
-              Weather
-            </Typography>
-            <Box>
-              <Typography variant="h7" component="div" gutterBottom>
-                Frisco, TX is {temperatureF} °F / {temperatureC} °C.
+            <Box >
+              <Typography variant="h3" component="div" textAlign={"left"}>
+                {temperatureF} °F.
               </Typography>
-              {weatherImg}
             </Box>
-            <Typography variant="h7" component="div" gutterBottom>
-              Cloud cover is at {cloudCover} %.
+            <Typography variant="h6" component="div" gutterBottom textAlign={"left"}>
+             Descriptor should go here like Fair or Windy or Sunny {weatherImg}
             </Typography>
+            <Typography variant="h6" component="div" textAlign={"left"}>
+                {tempsMax[0]}°F / {tempsMin[0]} °C.
+              </Typography>
           </Grid>
           <Grid
             container

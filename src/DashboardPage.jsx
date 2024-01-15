@@ -11,7 +11,7 @@ import {
 } from "@mui/material/styles";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === "dark" ? "#2c86c1" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
@@ -33,8 +33,6 @@ darkTheme = responsiveFontSizes(darkTheme);
 
 export default function DashboardPage() {
   return (
-    // !!!! Need to check on the below, not sure if I'm still doing that after edits
-    // Here we lift up state from child (ChatGPT) to projects, back down to child (PokeDex)
     <ThemeProvider theme={darkTheme}>
       <div id="Dashboard">
         <div className="card">
@@ -43,22 +41,6 @@ export default function DashboardPage() {
         <Item>
           <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} padding={3}>
             <Grid item xs={12}>
-              <Typography
-                variant="h2"
-                padding={4}
-                sx={{
-                  backgroundcolor: "primary",
-                  backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
-                  backgroundSize: "100%",
-                  backgroundRepeat: "repeat",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                User Dashboard
-              </Typography>
-
               <div id="Dashboard"></div>
               <Dashboard></Dashboard>
             </Grid>

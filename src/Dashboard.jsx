@@ -1,13 +1,14 @@
 import React from "react";
-import { Grid, Box, Paper } from "@mui/material";
+import { Grid, Box, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import TrafficCount from "./TrafficCount";
 import GitHub from "./GitHub";
 import { useEffect } from "react";
 import Weather from "./Weather";
+import DashboardWidget from "./DashboardWidget";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === "dark" ? "#2c86c1" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
@@ -50,26 +51,44 @@ export default function Dashboard() {
         <Grid
           container
           spacing={1}
-          justifyContent="space-between"
-          alignItems="flex-start"
+          justifyContent="left"
+          alignItems="left"
           sx={{ width: "100%" }}
           pb={30}
+          
         >
           <Grid item xs={12}>
+            <Typography
+              variant="h2"
+              pb={4}
+              color="#fff"
+              textAlign={"left"}
+            >
+              Little Elm
+            </Typography>
+          </Grid>
+          <Grid item xs={12} >
             <Item>
               <Weather />
             </Item>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Item>
-              <GitHub GitHubData={GitHubDataState} />
-            </Item>
+            <DashboardWidget ></DashboardWidget>
           </Grid>
-
           <Grid item xs={12} md={6}>
-            <Item>
-              <TrafficCount />
-            </Item>
+            <DashboardWidget />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <DashboardWidget />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <DashboardWidget />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <DashboardWidget />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <DashboardWidget />
           </Grid>
         </Grid>
       </Box>
