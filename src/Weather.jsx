@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import apiForecastData from "../apiForecastData.js";
+import DashboardWidget from "./DashboardWidget.jsx";
 
 export default function Weather() {
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
@@ -127,21 +128,32 @@ export default function Weather() {
   };
 
   return (
-    <Box  >
+    <div id="Dashboard">
+    <Box>
       {realtimeDataState ? (
-        <Grid >
+        <Grid>
           <Grid>
-            <Box >
+            <Box>
+              <Grid item xs={12}>
+                <Typography variant="h2" pb={4} color="#fff" textAlign={"left"}>
+                  Little Elm
+                </Typography>
+              </Grid>
               <Typography variant="h3" component="div" textAlign={"left"}>
                 {temperatureF} °F.
               </Typography>
             </Box>
-            <Typography variant="h6" component="div" gutterBottom textAlign={"left"}>
-             Descriptor should go here like Fair or Windy or Sunny {weatherImg}
+            <Typography
+              variant="h6"
+              component="div"
+              gutterBottom
+              textAlign={"left"}
+            >
+              Descriptor should go here like Fair or Windy or Sunny {weatherImg}
             </Typography>
             <Typography variant="h6" component="div" textAlign={"left"}>
-                {tempsMax[0]}°F / {tempsMin[0]} °C.
-              </Typography>
+              {tempsMax[0]}°F / {tempsMin[0]} °C.
+            </Typography>
           </Grid>
           <Grid
             container
@@ -159,8 +171,7 @@ export default function Weather() {
                   borderRadius: 5,
                   p: 5,
                   boxShadow: "0 4px 8px rgba(0, 0, 0, .5)",
-                  backgroundImage:
-                    "linear-gradient(to right bottom, #2980b9, #3498db)", //blue to blue
+                  backgroundColor: "rgb(50, 126, 176, .3)", //blue to blue
                   flexGrow: 1,
                 }}
               >
@@ -172,7 +183,7 @@ export default function Weather() {
                       label="Timeframe"
                       value={isDaily ? "Daily" : "Hourly"}
                       onChange={(e) => submitHandler(e)}
-                      sx={{ minWidth: 150, width: "25%", zIndex: 9000}}
+                      sx={{ minWidth: 150, width: "25%", zIndex: 9000 }}
                     >
                       <MenuItem value={"Hourly"}>Hourly</MenuItem>
                       <MenuItem value={"Daily"}>Daily</MenuItem>
@@ -193,6 +204,24 @@ export default function Weather() {
 
                 {!forecastDataState ? <p>Forecast data is loading...</p> : null}
               </Box>
+              <Grid item xs={12} md={6}>
+                <DashboardWidget></DashboardWidget>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DashboardWidget />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DashboardWidget />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DashboardWidget />
+              </Grid>
+              <Grid item xs={6} md={3}>
+                <DashboardWidget />
+              </Grid>
+              <Grid item xs={6} md={3}>
+                <DashboardWidget />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
@@ -200,5 +229,8 @@ export default function Weather() {
         <p>Loading weather data...</p>
       )}
     </Box>
+    </div>
   );
 }
+
+

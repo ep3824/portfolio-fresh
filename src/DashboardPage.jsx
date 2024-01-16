@@ -2,6 +2,7 @@ import { Grid, Box, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import "@fontsource-variable/red-hat-text";
 import Navbar from "./Navbar";
+import Weather from "./Weather";
 
 import Dashboard from "./Dashboard";
 import {
@@ -42,7 +43,7 @@ export default function DashboardPage() {
           <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} padding={3}>
             <Grid item xs={12}>
               <div id="Dashboard"></div>
-              <Dashboard></Dashboard>
+              <Weather></Weather>
             </Grid>
           </Grid>
         </Item>
