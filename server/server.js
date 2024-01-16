@@ -49,7 +49,7 @@ app.use('/images', express.static('public/images'));
 
 //<----API Calls Start---->
 
-app.get("/api/realtime", cache(86400), (req, res) => {
+app.get("/api/realtime", cache(3600), (req, res) => {
   console.log("Querying realtime data...");
   fetch(
     "https://api.tomorrow.io/v4/weather/realtime?location=frisco&apikey=" +
@@ -65,7 +65,7 @@ app.get("/api/realtime", cache(86400), (req, res) => {
     });
 });
 
-app.get("/api/forecast", cache(86400), (req, res) => {
+app.get("/api/forecast", cache(3600), (req, res) => {
   console.log("Querying forecast data...");
   fetch(
     "https://api.tomorrow.io/v4/weather/forecast?location=frisco&apikey=" +
@@ -98,17 +98,6 @@ app.get("/api/gitCommits", cache(3600), (req, res) => {
     });
 });
 
-app.get("/api/listPokemon", cache(86400), (req, res) => {
-  console.log("Querying Pokemon name data...");
-  fetch("https://pokeapi.co/api/v2/pokemon?limit=2000", {
-    method: "GET",
-  })
-    .then((response) => response.json())
-    .then((data) => res.json(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-});
 
 //<----API Calls End---->
 

@@ -2,14 +2,14 @@ import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { Grid } from "@mui/material";
 
-export default function DailyWeatherChart({ forecastDataState }) {
+export default function HourlyWeather({ forecastDataState }) {
   const hourlyTemps = [];
   const hours = [];
+  const weatherCodes = [];
+  const precipChance = [];
 
   function formatDateWithoutYear(inputDate) {
     return new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
       hour: "numeric",
     }).format(new Date(inputDate));
   }
@@ -18,6 +18,8 @@ export default function DailyWeatherChart({ forecastDataState }) {
     forecastDataState.timelines.hourly.forEach((hour) => {
       hourlyTemps.push(hour.values.temperature);
       hours.push(formatDateWithoutYear(hour.time));
+      weatherCodes.push(hour.values.weatherCode);
+      precipChance.push(hour.values.precipitationProbability);
     });
   }
 
@@ -26,7 +28,7 @@ export default function DailyWeatherChart({ forecastDataState }) {
     (temp, index) => (hourlyTemps[index] = Math.round((temp * 9) / 5 + 32))
   );
 
-  DailyWeatherChart.propTypes = {
+  HourlyWeather.propTypes = {
     forecastDataState: PropTypes.object,
   };
 
@@ -48,25 +50,41 @@ export default function DailyWeatherChart({ forecastDataState }) {
   return (
     <Grid container>
       <Grid container>
-        <Grid item xs={2}>
-          <Typography variant="h6">10am</Typography>
-          <Typography variant="h6"><img src="/images/1000.png"></img></Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6">10am</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6">10am</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6">10am</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6">10am</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6">10am</Typography>
-        </Grid>
+        {/* I'm limiting this to only 6 hours initially because I haven't figure out
+        scrolling yet */}
+        {console.log(forecastDataState, "forecastDataState")}
+        {hours.slice(0, 6).map((hour, index) => {
+          const weatherCode = weatherCodes[index];
+          return (
+            <Grid item xs={2} key={index}>
+              <Typography variant="h6">{hour}</Typography>
+              {weatherCode && (
+                <img
+                  src={`/images/${weatherCode}.png`}
+                  alt={`Weather for ${hour}`}
+                />
+              )}
+              <Typography variant="h6" pb={4}>{hourlyTemps[index]}°</Typography>
+              <Grid item>
+              <img
+                  src="/images/waterDropClear.png"
+                  height="20px"
+                  alt="Precipitation Chance"
+                  display="inline"
+                ></img>
+              <Typography variant="body2">
+                {precipChance[index]}%
+              </Typography>
+              </Grid>
+            </Grid>
+          );
+        })}
+        {/* <Grid item xs={2}>
+          <Typography variant="h6">{hours[0]}</Typography>
+          <Typography variant="h6">
+            <img src="/images/1000.png"></img>
+          </Typography>
+        </Grid> */}
       </Grid>
     </Grid>
   );
