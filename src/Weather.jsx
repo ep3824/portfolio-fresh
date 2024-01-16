@@ -127,7 +127,6 @@ export default function Weather() {
     height: "24rem",
     backgroundColor: "rgb(48, 122, 171, .3)", //blue to blue
     flexGrow: 1,
-
   }));
 
   return (
@@ -151,7 +150,6 @@ export default function Weather() {
                   <Typography variant="h1" component="div" textAlign={"left"}>
                     {temperatureF} °F
                   </Typography>
-                  
                 </Grid>
               </Box>
 
@@ -165,7 +163,12 @@ export default function Weather() {
                   {weatherCodes[realtimeDataState.data.values.weatherCode]}
                 </Typography>
               </Grid>
-              <Typography variant="h6" component="div" textAlign={"left"} pb={5}>
+              <Typography
+                variant="h6"
+                component="div"
+                textAlign={"left"}
+                pb={5}
+              >
                 {tempsMax[0]}° / {tempsMin[0]}° Feels like {feelsLikeF}°
               </Typography>
             </Grid>
@@ -177,11 +180,18 @@ export default function Weather() {
               sx={{ width: "100%" }}
               pb={10}
             >
-              <Grid item xs={12} md={12} pb={2} >
-                <DashWidget > </DashWidget>
+              <Grid item xs={12} md={12} pb={2}>
+                <DashWidget>
+                  10pm 11pm 12am 1am 2am
+                </DashWidget>
               </Grid>
               <Grid item xs={12} md={6} pb={2}>
-                <DashWidget> </DashWidget>
+              <DashWidget textAlign={"left"}> 
+                  <Typography> Today</Typography>
+                  <Typography> Tuesday</Typography>
+                  <Typography>Wednesday</Typography>
+                  <Typography> Today</Typography>
+                </DashWidget>
               </Grid>
               <Grid item xs={12} md={6} pb={2}>
                 <DashWidget> </DashWidget>
