@@ -13,21 +13,13 @@ export default function DailyWeatherChart({ forecastDataState }) {
     }).format(new Date(inputDate));
   }
 
-  forecastDataState
-    ? forecastDataState.timelines.daily.map((day) =>
-        tempsMax.push(day.values.temperatureMax)
-      )
-    : [];
-  forecastDataState
-    ? forecastDataState.timelines.daily.map((day) =>
-        tempsMin.push(day.values.temperatureMin)
-      )
-    : [];
-  forecastDataState
-    ? forecastDataState.timelines.daily.map((day) =>
-        days.push(formatDateWithoutYear(day.time))
-      )
-    : [];
+  if (forecastDataState) {
+    forecastDataState.timelines.daily.forEach((day) => {
+      tempsMax.push(day.values.temperatureMax);
+      tempsMin.push(day.values.temperatureMin);
+      days.push(formatDateWithoutYear(day.time));
+    });
+  }
 
   //Convert temp data to F
   tempsMax.map(

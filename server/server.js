@@ -1,5 +1,5 @@
-import expresss from "express";
-const app = expresss();
+import express from "express";
+const app = express();
 const port = 3000;
 import config from "./config.js";
 const apiKey = config.weatherApiKey;
@@ -41,6 +41,9 @@ const getCurrentDirectory = () => {
   const currentDirectory = path.dirname(currentModulePath);
   return currentDirectory;
 };
+
+//serve images
+app.use('/images', express.static('public/images'));
 
 //<----Middleware End---->
 

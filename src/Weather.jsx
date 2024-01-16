@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import CloudIcon from "@mui/icons-material/Cloud";
-import HourlyWeatherChart from "./HourlyWeatherChart";
+import HourlyWeather from "./HourlyWeather.jsx";
 import DailyWeatherChart from "./DailyWeatherChart";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -182,11 +182,11 @@ export default function Weather() {
             >
               <Grid item xs={12} md={12} pb={2}>
                 <DashWidget>
-                  10pm 11pm 12am 1am 2am
+                  <HourlyWeather />
                 </DashWidget>
               </Grid>
               <Grid item xs={12} md={6} pb={2}>
-              <DashWidget textAlign={"left"}> 
+                <DashWidget textAlign={"left"}>
                   <Typography> Today</Typography>
                   <Typography> Tuesday</Typography>
                   <Typography>Wednesday</Typography>
