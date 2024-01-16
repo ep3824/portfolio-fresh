@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import apiForecastData from "../apiForecastData.js";
 import styled from "@mui/material/styles/styled";
+import weatherCodes from "../weatherCodes.json";
 
 export default function Weather() {
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
@@ -66,6 +67,7 @@ export default function Weather() {
 
   let temperatureF;
   let temperatureC;
+  let feelsLikeF;
   let cloudCover;
 
   if (realtimeDataState) {
@@ -73,6 +75,9 @@ export default function Weather() {
       Math.round((realtimeDataState.data.values.temperature * 9) / 5) + 32;
     temperatureC = Math.round(realtimeDataState.data.values.temperature);
     cloudCover = realtimeDataState.data.values.cloudCover;
+    feelsLikeF =
+      Math.round((realtimeDataState.data.values.temperatureApparent * 9) / 5) +
+      32;
   }
 
   const weatherImg = cloudCover ? (
@@ -117,11 +122,12 @@ export default function Weather() {
 
   const DashWidget = styled(Box)(() => ({
     maxWidth: 700,
-    borderRadius: 5,
+    borderRadius: 30,
     pb: 5,
     height: "24rem",
     backgroundColor: "rgb(48, 122, 171, .3)", //blue to blue
     flexGrow: 1,
+
   }));
 
   return (
@@ -133,61 +139,63 @@ export default function Weather() {
               <Box>
                 <Grid item xs={12}>
                   <Typography
-                    variant="h2"
-                    pb={4}
+                    variant="h3"
+                    pb={3}
                     color="#fff"
                     textAlign={"left"}
                   >
                     Little Elm
                   </Typography>
                 </Grid>
-                <Typography variant="h3" component="div" textAlign={"left"}>
-                  {temperatureF} °F.
-                </Typography>
+                <Grid item xs={12}>
+                  <Typography variant="h1" component="div" textAlign={"left"}>
+                    {temperatureF} °F
+                  </Typography>
+                  
+                </Grid>
               </Box>
-              <Typography
-                variant="h6"
-                component="div"
-                gutterBottom
-                textAlign={"left"}
-              >
-                Descriptor should go here like Fair or Windy or Sunny{" "}
-                {weatherImg}
-              </Typography>
-              <Typography variant="h6" component="div" textAlign={"left"}>
-                {tempsMax[0]}°F / {tempsMin[0]} °C.
+
+              <Grid item>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  gutterBottom
+                  textAlign={"left"}
+                >
+                  {weatherCodes[realtimeDataState.data.values.weatherCode]}
+                </Typography>
+              </Grid>
+              <Typography variant="h6" component="div" textAlign={"left"} pb={5}>
+                {tempsMax[0]}° / {tempsMin[0]}° Feels like {feelsLikeF}°
               </Typography>
             </Grid>
             <Grid
               container
-              spacing={1}
               margin={0}
               justifyContent="space-between"
               alignItems="flex-start"
               sx={{ width: "100%" }}
               pb={10}
             >
-              <Grid item xs={12}>
-                
-                <Grid item xs={12} md={12} pb={2}>
-                  <DashWidget> </DashWidget>
-                </Grid>
-                <Grid item xs={12} md={6} pb={2}>
-                  <DashWidget> </DashWidget>
-                </Grid>
-                <Grid item xs={12} md={6} pb={2}>
-                  <DashWidget> </DashWidget>
-                </Grid>
-                <Grid item xs={12} md={6} pb={2}>
-                  <DashWidget> </DashWidget>
-                </Grid>
-                <Grid item xs={12} md={6} pb={2}>
-                  <DashWidget> </DashWidget>
-                </Grid>
-                <Grid item xs={12} md={6} pb={2}>
-                  <DashWidget> </DashWidget>
-                </Grid>
-                <Grid item xs={12} md={6} pb={2}>
+              <Grid item xs={12} md={12} pb={2} >
+                <DashWidget > </DashWidget>
+              </Grid>
+              <Grid item xs={12} md={6} pb={2}>
+                <DashWidget> </DashWidget>
+              </Grid>
+              <Grid item xs={12} md={6} pb={2}>
+                <DashWidget> </DashWidget>
+              </Grid>
+              <Grid item xs={12} md={6} pb={2}>
+                <DashWidget> </DashWidget>
+              </Grid>
+              <Grid item xs={12} md={6} pb={2}>
+                <DashWidget> </DashWidget>
+              </Grid>
+              <Grid item xs={12} md={6} pb={2}>
+                <DashWidget> </DashWidget>
+              </Grid>
+              <Grid item xs={12} md={6} pb={2}>
                 <DashWidget>
                   {/* This is the hourly/daily switcher */}
                   <Stack flexWrap="wrap" useFlexGap>
@@ -219,7 +227,6 @@ export default function Weather() {
                     <p>Forecast data is loading...</p>
                   ) : null}
                 </DashWidget>
-                </Grid>
               </Grid>
             </Grid>
           </Grid>
