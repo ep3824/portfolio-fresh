@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import CloudIcon from "@mui/icons-material/Cloud";
-import Button from "@mui/material/Button";
 import HourlyWeatherChart from "./HourlyWeatherChart";
 import DailyWeatherChart from "./DailyWeatherChart";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import apiForecastData from "../apiForecastData.js";
-import DashboardWidget from "./DashboardWidget.jsx";
+import styled from "@mui/material/styles/styled";
 
 export default function Weather() {
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
@@ -65,15 +64,17 @@ export default function Weather() {
     }).format(new Date(inputDate));
   }
 
-  const temperatureF = realtimeDataState
-    ? Math.round((realtimeDataState.data.values.temperature * 9) / 5) + 32
-    : null;
-  const temperatureC = realtimeDataState
-    ? Math.round(realtimeDataState.data.values.temperature)
-    : null;
-  const cloudCover = realtimeDataState
-    ? realtimeDataState.data.values.cloudCover
-    : null;
+  let temperatureF;
+  let temperatureC;
+  let cloudCover;
+
+  if (realtimeDataState) {
+    temperatureF =
+      Math.round((realtimeDataState.data.values.temperature * 9) / 5) + 32;
+    temperatureC = Math.round(realtimeDataState.data.values.temperature);
+    cloudCover = realtimeDataState.data.values.cloudCover;
+  }
+
   const weatherImg = cloudCover ? (
     cloudCover > 50 ? (
       <CloudIcon />
@@ -85,21 +86,15 @@ export default function Weather() {
   const tempsMax = [];
   const tempsMin = [];
   const days = [];
+  const cloudCoverData = [];
 
   forecastDataState
-    ? forecastDataState.timelines.daily.map((day) =>
-        tempsMax.push(day.values.temperatureMax)
-      )
-    : [];
-  forecastDataState
-    ? forecastDataState.timelines.daily.map((day) =>
-        tempsMin.push(day.values.temperatureMin)
-      )
-    : [];
-  forecastDataState
-    ? forecastDataState.timelines.daily.map((day) =>
-        days.push(formatDateWithoutYear(day.time))
-      )
+    ? forecastDataState.timelines.daily.forEach((day) => {
+        tempsMax.push(day.values.temperatureMax);
+        tempsMin.push(day.values.temperatureMin);
+        days.push(formatDateWithoutYear(day.time));
+        cloudCoverData.push(day.values.cloudCoverAvg);
+      })
     : [];
 
   //Convert temp data to F
@@ -109,13 +104,6 @@ export default function Weather() {
   tempsMin.map(
     (temp, index) => (tempsMin[index] = Math.round((temp * 9) / 5 + 32))
   );
-
-  const cloudCoverData = [];
-  forecastDataState
-    ? forecastDataState.timelines.daily.map((day) =>
-        cloudCoverData.push(day.values.cloudCoverAvg)
-      )
-    : [];
 
   const submitHandler = (e) => {
     console.log(e.target);
@@ -127,55 +115,80 @@ export default function Weather() {
     }
   };
 
+  const DashWidget = styled(Box)(() => ({
+    maxWidth: 700,
+    borderRadius: 5,
+    pb: 5,
+    height: "24rem",
+    backgroundColor: "rgb(48, 122, 171, .3)", //blue to blue
+    flexGrow: 1,
+  }));
+
   return (
     <div id="Dashboard">
-    <Box>
-      {realtimeDataState ? (
-        <Grid>
+      <Box>
+        {realtimeDataState ? (
           <Grid>
-            <Box>
-              <Grid item xs={12}>
-                <Typography variant="h2" pb={4} color="#fff" textAlign={"left"}>
-                  Little Elm
-                </Typography>
-              </Grid>
-              <Typography variant="h3" component="div" textAlign={"left"}>
-                {temperatureF} °F.
-              </Typography>
-            </Box>
-            <Typography
-              variant="h6"
-              component="div"
-              gutterBottom
-              textAlign={"left"}
-            >
-              Descriptor should go here like Fair or Windy or Sunny {weatherImg}
-            </Typography>
-            <Typography variant="h6" component="div" textAlign={"left"}>
-              {tempsMax[0]}°F / {tempsMin[0]} °C.
-            </Typography>
-          </Grid>
-          <Grid
-            container
-            spacing={1}
-            margin={0}
-            justifyContent="space-between"
-            alignItems="flex-start"
-            sx={{ width: "100%" }}
-            pb={10}
-          >
-            <Grid item xs={12}>
-              <Box
-                sx={{
-                  height: 260,
-                  borderRadius: 5,
-                  p: 5,
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, .5)",
-                  backgroundColor: "rgb(50, 126, 176, .3)", //blue to blue
-                  flexGrow: 1,
-                }}
-              >
+            <Grid>
+              <Box>
                 <Grid item xs={12}>
+                  <Typography
+                    variant="h2"
+                    pb={4}
+                    color="#fff"
+                    textAlign={"left"}
+                  >
+                    Little Elm
+                  </Typography>
+                </Grid>
+                <Typography variant="h3" component="div" textAlign={"left"}>
+                  {temperatureF} °F.
+                </Typography>
+              </Box>
+              <Typography
+                variant="h6"
+                component="div"
+                gutterBottom
+                textAlign={"left"}
+              >
+                Descriptor should go here like Fair or Windy or Sunny{" "}
+                {weatherImg}
+              </Typography>
+              <Typography variant="h6" component="div" textAlign={"left"}>
+                {tempsMax[0]}°F / {tempsMin[0]} °C.
+              </Typography>
+            </Grid>
+            <Grid
+              container
+              spacing={1}
+              margin={0}
+              justifyContent="space-between"
+              alignItems="flex-start"
+              sx={{ width: "100%" }}
+              pb={10}
+            >
+              <Grid item xs={12}>
+                
+                <Grid item xs={12} md={12} pb={2}>
+                  <DashWidget> </DashWidget>
+                </Grid>
+                <Grid item xs={12} md={6} pb={2}>
+                  <DashWidget> </DashWidget>
+                </Grid>
+                <Grid item xs={12} md={6} pb={2}>
+                  <DashWidget> </DashWidget>
+                </Grid>
+                <Grid item xs={12} md={6} pb={2}>
+                  <DashWidget> </DashWidget>
+                </Grid>
+                <Grid item xs={12} md={6} pb={2}>
+                  <DashWidget> </DashWidget>
+                </Grid>
+                <Grid item xs={12} md={6} pb={2}>
+                  <DashWidget> </DashWidget>
+                </Grid>
+                <Grid item xs={12} md={6} pb={2}>
+                <DashWidget>
                   {/* This is the hourly/daily switcher */}
                   <Stack flexWrap="wrap" useFlexGap>
                     <TextField
@@ -189,48 +202,31 @@ export default function Weather() {
                       <MenuItem value={"Daily"}>Daily</MenuItem>
                     </TextField>
                   </Stack>
+
+                  {forecastDataState &&
+                  isDaily &&
+                  forecastDataState.timelines.daily.length > 0 ? (
+                    <DailyWeatherChart forecastDataState={forecastDataState} />
+                  ) : null}
+
+                  {forecastDataState &&
+                  !isDaily &&
+                  forecastDataState.timelines.daily.length > 0 ? (
+                    <HourlyWeatherChart forecastDataState={forecastDataState} />
+                  ) : null}
+
+                  {!forecastDataState ? (
+                    <p>Forecast data is loading...</p>
+                  ) : null}
+                </DashWidget>
                 </Grid>
-                {forecastDataState &&
-                isDaily &&
-                forecastDataState.timelines.daily.length > 0 ? (
-                  <DailyWeatherChart forecastDataState={forecastDataState} />
-                ) : null}
-
-                {forecastDataState &&
-                !isDaily &&
-                forecastDataState.timelines.daily.length > 0 ? (
-                  <HourlyWeatherChart forecastDataState={forecastDataState} />
-                ) : null}
-
-                {!forecastDataState ? <p>Forecast data is loading...</p> : null}
-              </Box>
-              <Grid item xs={12} md={6}>
-                <DashboardWidget></DashboardWidget>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <DashboardWidget />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <DashboardWidget />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <DashboardWidget />
-              </Grid>
-              <Grid item xs={6} md={3}>
-                <DashboardWidget />
-              </Grid>
-              <Grid item xs={6} md={3}>
-                <DashboardWidget />
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      ) : (
-        <p>Loading weather data...</p>
-      )}
-    </Box>
+        ) : (
+          <p>Loading weather data...</p>
+        )}
+      </Box>
     </div>
   );
 }
-
-

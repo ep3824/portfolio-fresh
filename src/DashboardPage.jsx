@@ -3,8 +3,6 @@ import { styled } from "@mui/material/styles";
 import "@fontsource-variable/red-hat-text";
 import Navbar from "./Navbar";
 import Weather from "./Weather";
-
-import Dashboard from "./Dashboard";
 import {
   createTheme,
   responsiveFontSizes,
@@ -40,7 +38,7 @@ export default function DashboardPage() {
           <Navbar></Navbar>
         </div>
         <Item>
-          <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} padding={3}>
+          <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} padding={1}>
             <Grid item xs={12}>
               <div id="Dashboard"></div>
               <Weather></Weather>
