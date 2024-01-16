@@ -32,32 +32,16 @@ export default function HourlyWeather({ forecastDataState }) {
     forecastDataState: PropTypes.object,
   };
 
-  // const imageFileNames = [
-  //   1000, 1001, 1100, 1101, 1102, 2000, 2100, 4000, 4001, 4200, 4201,
-  //   5000, 5001, 5100, 5101, 5110, 6000, 6001, 6200, 6201, 7101, 7102, 7000, 8000,
-  // ];
-
-  // const images = [];
-  // imageFileNames.forEach((fileName) => {
-  //   try {
-  //     const image = require(`./weatherImages/${fileName}.png`);
-  //     images.push(image);
-  //   } catch (error) {
-  //     console.error(`Error loading image ${fileName}:`, error);
-  //   }
-  // });
-
   return (
     <Grid container>
       <Grid container>
         {/* I'm limiting this to only 6 hours initially because I haven't figure out
         scrolling yet */}
-        {console.log(forecastDataState, "forecastDataState")}
         {hours.slice(0, 6).map((hour, index) => {
           const weatherCode = weatherCodes[index];
           return (
             <Grid item xs={2} key={index}>
-              <Typography variant="h6">{hour}</Typography>
+              <Typography variant="body2" sx={{opacity: .8}}>{hour}</Typography>
               {weatherCode && (
                 <img
                   src={`/images/${weatherCode}.png`}
@@ -72,19 +56,13 @@ export default function HourlyWeather({ forecastDataState }) {
                   alt="Precipitation Chance"
                   display="inline"
                 ></img>
-              <Typography variant="body2">
+              <Typography variant="body2" sx={{opacity: .8}}>
                 {precipChance[index]}%
               </Typography>
               </Grid>
             </Grid>
           );
         })}
-        {/* <Grid item xs={2}>
-          <Typography variant="h6">{hours[0]}</Typography>
-          <Typography variant="h6">
-            <img src="/images/1000.png"></img>
-          </Typography>
-        </Grid> */}
       </Grid>
     </Grid>
   );

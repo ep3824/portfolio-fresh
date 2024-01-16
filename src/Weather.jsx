@@ -3,18 +3,13 @@ import { Grid, Box, Typography } from "@mui/material";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import CloudIcon from "@mui/icons-material/Cloud";
 import HourlyWeather from "./HourlyWeather.jsx";
-import DailyWeatherChart from "./DailyWeatherChart";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import Stack from "@mui/material/Stack";
-import apiForecastData from "../apiForecastData.js";
 import styled from "@mui/material/styles/styled";
 import weatherCodes from "../weatherCodes.json";
+import DailyWeather from "./DailyWeather";
 
 export default function Weather() {
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
   const [forecastDataState, setForecastDataState] = React.useState(null);
-  const [isDaily, setIsDaily] = React.useState(true);
 
   useEffect(() => {
     const fetchRealtimeData = async () => {
@@ -38,12 +33,7 @@ export default function Weather() {
         const response = await fetch("/api/forecast");
         if (response.ok) {
           const forecastData = await response.json();
-          //THIS LINE SHOULD BE DELETED BEFORE PROD
-          // This is a workaround for the Tomorrow.io API rate limit
-          // setForecastDataState(apiForecastData);
           setForecastDataState(forecastData);
-          // console.log("forecastData", forecastData)
-          // console.log("forecastDataState", forecastDataState)
         } else {
           console.error(
             `Failed to fetch weather data. Status: ${response.status}`
@@ -110,23 +100,13 @@ export default function Weather() {
     (temp, index) => (tempsMin[index] = Math.round((temp * 9) / 5 + 32))
   );
 
-  const submitHandler = (e) => {
-    console.log(e.target);
-    e.preventDefault();
-    if (e.target.value === "Daily") {
-      setIsDaily(true);
-    } else if (e.target.value === "Hourly") {
-      setIsDaily(false);
-    }
-  };
-
   const DashWidget = styled(Box)(() => ({
     maxWidth: 700,
     borderRadius: 30,
     pb: 5,
-    height: "24rem",
     backgroundColor: "rgb(48, 122, 171, .3)", //blue to blue
     flexGrow: 1,
+    padding: 10,
   }));
 
   return (
@@ -147,7 +127,12 @@ export default function Weather() {
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="h1" component="div" textAlign={"left"}>
+                  <Typography
+                    variant="h1"
+                    component="div"
+                    textAlign={"left"}
+                    fontWeight={"normal"}
+                  >
                     {temperatureF} °F
                   </Typography>
                 </Grid>
@@ -157,7 +142,7 @@ export default function Weather() {
                 <Typography
                   variant="h6"
                   component="div"
-                  gutterBottom
+                  pb={4}
                   textAlign={"left"}
                 >
                   {weatherCodes[realtimeDataState.data.values.weatherCode]}
@@ -167,7 +152,7 @@ export default function Weather() {
                 variant="h6"
                 component="div"
                 textAlign={"left"}
-                pb={5}
+                pb={3}
               >
                 {tempsMax[0]}° / {tempsMin[0]}° Feels like {feelsLikeF}°
               </Typography>
@@ -181,16 +166,13 @@ export default function Weather() {
               pb={10}
             >
               <Grid item xs={12} md={12} pb={2}>
-                <DashWidget>
-                  <HourlyWeather forecastDataState={forecastDataState}/>
+                <DashWidget textAlign={"left"}>
+                  <HourlyWeather forecastDataState={forecastDataState} />
                 </DashWidget>
               </Grid>
               <Grid item xs={12} md={6} pb={2}>
                 <DashWidget textAlign={"left"}>
-                  <Typography> Today</Typography>
-                  <Typography> Tuesday</Typography>
-                  <Typography>Wednesday</Typography>
-                  <Typography> Today</Typography>
+                  <DailyWeather forecastDataState={forecastDataState} />
                 </DashWidget>
               </Grid>
               <Grid item xs={12} md={6} pb={2}>
@@ -206,37 +188,7 @@ export default function Weather() {
                 <DashWidget> </DashWidget>
               </Grid>
               <Grid item xs={12} md={6} pb={2}>
-                <DashWidget>
-                  {/* This is the hourly/daily switcher */}
-                  <Stack flexWrap="wrap" useFlexGap>
-                    <TextField
-                      select
-                      label="Timeframe"
-                      value={isDaily ? "Daily" : "Hourly"}
-                      onChange={(e) => submitHandler(e)}
-                      sx={{ minWidth: 150, width: "25%", zIndex: 9000 }}
-                    >
-                      <MenuItem value={"Hourly"}>Hourly</MenuItem>
-                      <MenuItem value={"Daily"}>Daily</MenuItem>
-                    </TextField>
-                  </Stack>
-
-                  {forecastDataState &&
-                  isDaily &&
-                  forecastDataState.timelines.daily.length > 0 ? (
-                    <DailyWeatherChart forecastDataState={forecastDataState} />
-                  ) : null}
-
-                  {forecastDataState &&
-                  !isDaily &&
-                  forecastDataState.timelines.daily.length > 0 ? (
-                    <HourlyWeatherChart forecastDataState={forecastDataState} />
-                  ) : null}
-
-                  {!forecastDataState ? (
-                    <p>Forecast data is loading...</p>
-                  ) : null}
-                </DashWidget>
+                <DashWidget> </DashWidget>
               </Grid>
             </Grid>
           </Grid>
