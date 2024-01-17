@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
 import ProjectCard from "./ProjectCard.jsx";
 import Typography from "@mui/material/Typography";
-import EPWebsiteSS from "../EPWebsiteSS.png";
-import dashPic from "../dashPic.png";
+import EPWebsiteSS from "/images/EPWebsiteSS.png";
+import weatherPic from "/images/weatherPagePic.png";
 
 export default function ProjectsSection() {
   return (
@@ -22,9 +22,9 @@ export default function ProjectsSection() {
             </Typography>
           </Grid>
           <ProjectCard
-            image={`${dashPic}`}
-            title={"Dashboard App"}
-            description={"/dashboard-page"} 
+            image={`${weatherPic}`}
+            title={"Weather App"}
+            description={"An elegant weather app built with React and Material UI. Uses Tomorrow.io to fetch weather data."} 
             pageLink={"/dashboard-page"}
           />
           <ProjectCard

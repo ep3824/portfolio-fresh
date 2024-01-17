@@ -1,13 +1,9 @@
 import "./App.css";
 import Navbar from "./Navbar.jsx";
-
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-
 import Skills from "./Skills.jsx";
-// import { makeStyles } from '@mui/system';
-
 import Typography from "@mui/material/Typography";
 import Contact from "./Contact.jsx";
 import About from "./About.jsx";
@@ -35,9 +31,9 @@ function App() {
         sx={{ maxWidth: 1400, margin: "0 auto"}}
         padding={3}
       >
-        <Grid item xs={12}>
+        <Grid>
           <Typography
-            variant="h1"
+            variant="h2"
             sx={{
               backgroundcolor: "primary",
               backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,

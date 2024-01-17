@@ -102,8 +102,8 @@ app.get("/api/gitCommits", cache(3600), (req, res) => {
 //<----API Calls End---->
 
 //Project Page
-app.get("/project-page", (req, res) => {
+app.get("/dashboard-page", (req, res) => {
   const currentDirectory = getCurrentDirectory();
   // Serve the HTML file for the new page
-  res.sendFile(path.join(currentDirectory, "project-page.html"));
+  res.sendFile(path.join(currentDirectory, "dashboard-page.html"));
 });

@@ -6,14 +6,12 @@ import Bio from "./Bio.jsx";
 export default function Skills() {
   return (
     <div id="Skills">
-
       <Grid
         container
         justifyContent="space-between"
         alignItems="flex-start"
         sx={{ maxWidth: 1400, margin: "0 auto" }}
         pb={30}
-        
       >
         <Grid item xs={12} md={6}>
           <Typography variant="h3" pb={4} textAlign="left">

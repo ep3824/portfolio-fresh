@@ -1,7 +1,6 @@
 import { Grid, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import "@fontsource-variable/red-hat-text";
-import Navbar from "./Navbar";
 import Navbar2 from "./Navbar2";
 import Weather from "./Weather";
 import {

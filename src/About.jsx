@@ -1,6 +1,6 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import EthanParentResume from "../EthanParentResume.pdf";
+import EthanParentResume from "/images/EthanParentResume.pdf";
 
 export default function About() {
   return (
@@ -10,8 +10,8 @@ export default function About() {
             <Typography variant="h2" textAlign="left">
               software developer
             </Typography>
-            <Typography variant="h4" pb={4} textAlign="left">
-              <p>welcome to my portfolio. this is where I have projects.</p>
+            <Typography variant="h4" pb={4} textAlign="left" pt={10}>
+              welcome to my portfolio. this is where I have projects.
             </Typography>
           </Grid>
           <Grid item>

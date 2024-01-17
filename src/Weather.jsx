@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { Grid, Box, Typography } from "@mui/material";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import CloudIcon from "@mui/icons-material/Cloud";
 import HourlyWeather from "./HourlyWeather.jsx";
 import styled from "@mui/material/styles/styled";
 import weatherCodes from "../weatherCodes.json";
@@ -56,27 +54,20 @@ export default function Weather() {
   }
 
   let temperatureF;
-  let temperatureC;
+  // let temperatureC;
   let feelsLikeF;
-  let cloudCover;
+  // let cloudCover;
 
   if (realtimeDataState) {
     temperatureF =
       Math.round((realtimeDataState.data.values.temperature * 9) / 5) + 32;
-    temperatureC = Math.round(realtimeDataState.data.values.temperature);
-    cloudCover = realtimeDataState.data.values.cloudCover;
+    // temperatureC = Math.round(realtimeDataState.data.values.temperature);
+    // cloudCover = realtimeDataState.data.values.cloudCover;
     feelsLikeF =
       Math.round((realtimeDataState.data.values.temperatureApparent * 9) / 5) +
       32;
   }
 
-  const weatherImg = cloudCover ? (
-    cloudCover > 50 ? (
-      <CloudIcon />
-    ) : (
-      <WbSunnyIcon />
-    )
-  ) : null;
 
   const tempsMax = [];
   const tempsMin = [];

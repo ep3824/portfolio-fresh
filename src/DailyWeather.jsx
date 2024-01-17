@@ -64,7 +64,6 @@ export default function DailyWeather({ forecastDataState }) {
         }
         let weatherCodeMax = weatherCodesMax[index];
         let weatherCodeMin = weatherCodesMin[index];
-        console.log("weatherCodeMax", weatherCodeMax);
         return (
           <Grid container key={index}>
             <Grid item xs={2} pr={15}>
@@ -87,7 +86,6 @@ export default function DailyWeather({ forecastDataState }) {
               </Typography>
             </Grid>
             <Grid item xs={1}>
-              {console.log(weatherCodeMax, day)}
               <img
                 src={`/images/${weatherCodeMax}.png`}
                 alt={`Weather max for ${day}`}

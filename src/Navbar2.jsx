@@ -15,10 +15,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import DescriptionIcon from "@mui/icons-material/Description";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
-import CodeIcon from "@mui/icons-material/Code";
 import HailIcon from "@mui/icons-material/Hail";
 import HomeIcon from "@mui/icons-material/Home";
 import Link from "@mui/material/Link";
@@ -92,19 +88,6 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
-  const renderSwitch = (index) => {
-    switch (index) {
-      case 0:
-        return <DashboardIcon />;
-      case 1:
-        return <DescriptionIcon />;
-      case 2:
-        return <ContactPageIcon />;
-      default:
-        return <CodeIcon />;
-    }
-  };
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -160,11 +143,11 @@ export default function PersistentDrawerLeft() {
             )}
           </IconButton>
         </DrawerHeader>
-        <List>
-          <Link href="/">
+        <List >
+          <Link href="/" underline="none">
             <ListItem disablePadding>
               <ListItemButton>
-                
+            
                 <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary={"Home"} />
               </ListItemButton>

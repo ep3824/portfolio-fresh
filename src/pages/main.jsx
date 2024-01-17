@@ -34,7 +34,8 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <ThemeProvider theme={darkTheme}>
-    <CssBaseline />
+    {/* I don't think CssBaseline is needed */}
+    {/* <CssBaseline /> */}
     <App />
   </ThemeProvider>
 );

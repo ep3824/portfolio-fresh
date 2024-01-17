@@ -1,8 +1,8 @@
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
-import trendLogo from "../trendLogoWhite.png";
-import grinLogo from "../grinLogoTransparent.png";
-import tPayLogo from "../tPay.png";
+import trendLogo from "/images/trendLogoWhite.png";
+import grinLogo from "/images/grinLogoTransparent.png";
+import tPayLogo from "/images/tPay.png";
 
 export default function Bio() {
   return (
@@ -19,66 +19,62 @@ export default function Bio() {
             Bio
           </Typography>
           <Typography variant="h4">
-            Hi, I’m Ethan! I’m a web developer with cybersecurity experience.
+            Hi, I&apos;m Ethan! I am a web developer with cybersecurity
+            experience.
           </Typography>
           <Typography variant="body1" pb={4} textAlign="left">
-            <p>
-              In a nutshell, I create websites that help organizations address
-              business challenges and meet their needs. I manage everything from
-              website navigation and layout to a company’s web hosting and
-              security architecture.
-            </p>
-
-            <p>
-              My expertise lies within front-end web apps, and the main
-              languages in my tech stack are JavaScript, React, and of course
-              HTML/CSS. I’m a lifelong learner (currently taking a course on
-              building AI chatbots with Python!) and love to read, run, and find
-              new bubble tea shops in New York City.
-            </p>
-            <Typography variant="h5" pb={5}>
-              Here are some of the companies I've worked with:
-            </Typography>
-            <Grid>
-              <Grid item>
-                <a href="https://www.trendmicro.com/en_us/business.html">
-                  <img
-                    src={trendLogo}
-                    alt="Trend Micro Logo"
-                    style={{
-                      width: "50%",
-                      height: "50%",
-                    }}
-                  />
-                </a>
-              </Grid>
-              <Grid item>
-                <a href="https://grin.co">
-                  <img
-                    src={grinLogo}
-                    alt="Grin Logo"
-                    style={{
-                      width: "50%",
-                      height: "50%",
-                    }}
-                  />
-                </a>
-              </Grid>
-              <Grid item>
-                <a href="https://triumphpay.com/">
-                  <img
-                    src={tPayLogo}
-                    alt="TriumphPay Logo"
-                    style={{
-                      width: "50%",
-                      height: "50%",
-                    }}
-                  />
-                </a>
-              </Grid>
-              
-            </Grid>
+            I create websites that help organizations address business
+            challenges and meet their needs. My expertise ranges from crafting
+            intuitive website navigation and layouts to handling aspects such as
+            web hosting and securing applications on cloud platforms.
           </Typography>
+          <Typography variant="body1" pb={4} textAlign="left">
+            My broad experience and skillset includes full stack web apps, and
+            the main languages in my tech stack are JavaScript, React, and of
+            course HTML/CSS. I&apos;m a lifelong learner and love to bake, cook,
+            and find new plants to nurture.
+          </Typography>
+          <Typography variant="h5" pb={5}>
+            Here are some of the companies I&apos;ve worked with:
+          </Typography>
+          <Grid>
+            <Grid item>
+              <a href="https://www.trendmicro.com/en_us/business.html">
+                <img
+                  src={trendLogo}
+                  alt="Trend Micro Logo"
+                  style={{
+                    width: "50%",
+                    height: "50%",
+                  }}
+                />
+              </a>
+            </Grid>
+            <Grid item>
+              <a href="https://grin.co">
+                <img
+                  src={grinLogo}
+                  alt="Grin Logo"
+                  style={{
+                    width: "50%",
+                    height: "50%",
+                  }}
+                />
+              </a>
+            </Grid>
+            <Grid item>
+              <a href="https://triumphpay.com/">
+                <img
+                  src={tPayLogo}
+                  alt="TriumphPay Logo"
+                  style={{
+                    width: "50%",
+                    height: "50%",
+                  }}
+                />
+              </a>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </div>
