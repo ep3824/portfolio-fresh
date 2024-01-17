@@ -47,14 +47,14 @@ export default function DailyWeather({ forecastDataState }) {
       case 1100:
         weatherCodesMin[index] = 11001;
         break;
-        case 1101:
+      case 1101:
         weatherCodesMin[index] = 11011;
         break;
-        case 1102:
+      case 1102:
         weatherCodesMin[index] = 11021;
         break;
     }
-  })
+  });
 
   return (
     <Grid container>
@@ -62,8 +62,9 @@ export default function DailyWeather({ forecastDataState }) {
         if (index === 0) {
           day = "Today";
         }
-        const weatherCodeMax = weatherCodesMax[index];
-        const weatherCodeMin = weatherCodesMin[index];
+        let weatherCodeMax = weatherCodesMax[index];
+        let weatherCodeMin = weatherCodesMin[index];
+        console.log("weatherCodeMax", weatherCodeMax);
         return (
           <Grid container key={index}>
             <Grid item xs={2} pr={15}>
@@ -76,12 +77,17 @@ export default function DailyWeather({ forecastDataState }) {
                   height="20px"
                   alt="Precipitation Chance"
                   display="inline"
-                  style={{ verticalAlign: 'middle', marginRight: '2px', marginTop: '-4px' }}
+                  style={{
+                    verticalAlign: "middle",
+                    marginRight: "2px",
+                    marginTop: "-4px",
+                  }}
                 ></img>
                 {precipChance[index]}%
               </Typography>
             </Grid>
             <Grid item xs={1}>
+              {console.log(weatherCodeMax, day)}
               <img
                 src={`/images/${weatherCodeMax}.png`}
                 alt={`Weather max for ${day}`}
