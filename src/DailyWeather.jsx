@@ -38,6 +38,24 @@ export default function DailyWeather({ forecastDataState }) {
     forecastDataState: PropTypes.object,
   };
 
+  //Do some work to convert day codes to night
+  weatherCodesMin.map((code, index) => {
+    switch (code) {
+      case 1000:
+        weatherCodesMin[index] = 10001;
+        break;
+      case 1100:
+        weatherCodesMin[index] = 11001;
+        break;
+        case 1101:
+        weatherCodesMin[index] = 11011;
+        break;
+        case 1102:
+        weatherCodesMin[index] = 11021;
+        break;
+    }
+  })
+
   return (
     <Grid container>
       {days.slice(0, 6).map((day, index) => {
@@ -65,15 +83,17 @@ export default function DailyWeather({ forecastDataState }) {
             </Grid>
             <Grid item xs={1}>
               <img
-                src={`/images/${weatherCodeMin}.png`}
-                alt={`Weather min for ${day}`}
+                src={`/images/${weatherCodeMax}.png`}
+                alt={`Weather max for ${day}`}
+                height="20px"
               />
             </Grid>
 
             <Grid item xs={2}>
               <img
-                src={`/images/${weatherCodeMax}.png`}
-                alt={`Weather max for ${day}`}
+                src={`/images/${weatherCodeMin}.png`}
+                alt={`Weather min for ${day}`}
+                height="20px"
               />
             </Grid>
             <Grid item xs={1} pr={4}>
