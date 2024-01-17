@@ -46,6 +46,8 @@ export default function HourlyWeather({ forecastDataState }) {
                 <img
                   src={`/images/${weatherCode}.png`}
                   alt={`Weather for ${hour}`}
+                  height="20px"
+                  align="center"
                 />
               )}
               <Typography variant="h6" pb={4}>{hourlyTemps[index]}°</Typography>

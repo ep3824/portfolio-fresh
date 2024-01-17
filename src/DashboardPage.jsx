@@ -1,7 +1,8 @@
-import { Grid, Box, Paper, Typography } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import "@fontsource-variable/red-hat-text";
 import Navbar from "./Navbar";
+import Navbar2 from "./Navbar2";
 import Weather from "./Weather";
 import {
   createTheme,
@@ -35,7 +36,7 @@ export default function DashboardPage() {
     <ThemeProvider theme={darkTheme}>
       <div id="Dashboard">
         <div className="card">
-          <Navbar></Navbar>
+          <Navbar2></Navbar2>
         </div>
         <Item>
           <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} padding={1}>
@@ -46,7 +47,6 @@ export default function DashboardPage() {
           </Grid>
         </Item>
       </div>
-      <a href="/">Back to home</a>
     </ThemeProvider>
   );
 }
