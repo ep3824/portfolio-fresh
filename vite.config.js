@@ -7,19 +7,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/realtime': {
-        target: 'http://localhost:3000',
+        target: '10.0.2.156:3000/api/realtime',
         changeOrigin: true,
       },
       '/api/forecast': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-      },
-      '/api/gitCommits': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-      },
-      '/api/listPokemon': {
-        target: 'http://localhost:3000',
+        target: '10.0.2.156:3000/test/api/forecast',
         changeOrigin: true,
       },
     },

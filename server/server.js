@@ -1,17 +1,16 @@
-import express from "express";
+const express = require("express");
 const app = express();
 const port = 3000;
-import config from "./config.js";
+const config = require("./config.js");
 const apiKey = config.weatherApiKey;
-const gitHubToken = config.gitHubToken;
-import mcache from "memory-cache";
-import cors from "cors";
-import path from "path";
+const mcache = require("memory-cache");
+const cors = require("cors");
+const path = require("path");
 
 //<----Middleware Start---->
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server side router listening at http://localhost:${port}`);
 });
 
 app.use(cors());
@@ -36,14 +35,16 @@ function cache(duration) {
   };
 }
 
-const getCurrentDirectory = () => {
-  const currentModulePath = new URL(import.meta.url).pathname;
-  const currentDirectory = path.dirname(currentModulePath);
-  return currentDirectory;
-};
+// const getCurrentDirectory = () => {
+//   const currentModulePath = new URL(import.meta.url).pathname;
+//   const currentDirectory = path.dirname(currentModulePath);
+//   return currentDirectory;
+// };
 
 //serve images
-app.use('/images', express.static('public/images'));
+// not sure if I should serve these from the server or not?
+// if im using s3 maybe just let s3 serve the images....
+// app.use('/images', express.static('public/images'));
 
 //<----Middleware End---->
 
@@ -81,29 +82,14 @@ app.get("/api/forecast", cache(3600), (req, res) => {
     });
 });
 
-app.get("/api/gitCommits", cache(3600), (req, res) => {
-  console.log("Querying GitHub data...");
-  fetch("https://api.github.com/repos/ep3824/portfolio-dash-3/commits", {
-    method: "GET",
-    headers: {
-      Accept: "application/vnd.github+json",
-      Authorization: `Bearer ${gitHubToken}`,
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => res.json(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-});
-
 
 //<----API Calls End---->
 
 //Project Page
-app.get("/dashboard-page", (req, res) => {
-  const currentDirectory = getCurrentDirectory();
-  // Serve the HTML file for the new page
-  res.sendFile(path.join(currentDirectory, "dashboard-page.html"));
-});
+// app.get("/dashboard-page", (req, res) => {
+//   const currentDirectory = getCurrentDirectory();
+//   // Serve the HTML file for the new page
+//   res.sendFile(path.join(currentDirectory, "dashboard-page.html"));
+// });
+
+//Getting rid of this call, this should be handled by the frontend
