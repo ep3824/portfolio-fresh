@@ -11,7 +11,7 @@ export default defineConfig({
         changeOrigin: true,
       },
       '/api/forecast': {
-        target: '10.0.2.156:3000/test/api/forecast',
+        target: '10.0.2.156:3000/api/forecast',
         changeOrigin: true,
       },
     },
