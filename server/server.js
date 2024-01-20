@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
 const app = express();
 const port = 3000;
-const config = require("./config.js");
+import config from "./config.js";
 const apiKey = config.weatherApiKey;
-const mcache = require("memory-cache");
-const cors = require("cors");
-const path = require("path");
+import mcache from "memory-cache";
+import cors from "cors";
+import path from "path";
 
 //<----Middleware Start---->
 
@@ -15,7 +15,7 @@ app.listen(port, () => {
 
 app.use(cors());
 
-//Cache logic -- API Calls held for 1 day in cache
+//Cache logic -- API Calls held for 1 hour in cache
 
 function cache(duration) {
   return (req, res, next) => {
