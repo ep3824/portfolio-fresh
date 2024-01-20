@@ -9,5 +9,10 @@ Here are some features of this website:
 
 ## TBD
 
-1. Configure Load Balancer & CDN
-2. Create more projects for projects section
+1. Configure Load Balancer (Done)
+2. Configure CDN
+3. Create more projects for projects section
+4. Configure HTTPS (done)
+5. Configure auto-scaling
+
+
