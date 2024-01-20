@@ -10,7 +10,7 @@ import path from "path";
 //<----Middleware Start---->
 
 app.listen(port, () => {
-  console.log(`Server side router listening at http://localhost:${port}`);
+  console.log(`Server listening at http(s)://localhost:${port}`);
 });
 
 app.use(cors());
