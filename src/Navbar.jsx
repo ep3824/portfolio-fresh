@@ -20,6 +20,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import CodeIcon from "@mui/icons-material/Code";
 import HailIcon from "@mui/icons-material/Hail";
+// import EPLogo from "../public/images/EPLogo.png";
 
 const drawerWidth = 240;
 
@@ -38,7 +39,6 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
       }),
       marginLeft: 0,
     }),
-    
   })
 );
 
@@ -66,7 +66,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
-  
 }));
 
 const scrollToSection = (sectionId) => {
@@ -112,7 +111,7 @@ export default function PersistentDrawerLeft() {
         position="fixed"
         open={open}
         enableColorOnDark
-        sx={{ background: "#0c121c" }}
+        sx={{ background: "#042326" }}
       >
         <Toolbar>
           <IconButton
@@ -124,18 +123,16 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           {/* this is where the icon goes */}
-          <Typography color="white" pr={2}>
-            E.P. Portfolio
-          </Typography>
-
-          <HailIcon
+          <img
+            src="/images/EP.png"
+            height="40px"
+            alt="EP Logo"
+            onClick={() => scrollToSection("root")}
             style={{
               color: "white",
               cursor: "pointer",
             }}
-            
-            onClick={() => scrollToSection("root")}
-          ></HailIcon>
+          ></img>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -145,7 +142,7 @@ export default function PersistentDrawerLeft() {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
-            backgroundColor: "#0c121c"
+            backgroundColor: "#0a1517",
           },
         }}
         variant="persistent"

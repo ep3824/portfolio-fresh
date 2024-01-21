@@ -24,11 +24,11 @@ export default function About() {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
+                  backgroundImage: `linear-gradient(45deg, #026359, #0AA689)`,
                   color: "white",
-                  boxShadow: "0 0 20px 1px #15a8c4",
+                  boxShadow: "0 0 20px 1px #0D8C7F",
                   "&:hover": {
-                    boxShadow: "0 0 10px 8px #15a8c4", // Adjust glow on hover
+                    boxShadow: "0 0 10px 8px #0D8C7F", // Adjust glow on hover
                   },
                   textTransform: "none",
                   fontSize: ".9rem",

@@ -6,11 +6,11 @@ import { styled } from "@mui/material/styles";
 export default function ReusableCard({ image, title, description, pageLink }) {
   //Demo Button
   const CustomButton = styled(Button)(() => ({
-    backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
+    backgroundImage: `linear-gradient(45deg, #026359, #0AA689)`,
     color: "white",
-    boxShadow: "0 0 10px 1px #15a8c4",
+    boxShadow: "0 0 10px 1px #0D8C7F",
     "&:hover": {
-      boxShadow: "0 0 10px 8px #15a8c4", // Adjust glow on hover
+      boxShadow: "0 0 10px 8px #0D8C7F", // Adjust glow on hover
     },
     textTransform: "none",
     fontSize: ".8rem",
@@ -20,9 +20,9 @@ export default function ReusableCard({ image, title, description, pageLink }) {
   //GitHub Button
   const CustomButton2 = styled(Button)(() => ({
     color: "white",
-    boxShadow: "0 0 5px 1px #15a8c4",
+    boxShadow: "0 0 5px 1px #0AA689",
     "&:hover": {
-      boxShadow: "0 0 10px 8px #15a8c4", // Adjust glow on hover
+      boxShadow: "0 0 10px 8px #0AA689", // Adjust glow on hover
     },
     textTransform: "none",
     fontSize: ".8rem",
@@ -34,7 +34,7 @@ export default function ReusableCard({ image, title, description, pageLink }) {
       <Box
         sx={{
           maxWidth: 700,
-          border: "1px solid #7a72d8",
+          border: "1px solid #026359",
           padding: "15px",
           borderRadius: "15px",
           height: "24rem",

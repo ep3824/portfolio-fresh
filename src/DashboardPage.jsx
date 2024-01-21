@@ -53,13 +53,13 @@ export default function DashboardPage() {
     const totalDayHours = 24;
 
     const colors = [
-      [1, 13, 61],    // #010d3d Midnight-3am
-      [0, 51, 88],    // #003358 3am-6am
-      [15, 140, 172], // #0f8cac 6am-9am
-      [13, 131, 161], // #0d83a1 9am-12pm
-      [13, 131, 161], // #0d83a1 12pm-3pm
-      [77, 37, 125],  // #4d257d 3pm-6pm
-      [1, 13, 61],    // #010d3d 6pm-midnight
+      [28, 52, 96],   // #1C3460
+      [57, 93, 140],  // #395D8C
+      [86, 129, 166], // #80A2BF
+      [86, 129, 166], // #80A2BF
+      [128, 162, 191], // #5681A6
+      [57, 93, 140],  // #395D8C
+      [28, 52, 96],   // #1C3460
     ];
 
     const colorIndex = Math.floor((hours / totalDayHours) * colors.length);

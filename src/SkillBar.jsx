@@ -23,13 +23,10 @@ export default function SkillBar({skill, value}) {
       <Button
         variant="contained"
         sx={{
-          backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
+          backgroundImage: `linear-gradient(45deg, #026359, #0AA689)`,
           color: "white",
-          boxShadow: "0 0 20px 1px #15a8c4",
-          "&:hover": {
-            boxShadow: "0 0 20px 1px #15a8c4", // Negate glow on hover
-          },
-          textTransform: "none",
+          boxShadow: "0 0 5px 1px #15a8c4",
+          textTransform: "cursor",
           fontSize: ".9rem",
           width: `${value}%`,
         }}

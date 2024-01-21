@@ -13,7 +13,7 @@ import ProjectsSection from "./ProjectsSection.jsx";
 
 // This probably needs to be deleted, I don't think I want the elevation that comes with Paper
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#0f1724" : "#fff",
+  backgroundColor: theme.palette.mode === "dark" ? "#042326" : "#fff",
   ...theme.typography.body2,
   // Made this change to get one uniform background color
   backgroundImage: "none",
@@ -52,7 +52,7 @@ function App() {
                         variant="h2"
                         sx={{
                           backgroundcolor: "primary",
-                          backgroundImage: `linear-gradient(45deg, #9a61de, #15a8c4)`,
+                          backgroundImage: `linear-gradient(45deg, #026359, #02facc)`,
                           backgroundSize: "100%",
                           backgroundRepeat: "repeat",
                           backgroundClip: "text",
