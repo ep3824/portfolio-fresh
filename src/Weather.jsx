@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { Grid, Box, Typography } from "@mui/material";
 import HourlyWeather from "./HourlyWeather.jsx";
 import styled from "@mui/material/styles/styled";
 import weatherCodes from "../weatherCodes.json";
 import DailyWeather from "./DailyWeather";
 
-export default function Weather() {
+export default function Weather({ updateLocalTime }) {
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
   const [forecastDataState, setForecastDataState] = React.useState(null);
 
@@ -32,6 +33,7 @@ export default function Weather() {
         if (response.ok) {
           const forecastData = await response.json();
           setForecastDataState(forecastData);
+          updateLocalTime(forecastData.timelines.hourly[0].time);
         } else {
           console.error(
             `Failed to fetch weather data. Status: ${response.status}`
@@ -68,7 +70,6 @@ export default function Weather() {
       32;
   }
 
-
   const tempsMax = [];
   const tempsMin = [];
   const days = [];
@@ -99,6 +100,10 @@ export default function Weather() {
     flexGrow: 1,
     padding: 10,
   }));
+
+  Weather.propTypes = {
+    updateLocalTime: PropTypes.func,
+  };
 
   return (
     <div id="Dashboard">
