@@ -1,16 +1,23 @@
 import express from "express";
 const app = express();
-const port = 3000;
+const port = 443;
 import config from "./config.js";
 const apiKey = config.weatherApiKey;
 import mcache from "memory-cache";
 import cors from "cors";
 import path from "path";
+import https from "https";
+import fs from "fs";
 
 //<----Middleware Start---->
 
-app.listen(port, () => {
-  console.log(`Server listening at http(s)://localhost:${port}`);
+const privateKey = fs.readFileSync('./private.key', 'utf8');
+const certificate = fs.readFileSync('./certificate.crt', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(port, () => {
+  console.log(`Server listening at https://localhost:${port}`);
 });
 
 app.use(cors());
