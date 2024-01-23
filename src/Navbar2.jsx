@@ -108,17 +108,17 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-
-          <img
-            src="/images/EP.png"
-            height="40px"
-            alt="EP Logo"
-            onClick={() => scrollToSection("root")}
-            style={{
-              color: "white",
-              cursor: "pointer",
-            }}
-          ></img>
+          <a href="/">
+            <img
+              src="/images/EP.png"
+              height="40px"
+              alt="EP Logo"
+              style={{
+                color: "white",
+                cursor: "pointer",
+              }}
+            ></img>
+          </a>
         </Toolbar>
       </AppBar>
       <Drawer
