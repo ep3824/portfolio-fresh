@@ -4,7 +4,7 @@ import "../index.css";
 import "@fontsource-variable/red-hat-text";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
+
 
 // Create a dark theme
 let darkTheme = createTheme({
@@ -38,8 +38,6 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <ThemeProvider theme={darkTheme}>
-    {/* I don't think CssBaseline is needed */}
-    {/* <CssBaseline /> */}
     <App />
   </ThemeProvider>
 );

@@ -8,7 +8,7 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
-import { Component, useEffect } from "react";
+import { useEffect } from "react";
 import React from "react";
 
 // Create a dark theme

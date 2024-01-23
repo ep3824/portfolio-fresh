@@ -1,23 +1,26 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
+import {
+  Box,
+  Drawer,
+  CssBaseline,
+  AppBar as MuiAppBar,
+  Toolbar,
+  List,
+  Typography,
+  IconButton,
+  Link,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import HailIcon from "@mui/icons-material/Hail";
-import HomeIcon from "@mui/icons-material/Home";
-import Link from "@mui/material/Link";
+import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import { Home as HomeIcon, Hail as HailIcon } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -95,7 +98,7 @@ export default function PersistentDrawerLeft() {
         position="fixed"
         open={open}
         enableColorOnDark
-        sx={{ background: "#0c121c" }}
+        sx={{ background: "#042326" }}
       >
         <Toolbar>
           <IconButton
@@ -106,18 +109,17 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          {/* this is where the icon goes */}
-          <Typography color="white" pr={2}>
-            E.P. Portfolio
-          </Typography>
 
-          <HailIcon
+          <img
+            src="/images/EP.png"
+            height="40px"
+            alt="EP Logo"
+            onClick={() => scrollToSection("root")}
             style={{
               color: "white",
               cursor: "pointer",
             }}
-            onClick={() => scrollToSection("root")}
-          ></HailIcon>
+          ></img>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -127,7 +129,7 @@ export default function PersistentDrawerLeft() {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
-            backgroundColor: "#0c121c",
+            backgroundColor: "#0a1517",
           },
         }}
         variant="persistent"
@@ -143,12 +145,13 @@ export default function PersistentDrawerLeft() {
             )}
           </IconButton>
         </DrawerHeader>
-        <List >
+        <List>
           <Link href="/" underline="none">
             <ListItem disablePadding>
               <ListItemButton>
-            
-                <ListItemIcon><HomeIcon /></ListItemIcon>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
                 <ListItemText primary={"Home"} />
               </ListItemButton>
             </ListItem>

@@ -5,7 +5,6 @@ import config from "./config.js";
 const apiKey = config.weatherApiKey;
 import mcache from "memory-cache";
 import cors from "cors";
-import path from "path";
 import https from "https";
 import fs from "fs";
 
