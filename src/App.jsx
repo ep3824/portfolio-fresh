@@ -45,7 +45,7 @@ function App() {
                   <Grid
                     container
                     sx={{ maxWidth: 1400, margin: "0 auto" }}
-                    padding={3}
+                    padding={.5}
                   >
                     <Grid>
                       <Typography
