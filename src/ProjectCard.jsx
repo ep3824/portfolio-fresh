@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { Grid, Box, CardMedia, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 export default function ReusableCard({ image, title, description, pageLink }) {
   //Demo Button
@@ -29,6 +31,9 @@ export default function ReusableCard({ image, title, description, pageLink }) {
     margin: "10px",
   }));
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Grid item xs={12} md={6} >
       <Box
@@ -37,7 +42,7 @@ export default function ReusableCard({ image, title, description, pageLink }) {
           border: "1px solid #026359",
           padding: "15px",
           borderRadius: "15px",
-          height: "25rem",
+          height: isMobile ? "28rem" : "25rem",
         }}
         
       >
