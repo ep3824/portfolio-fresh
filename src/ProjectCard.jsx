@@ -35,16 +35,19 @@ export default function ReusableCard({ image, title, description, pageLink }) {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Grid item xs={12} md={6} >
+    <Grid item xs={12} md={6}>
       <Box
         sx={{
           maxWidth: 700,
           border: "1px solid #026359",
           padding: "15px",
           borderRadius: "15px",
-          height: isMobile ? "35rem" : "25rem",
+          height: isMobile ? "26rem" : "24rem",
         }}
-        
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        alignItems= {`${isMobile ? "center" : "flex-start"}`}
       >
         <CardMedia component="img" alt={title} height="140" image={image} />
 
@@ -66,15 +69,19 @@ export default function ReusableCard({ image, title, description, pageLink }) {
         >
           {description}
         </Typography>
-        {/* For now, these projects will all just link to the same Projects Page,
-        Eventually they will each get their own page */}
-        <a href={pageLink} target="_blank" rel="noreferrer">
-          <CustomButton size="small">Demo</CustomButton>
-        </a>
-        {/* And for now, these will just link to my general GitHub page */}
-        <a href="https://www.github.com/ep3824" target="_blank" rel="noreferrer">
-        <CustomButton2 size="small">GitHub</CustomButton2>
-        </a>
+        <div>
+          <a href={pageLink} target="_blank" rel="noreferrer">
+            <CustomButton size="small" >Demo</CustomButton>
+          </a>
+          {/* And for now, these will just link to my general GitHub page */}
+          <a
+            href="https://www.github.com/ep3824"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <CustomButton2 size="small">GitHub</CustomButton2>
+          </a>
+        </div>
       </Box>
     </Grid>
   );
