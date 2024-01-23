@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const port = 443;
+const port = 8443;  // Use a port above 1024 to avoid requiring root privileges
 import config from "./config.js";
 const apiKey = config.weatherApiKey;
 import mcache from "memory-cache";
@@ -12,7 +12,7 @@ import fs from "fs";
 //<----Middleware Start---->
 
 const privateKey = fs.readFileSync('./private.key', 'utf8');
-const certificate = fs.readFileSync('./certificate.crt', 'utf8');
+const certificate = fs.readFileSync('./certificate.pem', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 const httpsServer = https.createServer(credentials, app);
 

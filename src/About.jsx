@@ -17,7 +17,7 @@ export default function About() {
           <Grid item>
             <a
               href={EthanParentResume}
-              download="MyResume"
+              download="MyResume.pdf"
               target="_blank"
               rel="noreferrer"
             >
