@@ -7,7 +7,6 @@ import {
   AppBar as MuiAppBar,
   Toolbar,
   List,
-  Typography,
   IconButton,
   Link,
 } from "@mui/material";
@@ -20,7 +19,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Home as HomeIcon, Hail as HailIcon } from "@mui/icons-material";
+import { Home as HomeIcon } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
