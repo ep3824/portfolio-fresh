@@ -51,26 +51,26 @@ function cache(duration) {
 
 //<----API Calls Start---->
 
-app.get("/api/realtime", cache(3600), (req, res) => {
-  console.log("Querying realtime data...");
-  fetch(
-    "https://api.tomorrow.io/v4/weather/realtime?location=frisco&apikey=" +
-      config.weatherApiKey,
-    {
-      method: "GET",
-    }
-  )
-    .then((response) => response.json())
-    .then((data) => res.json(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-});
+// app.get("/api/realtime", cache(3600), (req, res) => {
+//   console.log("Querying realtime data...");
+//   fetch(
+//     `https://api.tomorrow.io/v4/weather/realtime?location=${req.query.city}&apikey=` +
+//       config.weatherApiKey,
+//     {
+//       method: "GET",
+//     }
+//   )
+//     .then((response) => response.json())
+//     .then((data) => res.json(data))
+//     .catch((error) => {
+//       console.error("Error:", error);
+//     });
+// });
 
 app.get("/api/forecast", cache(3600), (req, res) => {
   console.log("Querying forecast data...");
   fetch(
-    "https://api.tomorrow.io/v4/weather/forecast?location=frisco&apikey=" +
+    `https://api.tomorrow.io/v4/weather/forecast?location=${req.query.city}&apikey=` +
       config.weatherApiKey,
     {
       method: "GET",
@@ -86,7 +86,7 @@ app.get("/api/forecast", cache(3600), (req, res) => {
 app.get("/api/places", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}`
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}&types=(cities)`
     );
     res.json(response.data);
   } catch (error) {

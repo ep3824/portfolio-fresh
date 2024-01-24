@@ -1,6 +1,6 @@
-// PlacesAutocomplete.jsx
-
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import PropTypes from "prop-types";
 
 async function fetchPlaces(input) {
   try {
@@ -15,7 +15,7 @@ async function fetchPlaces(input) {
   }
 }
 
-export default function PlacesAutocomplete() {
+export default function PlacesAutocomplete({ onCitySelect }) {
   const [inputValue, setInputValue] = useState("");
   const [places, setPlaces] = useState([]);
 
@@ -31,20 +31,52 @@ export default function PlacesAutocomplete() {
     }
   };
 
+  const handleCitySelect = (city) => {
+    setInputValue(city.description);
+    setPlaces([]);
+    onCitySelect(city); // Send selected city to the parent component
+  };
+
+  PlacesAutocomplete.propTypes = {
+    onCitySelect: PropTypes.func.isRequired,
+  };
+
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Enter a location"
+    <div style={{ position: "relative", width: "300px" }}>
+      <TextField
+        label="Enter a location"
         value={inputValue}
         onChange={handleInputChange}
       />
-      <ul>
+      <ul
+        style={{
+          listStyle: "none",
+          padding: 0,
+          margin: 0,
+          position: "absolute",
+          top: "100%",
+          left: 0,
+          width: "100%",
+          backgroundColor: "#ffffff",
+          borderTop: "none",
+          color: "black",
+        }}
+      >
         {places &&
           Array.isArray(places.predictions) &&
           places.predictions.length > 0 &&
           places.predictions.map((place) => (
-            <li key={place.place_id}>{place.description}</li>
+            <li
+              key={place.place_id}
+              style={{
+                padding: "10px",
+                borderBottom: "1px solid #e0e0e0",
+                cursor: "pointer",
+              }}
+              onClick={() => handleCitySelect(place)}
+            >
+              {place.description}
+            </li>
           ))}
       </ul>
     </div>

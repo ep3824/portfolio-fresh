@@ -7,33 +7,43 @@ import weatherCodes from "../weatherCodes.json";
 import DailyWeather from "./DailyWeather";
 import TextField from "@mui/material/TextField";
 import PlacesAutocomplete from "./PlacesAutocomplete.jsx";
+import { useState } from "react";
 
 export default function Weather({ updateLocalTime }) {
-  const [realtimeDataState, setRealtimeDataState] = React.useState(null);
   const [forecastDataState, setForecastDataState] = React.useState(null);
+  const [selectedCity, setSelectedCity] = useState({
+    description: "Frisco, TX, USA",
+  });
+  //Necessary to give API the dash version ("new-york" instead of "new york")
+  const cityNameDashes = selectedCity.description
+    .replace(/, /g, "-")
+    .replace(/ /g, "-");
+
+  console.log("cityNameDashes", cityNameDashes);
 
   useEffect(() => {
-    const fetchRealtimeData = async () => {
-      try {
-        const response = await fetch("/api/realtime");
-        if (response.ok) {
-          const realtimeData = await response.json();
-          setRealtimeDataState(realtimeData);
-        } else {
-          console.error(
-            `Failed to fetch weather data. Status: ${response.status}`
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching realtime weather data:", error);
-      }
-    };
+    // const fetchRealtimeData = async () => {
+    //   try {
+    //     const response = await fetch(`/api/realtime?city=${cityNameDashes}`);
+    //     if (response.ok) {
+    //       const realtimeData = await response.json();
+    //       setRealtimeDataState(realtimeData);
+    //     } else {
+    //       console.error(
+    //         `Failed to fetch weather data. Status: ${response.status}`
+    //       );
+    //     }
+    //   } catch (error) {
+    //     console.error("Error fetching realtime weather data:", error);
+    //   }
+    // };
 
     const fetchForecastData = async () => {
       try {
-        const response = await fetch("/api/forecast");
+        const response = await fetch(`/api/forecast?city=${cityNameDashes}`);
         if (response.ok) {
           const forecastData = await response.json();
+          console.log("forecastData", forecastData);
           setForecastDataState(forecastData);
           updateLocalTime(forecastData.timelines.hourly[0].time);
         } else {
@@ -46,30 +56,14 @@ export default function Weather({ updateLocalTime }) {
       }
     };
 
-    fetchRealtimeData();
     fetchForecastData();
-  }, []); // The empty dependency => effect runs once when the component mounts
+  }, [selectedCity]); // When city changes, fetch weather data
 
   function formatDateWithoutYear(inputDate) {
     return new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "numeric",
     }).format(new Date(inputDate));
-  }
-
-  let temperatureF;
-  // let temperatureC;
-  let feelsLikeF;
-  // let cloudCover;
-
-  if (realtimeDataState) {
-    temperatureF =
-      Math.round((realtimeDataState.data.values.temperature * 9) / 5) + 32;
-    // temperatureC = Math.round(realtimeDataState.data.values.temperature);
-    // cloudCover = realtimeDataState.data.values.cloudCover;
-    feelsLikeF =
-      Math.round((realtimeDataState.data.values.temperatureApparent * 9) / 5) +
-      32;
   }
 
   const tempsMax = [];
@@ -85,6 +79,23 @@ export default function Weather({ updateLocalTime }) {
         cloudCoverData.push(day.values.cloudCoverAvg);
       })
     : [];
+
+  let temperatureF;
+  // let temperatureC;
+  let feelsLikeF;
+  // let cloudCover;
+
+  if (forecastDataState) {
+    temperatureF =
+      Math.round((forecastDataState.timelines.minutely[0].values.temperature * 9) / 5) +
+      32;
+    // temperatureC = Math.round(realtimeDataState.data.values.temperature);
+    // cloudCover = realtimeDataState.data.values.cloudCover;
+    feelsLikeF =
+      Math.round(
+        (forecastDataState.timelines.minutely[0].values.temperatureApparent * 9) / 5
+      ) + 32;
+  }
 
   //Convert temp data to F
   tempsMax.map(
@@ -103,6 +114,12 @@ export default function Weather({ updateLocalTime }) {
     padding: 10,
   }));
 
+  const handleCitySelect = (city) => {
+    // Handle the selected city data
+    console.log("Selected City:", city);
+    setSelectedCity(city);
+  };
+
   Weather.propTypes = {
     updateLocalTime: PropTypes.func,
   };
@@ -110,7 +127,7 @@ export default function Weather({ updateLocalTime }) {
   return (
     <div id="Dashboard" style={{ textAlign: "left" }}>
       <Box>
-        {realtimeDataState ? (
+        {forecastDataState ? (
           <Grid container>
             <Grid item xs={12}>
               <Box>
@@ -122,11 +139,11 @@ export default function Weather({ updateLocalTime }) {
                       color="#fff"
                       textAlign={"left"}
                     >
-                      Frisco
+                      {selectedCity.description}
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <PlacesAutocomplete />
+                    <PlacesAutocomplete onCitySelect={handleCitySelect} />
                   </Grid>
                 </Grid>
 
@@ -149,7 +166,7 @@ export default function Weather({ updateLocalTime }) {
                   pb={4}
                   textAlign={"left"}
                 >
-                  {weatherCodes[realtimeDataState.data.values.weatherCode]}
+                  {weatherCodes[forecastDataState.timelines.minutely[0].weatherCode]}
                 </Typography>
               </Grid>
               <Typography
