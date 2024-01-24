@@ -110,7 +110,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
           <a href="/">
             <img
-              src="/images/EP.png"
+              src="/images/EP.webp"
               height="40px"
               alt="EP Logo"
               style={{

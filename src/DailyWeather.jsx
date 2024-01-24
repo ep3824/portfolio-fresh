@@ -72,7 +72,7 @@ export default function DailyWeather({ forecastDataState }) {
             <Grid item xs={2}>
               <Typography variant="body2" sx={{ opacity: 0.8 }}>
                 <img
-                  src="/images/waterDropClear.png"
+                  src="/images/waterDropClear.webp"
                   height="20px"
                   alt="Precipitation Chance"
                   display="inline"
@@ -87,7 +87,7 @@ export default function DailyWeather({ forecastDataState }) {
             </Grid>
             <Grid item xs={1}>
               <img
-                src={`/images/${weatherCodeMax}.png`}
+                src={`/images/${weatherCodeMax}.webp`}
                 alt={`Weather max for ${day}`}
                 height="20px"
               />
@@ -95,7 +95,7 @@ export default function DailyWeather({ forecastDataState }) {
 
             <Grid item xs={2}>
               <img
-                src={`/images/${weatherCodeMin}.png`}
+                src={`/images/${weatherCodeMin}.webp`}
                 alt={`Weather min for ${day}`}
                 height="20px"
               />

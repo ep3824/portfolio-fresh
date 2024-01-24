@@ -44,7 +44,7 @@ export default function HourlyWeather({ forecastDataState }) {
               <Typography variant="body2" sx={{opacity: .8}}>{hour}</Typography>
               {weatherCode && (
                 <img
-                  src={`/images/${weatherCode}.png`}
+                  src={`/images/${weatherCode}.webp`}
                   alt={`Weather for ${hour}`}
                   height="20px"
                   align="center"
@@ -53,7 +53,7 @@ export default function HourlyWeather({ forecastDataState }) {
               <Typography variant="h6" pb={4}>{hourlyTemps[index]}°</Typography>
               <Grid item>
               <img
-                  src="/images/waterDropClear.png"
+                  src="/images/waterDropClear.webp"
                   height="20px"
                   alt="Precipitation Chance"
                   display="inline"

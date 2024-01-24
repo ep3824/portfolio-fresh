@@ -5,6 +5,8 @@ import HourlyWeather from "./HourlyWeather.jsx";
 import styled from "@mui/material/styles/styled";
 import weatherCodes from "../weatherCodes.json";
 import DailyWeather from "./DailyWeather";
+import TextField from "@mui/material/TextField";
+import PlacesAutocomplete from "./PlacesAutocomplete.jsx";
 
 export default function Weather({ updateLocalTime }) {
   const [realtimeDataState, setRealtimeDataState] = React.useState(null);
@@ -106,22 +108,28 @@ export default function Weather({ updateLocalTime }) {
   };
 
   return (
-    <div id="Dashboard">
+    <div id="Dashboard" style={{ textAlign: "left" }}>
       <Box>
         {realtimeDataState ? (
-          <Grid>
-            <Grid>
+          <Grid container>
+            <Grid item xs={12}>
               <Box>
-                <Grid item xs={12}>
-                  <Typography
-                    variant="h3"
-                    pb={3}
-                    color="#fff"
-                    textAlign={"left"}
-                  >
-                    Little Elm
-                  </Typography>
+                <Grid container alignItems={"center"}>
+                  <Grid item xs={12}>
+                    <Typography
+                      variant="h3"
+                      pb={3}
+                      color="#fff"
+                      textAlign={"left"}
+                    >
+                      Frisco
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <PlacesAutocomplete />
+                  </Grid>
                 </Grid>
+
                 <Grid item xs={12}>
                   <Typography
                     variant="h1"
@@ -171,7 +179,10 @@ export default function Weather({ updateLocalTime }) {
                   <DailyWeather forecastDataState={forecastDataState} />
                 </DashWidget>
               </Grid>
-              <Grid item xs={12} md={6} pb={2}>
+              {/* <Grid item xs={12} md={6} pb={2}>
+                <DashWidget> </DashWidget>
+              </Grid> */}
+              {/* <Grid item xs={12} md={6} pb={2}>
                 <DashWidget> </DashWidget>
               </Grid>
               <Grid item xs={12} md={6} pb={2}>
@@ -182,10 +193,7 @@ export default function Weather({ updateLocalTime }) {
               </Grid>
               <Grid item xs={12} md={6} pb={2}>
                 <DashWidget> </DashWidget>
-              </Grid>
-              <Grid item xs={12} md={6} pb={2}>
-                <DashWidget> </DashWidget>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         ) : (

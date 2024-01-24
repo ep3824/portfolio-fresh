@@ -1,8 +1,8 @@
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
-import trendLogo from "/images/trendLogoWhite.png";
-import grinLogo from "/images/grinLogoTransparent.png";
-import tPayLogo from "/images/tPay.png";
+import trendLogo from "/images/trendLogoWhite.webp";
+import grinLogo from "/images/grinLogoTransparent.webp";
+import tPayLogo from "/images/tPay.webp";
 
 export default function Bio() {
   return (
@@ -18,7 +18,7 @@ export default function Bio() {
           <Typography variant="h3" pb={4} textAlign="left">
             Bio
           </Typography>
-          <Typography variant="h4">
+          <Typography variant="h4" pb={4}>
             Hi, I&apos;m Ethan! I am a web developer with cybersecurity
             experience.
           </Typography>

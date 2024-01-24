@@ -25,7 +25,7 @@ import {
   Code as CodeIcon,
 } from "@mui/icons-material";
 
-// import EPLogo from "../public/images/EPLogo.png";
+// import EPLogo from "../public/images/EPLogo.webp";
 
 const drawerWidth = 240;
 
@@ -129,7 +129,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
           {/* this is where the icon goes */}
           <img
-            src="/images/EP.png"
+            src="/images/EP.webp"
             height="40px"
             alt="EP Logo"
             onClick={() => scrollToSection("root")}

@@ -1,15 +1,14 @@
 import express from "express";
 const app = express();
-const port = 8443;  // Use a port above 1024 to avoid requiring root privileges
+const port = 8443; // Use a port above 1024 to avoid requiring root privileges
 import config from "./config.js";
-const apiKey = config.weatherApiKey;
 import mcache from "memory-cache";
 import cors from "cors";
 import https from "https";
 import fs from "fs";
+import axios from "axios";
 
 //<----Middleware Start---->
-
 
 app.listen(port, () => {
   console.log(`Server listening at https://localhost:${port}`);
@@ -56,7 +55,7 @@ app.get("/api/realtime", cache(3600), (req, res) => {
   console.log("Querying realtime data...");
   fetch(
     "https://api.tomorrow.io/v4/weather/realtime?location=frisco&apikey=" +
-      apiKey,
+      config.weatherApiKey,
     {
       method: "GET",
     }
@@ -72,7 +71,7 @@ app.get("/api/forecast", cache(3600), (req, res) => {
   console.log("Querying forecast data...");
   fetch(
     "https://api.tomorrow.io/v4/weather/forecast?location=frisco&apikey=" +
-      apiKey,
+      config.weatherApiKey,
     {
       method: "GET",
     }
@@ -84,6 +83,17 @@ app.get("/api/forecast", cache(3600), (req, res) => {
     });
 });
 
+app.get("/api/places", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 //<----API Calls End---->
 

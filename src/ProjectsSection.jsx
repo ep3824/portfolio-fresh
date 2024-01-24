@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
 import ProjectCard from "./ProjectCard.jsx";
 import Typography from "@mui/material/Typography";
-import EPWebsiteSS from "/images/EPWebsiteSS.png";
-import weatherPic from "/images/weatherPagePic.png";
+import EPWebsiteSS from "/images/EPWebsiteSS.webp";
+import weatherPic from "/images/weatherPagePic.webp";
 
 export default function ProjectsSection() {
   return (
@@ -34,7 +34,7 @@ export default function ProjectsSection() {
             pageLink={"/"}
           />
           <ProjectCard
-            image={`https://picsum.photos/id/237/536/354`}
+            image={`${EPWebsiteSS}`}
             title={"Automation Scripts"}
             description={"PowerShell and Python scripts to automate tasks."}
             pageLink={"/"}
