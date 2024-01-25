@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import PropTypes from "prop-types";
 
@@ -35,6 +35,7 @@ export default function PlacesAutocomplete({ onCitySelect }) {
     setInputValue(city.description);
     setPlaces([]);
     onCitySelect(city); // Send selected city to the parent component
+    setInputValue("");
   };
 
   PlacesAutocomplete.propTypes = {
@@ -44,7 +45,7 @@ export default function PlacesAutocomplete({ onCitySelect }) {
   return (
     <div style={{ position: "relative", width: "300px" }}>
       <TextField
-        label="Enter a location"
+        label="Select City"
         value={inputValue}
         onChange={handleInputChange}
       />

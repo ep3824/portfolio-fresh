@@ -10,6 +10,7 @@ Here are some features of this website:
 6. Has HTTP/2 enabled
 8. End to end encryption
 9. AWS WAF Enabled
+10. Minimize API Weather calls by making 1 call and parsing data for forecast and realtime
 
 ## TBD
 

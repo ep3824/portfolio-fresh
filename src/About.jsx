@@ -2,7 +2,6 @@ import { Grid, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import EthanParentResume from "/images/EthanParentResume.pdf";
 import Box from "@mui/material/Box";
-import Typogrpahy from "@mui/material/Typography";
 import tPayLogo from "/images/tPay.webp";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";

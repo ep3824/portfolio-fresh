@@ -5,7 +5,6 @@ import HourlyWeather from "./HourlyWeather.jsx";
 import styled from "@mui/material/styles/styled";
 import weatherCodes from "../weatherCodes.json";
 import DailyWeather from "./DailyWeather";
-import TextField from "@mui/material/TextField";
 import PlacesAutocomplete from "./PlacesAutocomplete.jsx";
 import { useState } from "react";
 
@@ -19,31 +18,13 @@ export default function Weather({ updateLocalTime }) {
     .replace(/, /g, "-")
     .replace(/ /g, "-");
 
-  console.log("cityNameDashes", cityNameDashes);
-
   useEffect(() => {
-    // const fetchRealtimeData = async () => {
-    //   try {
-    //     const response = await fetch(`/api/realtime?city=${cityNameDashes}`);
-    //     if (response.ok) {
-    //       const realtimeData = await response.json();
-    //       setRealtimeDataState(realtimeData);
-    //     } else {
-    //       console.error(
-    //         `Failed to fetch weather data. Status: ${response.status}`
-    //       );
-    //     }
-    //   } catch (error) {
-    //     console.error("Error fetching realtime weather data:", error);
-    //   }
-    // };
-
+    //Only need 1 API call to get all the Weather data
     const fetchForecastData = async () => {
       try {
         const response = await fetch(`/api/forecast?city=${cityNameDashes}`);
         if (response.ok) {
           const forecastData = await response.json();
-          console.log("forecastData", forecastData);
           setForecastDataState(forecastData);
           updateLocalTime(forecastData.timelines.hourly[0].time);
         } else {
@@ -116,7 +97,6 @@ export default function Weather({ updateLocalTime }) {
 
   const handleCitySelect = (city) => {
     // Handle the selected city data
-    console.log("Selected City:", city);
     setSelectedCity(city);
   };
 

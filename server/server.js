@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const port = 8443;  // Use a port above 1024 to avoid requiring root privileges
+const port = 8443; // Use a port above 1024 to avoid requiring root privileges
 import config from "./config.js";
 const apiKey = config.weatherApiKey;
 import mcache from "memory-cache";
@@ -10,8 +10,8 @@ import fs from "fs";
 
 //<----Middleware Start---->
 
-const privateKey = fs.readFileSync('./private.key', 'utf8');
-const certificate = fs.readFileSync('./certificate.pem', 'utf8');
+const privateKey = fs.readFileSync("./private.key", "utf8");
+const certificate = fs.readFileSync("./certificate.pem", "utf8");
 const credentials = { key: privateKey, cert: certificate };
 const httpsServer = https.createServer(credentials, app);
 
@@ -19,7 +19,7 @@ httpsServer.listen(port, () => {
   console.log(`Server listening at https://localhost:${port}`);
 });
 
-app.use(cors());
+httpsServer.use(cors());
 
 //Cache logic -- API Calls held for 1 hour in cache
 
@@ -41,41 +41,14 @@ function cache(duration) {
   };
 }
 
-// const getCurrentDirectory = () => {
-//   const currentModulePath = new URL(import.meta.url).pathname;
-//   const currentDirectory = path.dirname(currentModulePath);
-//   return currentDirectory;
-// };
-
-//serve images
-// not sure if I should serve these from the server or not?
-// if im using s3 maybe just let s3 serve the images....
-// app.use('/images', express.static('public/images'));
-
 //<----Middleware End---->
 
 //<----API Calls Start---->
 
-app.get("/api/realtime", cache(3600), (req, res) => {
-  console.log("Querying realtime data...");
-  fetch(
-    "https://api.tomorrow.io/v4/weather/realtime?location=frisco&apikey=" +
-      apiKey,
-    {
-      method: "GET",
-    }
-  )
-    .then((response) => response.json())
-    .then((data) => res.json(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-});
-
-app.get("/api/forecast", cache(3600), (req, res) => {
+httpsServer.get("/api/forecast", cache(3600), (req, res) => {
   console.log("Querying forecast data...");
   fetch(
-    "https://api.tomorrow.io/v4/weather/forecast?location=frisco&apikey=" +
+    `https://api.tomorrow.io/v4/weather/forecast?location=${req.query.city}&apikey=` +
       apiKey,
     {
       method: "GET",
@@ -88,14 +61,19 @@ app.get("/api/forecast", cache(3600), (req, res) => {
     });
 });
 
+httpsServer.get("/api/places", cache(3600), (req, res) => {
+  console.log("Querying places data...");
+  fetch(
+    `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}&types=(cities)`,
+    {
+      method: "GET",
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => res.json(data))
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+});
 
 //<----API Calls End---->
-
-//Project Page
-// app.get("/dashboard-page", (req, res) => {
-//   const currentDirectory = getCurrentDirectory();
-//   // Serve the HTML file for the new page
-//   res.sendFile(path.join(currentDirectory, "dashboard-page.html"));
-// });
-
-//Getting rid of this call, this should be handled by the frontend
