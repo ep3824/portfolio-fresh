@@ -35,7 +35,6 @@ export default function PlacesAutocomplete({ onCitySelect }) {
     setInputValue(city.description);
     setPlaces([]);
     onCitySelect(city); // Send selected city to the parent component
-    setInputValue("");
   };
 
   PlacesAutocomplete.propTypes = {

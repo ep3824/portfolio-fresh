@@ -28,7 +28,6 @@ const interpolateColors = (color1, color2, factor) => {
   const result = color1.map((channel, index) =>
     Math.round(channel + factor * (color2[index] - channel))
   );
-  console.log(`rgb(${result.join(", ")})`);
   return `rgb(${result.join(", ")})`;
 };
 
