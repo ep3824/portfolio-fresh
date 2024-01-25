@@ -46,7 +46,7 @@ export default function HourlyWeather({ forecastDataState }) {
                 <img
                   src={`/images/${weatherCode}.webp`}
                   alt={`Weather for ${hour}`}
-                  height="20px"
+                  height="30px"
                   align="center"
                 />
               )}

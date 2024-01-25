@@ -65,15 +65,15 @@ export default function DailyWeather({ forecastDataState }) {
         let weatherCodeMax = weatherCodesMax[index];
         let weatherCodeMin = weatherCodesMin[index];
         return (
-          <Grid container key={index}>
-            <Grid item xs={2} pr={15}>
+          <Grid container key={index} width={"1400px"}>
+            <Grid item xs={1} md={3} pr={12}>
               <Typography>{day}</Typography>
             </Grid>
             <Grid item xs={2}>
               <Typography variant="body2" sx={{ opacity: 0.8 }}>
                 <img
                   src="/images/waterDropClear.webp"
-                  height="20px"
+                  height="30px"
                   alt="Precipitation Chance"
                   display="inline"
                   style={{
@@ -85,25 +85,25 @@ export default function DailyWeather({ forecastDataState }) {
                 {precipChance[index]}%
               </Typography>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={1} md={2} pr={3.5} pl={3.5}>
               <img
                 src={`/images/${weatherCodeMax}.webp`}
                 alt={`Weather max for ${day}`}
-                height="20px"
+                height="25px"
               />
             </Grid>
 
-            <Grid item xs={2}>
+            <Grid item xs={1} md={2} pr={9}>
               <img
                 src={`/images/${weatherCodeMin}.webp`}
                 alt={`Weather min for ${day}`}
-                height="20px"
+                height="25px"
               />
             </Grid>
-            <Grid item xs={1} pr={4}>
+            <Grid item xs={1} md={2} pr={3.5}>
               <Typography variant="h7">{tempsMax[index]}°</Typography>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={1} md={1}>
               <Typography variant="h7">{tempsMin[index]}°</Typography>
             </Grid>
           </Grid>

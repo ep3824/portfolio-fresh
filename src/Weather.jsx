@@ -7,6 +7,7 @@ import weatherCodes from "../weatherCodes.json";
 import DailyWeather from "./DailyWeather";
 import PlacesAutocomplete from "./PlacesAutocomplete.jsx";
 import { useState } from "react";
+import ClothingRec from "./ClothingRec.jsx";
 
 export default function Weather({ updateLocalTime }) {
   const [forecastDataState, setForecastDataState] = React.useState(null);
@@ -92,7 +93,7 @@ export default function Weather({ updateLocalTime }) {
     pb: 5,
     backgroundColor: "rgb(48, 122, 171, .3)", //blue to blue
     flexGrow: 1,
-    padding: 10,
+    padding: 20,
   }));
 
   const handleCitySelect = (city) => {
@@ -166,19 +167,23 @@ export default function Weather({ updateLocalTime }) {
               sx={{ width: "100%" }}
               pb={10}
             >
+              
               <Grid item xs={12} md={12} pb={2}>
                 <DashWidget textAlign={"left"}>
                   <HourlyWeather forecastDataState={forecastDataState} />
                 </DashWidget>
               </Grid>
-              <Grid item xs={12} md={6} pb={2}>
+              
+              <Grid item xs={12} md={12} pb={2}>
                 <DashWidget textAlign={"left"}>
                   <DailyWeather forecastDataState={forecastDataState} />
                 </DashWidget>
               </Grid>
-              {/* <Grid item xs={12} md={6} pb={2}>
-                <DashWidget> </DashWidget>
-              </Grid> */}
+              <Grid item xs={12} md={12} pb={2}>
+                <DashWidget>
+                  <ClothingRec forecastDataState={forecastDataState}/>
+                </DashWidget>
+              </Grid>
               {/* <Grid item xs={12} md={6} pb={2}>
                 <DashWidget> </DashWidget>
               </Grid>
