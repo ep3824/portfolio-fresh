@@ -69,13 +69,16 @@ export default function Weather({ updateLocalTime }) {
 
   if (forecastDataState) {
     temperatureF =
-      Math.round((forecastDataState.timelines.minutely[0].values.temperature * 9) / 5) +
-      32;
+      Math.round(
+        (forecastDataState.timelines.minutely[0].values.temperature * 9) / 5
+      ) + 32;
     // temperatureC = Math.round(realtimeDataState.data.values.temperature);
     // cloudCover = realtimeDataState.data.values.cloudCover;
     feelsLikeF =
       Math.round(
-        (forecastDataState.timelines.minutely[0].values.temperatureApparent * 9) / 5
+        (forecastDataState.timelines.minutely[0].values.temperatureApparent *
+          9) /
+          5
       ) + 32;
   }
 
@@ -104,6 +107,13 @@ export default function Weather({ updateLocalTime }) {
   Weather.propTypes = {
     updateLocalTime: PropTypes.func,
   };
+
+  let weatherCode;
+  if (forecastDataState) {
+    console.log(forecastDataState.timelines.minutely[0].values.weatherCode);
+    weatherCode =
+      forecastDataState.timelines.minutely[0].values.weatherCode;
+  }
 
   return (
     <div id="Dashboard" style={{ textAlign: "left" }}>
@@ -135,6 +145,12 @@ export default function Weather({ updateLocalTime }) {
                     textAlign={"left"}
                     fontWeight={"normal"}
                   >
+                    <img
+                      src={`/images/${weatherCode}.webp`}
+                      // alt={`Weather for ${hour}`}
+                      height="64px"
+                      align="center"
+                    />{" "}
                     {temperatureF} °F
                   </Typography>
                 </Grid>
@@ -147,7 +163,11 @@ export default function Weather({ updateLocalTime }) {
                   pb={4}
                   textAlign={"left"}
                 >
-                  {weatherCodes[forecastDataState.timelines.minutely[0].weatherCode]}
+                  {
+                    weatherCodes[
+                      forecastDataState.timelines.minutely[0].weatherCode
+                    ]
+                  }
                 </Typography>
               </Grid>
               <Typography
@@ -167,13 +187,12 @@ export default function Weather({ updateLocalTime }) {
               sx={{ width: "100%" }}
               pb={10}
             >
-              
               <Grid item xs={12} md={12} pb={2}>
                 <DashWidget textAlign={"left"}>
                   <HourlyWeather forecastDataState={forecastDataState} />
                 </DashWidget>
               </Grid>
-              
+
               <Grid item xs={12} md={12} pb={2}>
                 <DashWidget textAlign={"left"}>
                   <DailyWeather forecastDataState={forecastDataState} />
@@ -181,7 +200,7 @@ export default function Weather({ updateLocalTime }) {
               </Grid>
               <Grid item xs={12} md={12} pb={2}>
                 <DashWidget>
-                  <ClothingRec forecastDataState={forecastDataState}/>
+                  <ClothingRec forecastDataState={forecastDataState} />
                 </DashWidget>
               </Grid>
               {/* <Grid item xs={12} md={6} pb={2}>
