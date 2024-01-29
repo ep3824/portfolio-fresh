@@ -17,6 +17,10 @@ Here are some features of this website:
 
 1. Create more projects for projects section
 
+## Bugs
+
+1. Some cities that populate with the state/municipality will cause the weather app to crash, ex: Rio de Janeiro populates as Rio-de-Janeiro-State-of-Rio-de-Janeiro-Brazil , which does not work with Tomorrow.io forecast API. I need to account for cities like this and parse out the municipality / state names ( as well as create an error message page )
+
 
 
 

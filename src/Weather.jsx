@@ -19,12 +19,14 @@ export default function Weather({ updateLocalTime }) {
   const cityNameDashes = selectedCity.description
     .replace(/, /g, "-")
     .replace(/ /g, "-");
+  
+  const cityNameNoState = cityNameDashes.split(/-State|-municipality|-province/)[0];
 
   useEffect(() => {
     //Only need 1 API call to get all the Weather data
     const fetchForecastData = async () => {
       try {
-        const response = await fetch(`/api/forecast?city=${cityNameDashes}`);
+        const response = await fetch(`/api/forecast?city=${cityNameNoState}`);
         if (response.ok) {
           const forecastData = await response.json();
           setForecastDataState(forecastData);
@@ -115,6 +117,8 @@ export default function Weather({ updateLocalTime }) {
   if (forecastDataState && validator.isInt(forecastDataState.timelines.minutely[0].values.weatherCode + '')) {
     weatherCode =
       forecastDataState.timelines.minutely[0].values.weatherCode;
+  } else {
+    weatherCode = 0;
   }
 
   return (
