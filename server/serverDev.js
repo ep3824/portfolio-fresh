@@ -30,10 +30,10 @@ app.use(
 function cache(duration) {
   return (req, res, next) => {
     
-    let key = "__express__" + (req.originalUrl || req.url);
-    if (!validator.matches('/api/forecast' || '/api/places')) {
-      res.send("Invalid API request");
-    }
+    //I don't really think this is the use case for validator.js
+    //But as long as validator.js is consistent, caching this way should be OK for now
+    let key = validator.escape(("__express__" + (req.originalUrl || req.url)));
+    console.log(key)
     let cachedBody = mcache.get(key);
     //Cache hit
     if (cachedBody) {
