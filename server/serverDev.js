@@ -7,6 +7,7 @@ import cors from "cors";
 import axios from "axios";
 import cookieParser from "cookie-parser";
 import { query, validationResult } from "express-validator";
+import validator from "validator";
 
 //<----Middleware Start---->
 
@@ -28,12 +29,18 @@ app.use(
 
 function cache(duration) {
   return (req, res, next) => {
+    
     let key = "__express__" + (req.originalUrl || req.url);
+    if (!validator.matches('/api/forecast' || '/api/places')) {
+      res.send("Invalid API request");
+    }
     let cachedBody = mcache.get(key);
+    //Cache hit
     if (cachedBody) {
       res.send(cachedBody);
       return;
     } else {
+      //Cache miss
       res.sendResponse = res.send;
       res.send = (body) => {
         mcache.put(key, body, duration * 1000);
