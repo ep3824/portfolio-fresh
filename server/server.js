@@ -8,7 +8,9 @@ import cors from "cors";
 import https from "https";
 import fs from "fs";
 import { query, validationResult } from "express-validator";
+import validator from "validator";
 import cookieParser from "cookie-parser";
+import csrf from "csurf";
 
 //<----Middleware Start---->
 
@@ -35,7 +37,7 @@ httpsServer.use(
 
 function cache(duration) {
   return (req, res, next) => {
-    let key = "__express__" + (req.originalUrl || req.url);
+    let key = validator.escape(("__express__" + (req.originalUrl || req.url)));
     let cachedBody = mcache.get(key);
     if (cachedBody) {
       res.send(cachedBody);

@@ -8,6 +8,7 @@ import axios from "axios";
 import cookieParser from "cookie-parser";
 import { query, validationResult } from "express-validator";
 import validator from "validator";
+import csrf from "csurf";
 
 //<----Middleware Start---->
 
@@ -24,6 +25,14 @@ app.use(
     sameSite: "strict",
   })
 );
+
+const csrfProtection = csrf({ cookie: true })
+
+app.use(csrfProtection);
+
+app.get('/getCSRFToken', (req, res) => {
+  res.json({ CSRFToken: req.CSRFToken() });
+});
 
 //Cache logic -- API Calls held for 1 hour in cache
 

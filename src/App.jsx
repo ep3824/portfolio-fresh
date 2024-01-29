@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DashboardPage from "./DashboardPage";
 import Navbar from "./Navbar.jsx";
@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Contact from "./Contact.jsx";
 import About from "./About.jsx";
 import ProjectsSection from "./ProjectsSection.jsx";
+import axios from "axios";
 
 // This probably needs to be deleted, I don't think I want the elevation that comes with Paper
 const Item = styled(Paper)(({ theme }) => ({
@@ -21,7 +22,16 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: "none",
 }));
 
+const getCSRFToken = async () => {
+  const response = await axios.get('/getCSRFToken');
+  axios.defaults.headers.post['X-CSRF-Token'] = response.data.CSRFToken;
+};
+
 function App() {
+  useEffect(() => {
+    getCSRFToken();
+  }
+  , []);
   return (
     <Router>
       <Routes>
