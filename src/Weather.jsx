@@ -8,6 +8,7 @@ import DailyWeather from "./DailyWeather";
 import PlacesAutocomplete from "./PlacesAutocomplete.jsx";
 import { useState } from "react";
 import ClothingRec from "./ClothingRec.jsx";
+import validator from "validator";
 
 export default function Weather({ updateLocalTime }) {
   const [forecastDataState, setForecastDataState] = React.useState(null);
@@ -109,8 +110,9 @@ export default function Weather({ updateLocalTime }) {
   };
 
   let weatherCode;
-  if (forecastDataState) {
-    console.log(forecastDataState.timelines.minutely[0].values.weatherCode);
+  //If the API data has come back and if the weatherCode is an integer, proceed
+  //(For validation, we coerce the weatherCode number to a string and then check if it's an integer)
+  if (forecastDataState && validator.isInt(forecastDataState.timelines.minutely[0].values.weatherCode + '')) {
     weatherCode =
       forecastDataState.timelines.minutely[0].values.weatherCode;
   }

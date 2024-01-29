@@ -11,6 +11,7 @@ Here are some features of this website:
 8. End to end encryption
 9. AWS WAF Enabled
 10. Minimize API Weather calls by making 1 call and parsing data for forecast and realtime
+11. Implements security suggestions from Snyk.io (input validation, sanitization, XSS attack prevention, etc.)
 
 ## TBD
 
