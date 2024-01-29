@@ -33,6 +33,14 @@ httpsServer.use(
   })
 );
 
+const csrfProtection = csrf({ cookie: true })
+
+httpsServer.use(csrfProtection);
+
+httpsServer.get('/getCSRFToken', (req, res) => {
+  res.json({ CSRFToken: req.CSRFToken() });
+});
+
 //Cache logic -- API Calls held for 1 hour in cache
 
 function cache(duration) {

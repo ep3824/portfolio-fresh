@@ -32,7 +32,7 @@ export default function Bio() {
             My broad experience and skillset includes full stack web apps, and
             the main languages in my tech stack are JavaScript, React, and of
             course HTML/CSS. I&apos;m a lifelong learner and love to bake, cook,
-            and find new plants to nurture.
+            and find new plants to nurture. Ask me about my fig tree!
           </Typography>
           <Typography variant="h5" pb={5}>
             Here are some of the companies I&apos;ve worked with:

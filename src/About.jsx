@@ -37,7 +37,6 @@ export default function About() {
             </Typography>
             <Typography variant="h4" pb={4} textAlign="left" pt={10}>
               welcome to my portfolio. this is where I have projects.
-              lorem ipsum dolor sit ameto
             </Typography>
             <a
               href={EthanParentResume}
@@ -64,7 +63,8 @@ export default function About() {
           </Grid>
           <Grid item md={6}>
             <Box>
-              <img height="100px" src={`${tPayLogo}`} alt="tPay Logo"></img>
+              {/* placeholder for image */}
+              {/* <img height="100px" src={`${tPayLogo}`} alt="tPay Logo"></img> */}
             </Box>
           </Grid>
         </Grid>
