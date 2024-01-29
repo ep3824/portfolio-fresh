@@ -40,6 +40,12 @@ export default function ClothingRec({ forecastDataState }) {
       bottom: ["pants"],
       feet: ["shoes"],
     },
+    1100: {
+      description: ["partly cloudy"],
+      top: ["long sleeve shirt"],
+      bottom: ["pants"],
+      feet: ["shoes"],
+    },
     1101: {
       description: ["partly cloudy"],
       top: ["long sleeve shirt"],
@@ -104,7 +110,7 @@ export default function ClothingRec({ forecastDataState }) {
         </Typography>
         <Typography variant="body1" pb={4} textAlign={"left"}>
             {/* It's a {clothingWeatherPair[weatherCode].description} day, make sure to wear a {clothingWeatherPair[weatherCode].top} and {clothingWeatherPair[weatherCode].bottom}! */}
-            It is {isCold ? "cold" : "warm"} and {isRainy ? "rainy" : null} { isSnowy ? "snowy" : null} { isFoggy ? "foggy" : null}   today, so make sure to wear a {isCold ? "jacket" : "t-shirt"} and {isRainy ? "bring an umbrella" : "enjoy the clear skies"}!
+            It is {isCold ? "cold" : "warm"} {isRainy ? " and rainy" : null} { isSnowy ? " and snowy" : null} { isFoggy ? " and foggy" : null}   today, so make sure to wear a {isCold ? "jacket" : "t-shirt"} and {isRainy ? "bring an umbrella" : "enjoy the clear skies"}!
         </Typography>
         <Grid>
             

@@ -5,6 +5,8 @@ import config from "./config.js";
 import mcache from "memory-cache";
 import cors from "cors";
 import axios from "axios";
+import cookieParser from "cookie-parser";
+import { query, validationResult } from "express-validator";
 
 //<----Middleware Start---->
 
@@ -13,6 +15,14 @@ app.listen(port, () => {
 });
 
 app.use(cors());
+
+app.disable("x-powered-by");
+
+app.use(
+  cookieParser(Math.random().toString(), {
+    sameSite: "strict",
+  })
+);
 
 //Cache logic -- API Calls held for 1 hour in cache
 
@@ -38,37 +48,58 @@ function cache(duration) {
 
 //<----API Calls Start---->
 
-
-app.get("/api/forecast", cache(3600), (req, res) => {
-  console.log("Querying forecast data...");
-  fetch(
-    `https://api.tomorrow.io/v4/weather/forecast?location=${req.query.city}&apikey=` +
-      config.weatherApiKey,
-    {
-      method: "GET",
+app.get(
+  "/api/forecast",
+  cache(3600),
+  query("city").notEmpty().escape(),
+  (req, res) => {
+    console.log("Querying forecast data...");
+    const result = validationResult(req);
+    if (result.isEmpty()) {
+      fetch(
+        `https://api.tomorrow.io/v4/weather/forecast?location=${req.query.city}&apikey=` +
+          config.weatherApiKey,
+        {
+          method: "GET",
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => res.json(data))
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
-  )
-    .then((response) => response.json())
-    .then((data) => res.json(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-});
 
-app.get("/api/places", cache(3600), (req, res) => {
-  console.log("Querying places data...");
-  fetch(
-    `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}&types=(cities)`,
-    {
-      method: "GET",
+    if (!result.isEmpty()) {
+      res.send({ errors: result.array() });
     }
-  )
-    .then((response) => response.json())
-    .then((data) => res.json(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-});
+  }
+);
+
+app.get(
+  "/api/places",
+  cache(3600),
+  query("input").notEmpty().escape(),
+  (req, res) => {
+    console.log("Querying places data...");
+    const result = validationResult(req);
+    if (result.isEmpty()) {
+    fetch(
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}&types=(cities)`,
+      {
+        method: "GET",
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => res.json(data))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    }
+    if (!result.isEmpty()) {
+      res.send({ errors: result.array() });
+    }
+  }
+);
 
 //<----API Calls End---->
-
