@@ -18,7 +18,7 @@ Here are some features of this website:
 2. Minimize API Weather calls by making 1 call and parsing data for forecast and realtime
 3. Implements security suggestions from Snyk.io (input validation, sanitization, XSS attack prevention, etc.)
 
-## TBD
+## Future Improvements
 
 1. Create more projects for projects section. 
 2. Add loading wheel so users can see when the weather information is done loading

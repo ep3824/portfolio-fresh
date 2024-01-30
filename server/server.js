@@ -1,6 +1,5 @@
 import express from "express";
 const app = express();
-
 const port = 8443; // Use a port above 1024 to avoid requiring root privileges
 import config from "./config.js";
 const apiKey = config.weatherApiKey;
@@ -12,6 +11,8 @@ import { query, validationResult } from "express-validator";
 import validator from "validator";
 import cookieParser from "cookie-parser";
 import csrf from "csurf";
+
+//<----Middleware Start---->
 app.use(cors())
 app.disable("x-powered-by");
 app.use(
@@ -20,10 +21,7 @@ app.use(
   })
 );
 const csrfProtection = csrf({ cookie: true })
-
 app.use(csrfProtection);
-
-//<----Middleware Start---->
 
 const privateKey = fs.readFileSync("./private.key", "utf8");
 const certificate = fs.readFileSync("./certificate.pem", "utf8");
