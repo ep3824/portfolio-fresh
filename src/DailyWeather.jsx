@@ -66,10 +66,10 @@ export default function DailyWeather({ forecastDataState }) {
         let weatherCodeMin = weatherCodesMin[index];
         return (
           <Grid container key={index} width={"1400px"}>
-            <Grid item xs={1} md={2} pr={12}>
+            <Grid item xs={1} sm={2} pr={12}>
               <Typography>{day}</Typography>
             </Grid>
-            <Grid item xs={.7} md={.4}>
+            <Grid item xs={.7} sm={.4}>
               <Typography variant="body2" sx={{ opacity: 0.8 }}>
                 <img
                   src="/images/waterDropClear.webp"
@@ -84,15 +84,15 @@ export default function DailyWeather({ forecastDataState }) {
                 ></img>
               </Typography>
             </Grid>
-            <Grid item xs={.4}>
+            <Grid item xs={.1}>
               {precipChance[index]}%
             </Grid>
             <Grid
               item
               xs={1}
-              md={1.7}
-              pr={{ xs: 3.5, md: 0 }}
-              pl={{ xs: 6, md: 8 }}
+              sm={4}
+              pr={{ xs: 3.5, sm: 0}}
+              pl={{ xs: 6, sm: 24 }}
             >
               <img
                 src={`/images/${weatherCodeMax}.webp`}
@@ -101,17 +101,17 @@ export default function DailyWeather({ forecastDataState }) {
               />
             </Grid>
 
-            <Grid item xs={1} md={2} pr={6}>
+            <Grid item xs={1} sm={2} pr={3}>
               <img
                 src={`/images/${weatherCodeMin}.webp`}
                 alt={`Weather condition at night for ${day}`}
                 height="25px"
               />
             </Grid>
-            <Grid item xs={1} md={1.4} pl={{ xs: 0, md: 6 }}>
+            <Grid item xs={1} sm={2} pl={{ xs: 0, sm: 10.5 }}>
               <Typography variant="h7">{tempsMax[index]}°</Typography>
             </Grid>
-            <Grid item xs={1} md={1}>
+            <Grid item xs={1} sm={1}>
               <Typography variant="h7">{tempsMin[index]}°</Typography>
             </Grid>
           </Grid>
