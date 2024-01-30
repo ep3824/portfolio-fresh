@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 async function fetchPlaces(input) {
   try {
     const response = await fetch(
-      `http://localhost:8443/api/places?input=${input}`
+      `/api/places?input=${input}`
     );
     const data = await response.json();
     return data;

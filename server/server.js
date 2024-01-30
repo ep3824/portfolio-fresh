@@ -1,5 +1,6 @@
 import express from "express";
 const app = express();
+
 const port = 8443; // Use a port above 1024 to avoid requiring root privileges
 import config from "./config.js";
 const apiKey = config.weatherApiKey;
@@ -11,6 +12,16 @@ import { query, validationResult } from "express-validator";
 import validator from "validator";
 import cookieParser from "cookie-parser";
 import csrf from "csurf";
+app.use(cors())
+app.disable("x-powered-by");
+app.use(
+  cookieParser(Math.random().toString(), {
+    sameSite: "strict",
+  })
+);
+const csrfProtection = csrf({ cookie: true })
+
+app.use(csrfProtection);
 
 //<----Middleware Start---->
 
@@ -23,21 +34,11 @@ httpsServer.listen(port, () => {
   console.log(`Server listening at https://localhost:${port}`);
 });
 
-httpsServer.use(cors());
+// const csrfProtection = csrf({ cookie: true })
 
-httpsServer.disable('x-powered-by');
+// httpsServer.use(csrfProtection);
 
-httpsServer.use(
-  cookieParser(Math.random().toString(), {
-    sameSite: "strict",
-  })
-);
-
-const csrfProtection = csrf({ cookie: true })
-
-httpsServer.use(csrfProtection);
-
-httpsServer.get('/getCSRFToken', (req, res) => {
+app.get('/getCSRFToken', (req, res) => {
   res.json({ CSRFToken: req.CSRFToken() });
 });
 
@@ -65,7 +66,7 @@ function cache(duration) {
 
 //<----API Calls Start---->
 
-httpsServer.get(
+app.get(
   "/api/forecast",
   cache(3600),
   query("city").notEmpty().escape(),
@@ -93,7 +94,7 @@ httpsServer.get(
   }
 );
 
-httpsServer.get(
+app.get(
   "/api/places",
   cache(3600),
   query("input").notEmpty().escape(),
