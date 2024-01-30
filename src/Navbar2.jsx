@@ -67,17 +67,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const scrollToSection = (sectionId) => {
-  // This is a hacky way to scroll to the top of the page
-  // when about is clicked.
-  // Could be cleaned up by moving some about me CSS to the root
-  if (sectionId === "About") sectionId = "root";
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-  }
-};
-
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);

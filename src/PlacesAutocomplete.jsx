@@ -44,7 +44,7 @@ export default function PlacesAutocomplete({ onCitySelect }) {
   return (
     <div style={{ position: "relative", width: "300px" }}>
       <TextField
-        label="Select City"
+        label="Select (U.S.) City"
         value={inputValue}
         onChange={handleInputChange}
       />

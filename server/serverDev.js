@@ -99,7 +99,7 @@ app.get(
     const result = validationResult(req);
     if (result.isEmpty()) {
       fetch(
-        `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}&types=(cities)`,
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}&types=(cities)&components=country:us`,
         {
           method: "GET",
         }

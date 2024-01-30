@@ -35,14 +35,6 @@ darkTheme = responsiveFontSizes(darkTheme);
 const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container);
 
-// Define placesCallback in the global scope
-window.placesCallback = function () {
-  // This function will be called once the Google Maps API is loaded
-
-  // Now, you can initialize your React app or perform any other logic related to the API
-  console.log("Google Maps API loaded successfully");
-};
-
 root.render(
   <ThemeProvider theme={darkTheme}>
     <App />
