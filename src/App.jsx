@@ -6,7 +6,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Skills from "./Skills.jsx";
-import Typography from "@mui/material/Typography";
 import Contact from "./Contact.jsx";
 import About from "./About.jsx";
 import ProjectsSection from "./ProjectsSection.jsx";
@@ -23,15 +22,14 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const getCSRFToken = async () => {
-  const response = await axios.get('/getCSRFToken');
-  axios.defaults.headers.post['X-CSRF-Token'] = response.data.CSRFToken;
+  const response = await axios.get("/getCSRFToken");
+  axios.defaults.headers.post["X-CSRF-Token"] = response.data.CSRFToken;
 };
 
 function App() {
   useEffect(() => {
     getCSRFToken();
-  }
-  , []);
+  }, []);
   return (
     <Router>
       <Routes>
@@ -58,7 +56,6 @@ function App() {
                     padding={1}
                   >
                     <Grid>
-                      
                       <Item>
                         <About />
                       </Item>

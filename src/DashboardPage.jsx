@@ -94,7 +94,7 @@ export default function DashboardPage() {
           <Navbar2></Navbar2>
         </div>
         <Item>
-          <Grid container sx={{ maxWidth: 1400, margin: "0 auto" }} padding={1}>
+          <Grid container sx={{ maxWidth: 1400, margin: "0 auto"}} padding={1}>
             <Grid item xs={12}>
               <div id="Dashboard"></div>
               <Weather updateLocalTime={updateLocalTime}></Weather>

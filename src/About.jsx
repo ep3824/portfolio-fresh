@@ -2,20 +2,21 @@ import { Grid, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import EthanParentResume from "/images/EthanParentResume.pdf";
 import Box from "@mui/material/Box";
-import tPayLogo from "/images/tPay.webp";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-
-
 export default function About() {
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <div id="About">
-      <Grid container sx={{ maxWidth: 1400 }} pt={isMobile ? 10 : 20} pb={isMobile ? 10 : 20}>
+      <Grid
+        container
+        sx={{ maxWidth: 1400 }}
+        pt={isMobile ? 10 : 20}
+        pb={isMobile ? 10 : 20}
+      >
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <Typography

@@ -156,6 +156,11 @@ export default function Weather({ updateLocalTime }) {
                       // alt={`Weather for ${hour}`}
                       height="64px"
                       align="center"
+                      style={{
+                        verticalAlign: "middle",
+                        marginRight: "2px",
+                        marginTop: "-6px",
+                      }}
                     />{" "}
                     {temperatureF} °F
                   </Typography>

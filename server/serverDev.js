@@ -4,7 +4,6 @@ const port = 8443; // Use a port above 1024 to avoid requiring root privileges
 import config from "./config.js";
 import mcache from "memory-cache";
 import cors from "cors";
-import axios from "axios";
 import cookieParser from "cookie-parser";
 import { query, validationResult } from "express-validator";
 import validator from "validator";
@@ -26,23 +25,22 @@ app.use(
   })
 );
 
-const csrfProtection = csrf({ cookie: true })
+const csrfProtection = csrf({ cookie: true });
 
 app.use(csrfProtection);
 
-app.get('/getCSRFToken', (req, res) => {
+app.get("/getCSRFToken", (req, res) => {
   res.json({ CSRFToken: req.CSRFToken() });
 });
 
-//Cache logic -- API Calls held for 1 hour in cache
+//Cache logic -- API Calls held for X time in cache
 
 function cache(duration) {
   return (req, res, next) => {
-    
     //I don't really think this is the use case for validator.js
     //But as long as validator.js is consistent, caching this way should be OK for now
-    let key = validator.escape(("__express__" + (req.originalUrl || req.url)));
-    console.log(key)
+    let key = validator.escape("__express__" + (req.originalUrl || req.url));
+    console.log(key);
     let cachedBody = mcache.get(key);
     //Cache hit
     if (cachedBody) {
@@ -100,17 +98,17 @@ app.get(
     console.log("Querying places data...");
     const result = validationResult(req);
     if (result.isEmpty()) {
-    fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}&types=(cities)`,
-      {
-        method: "GET",
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => res.json(data))
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      fetch(
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.googleMapsApiKey}&input=${req.query.input}&types=(cities)`,
+        {
+          method: "GET",
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => res.json(data))
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
     if (!result.isEmpty()) {
       res.send({ errors: result.array() });

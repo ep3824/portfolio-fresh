@@ -2,7 +2,6 @@ import express from "express";
 const app = express();
 const port = 8443; // Use a port above 1024 to avoid requiring root privileges
 import config from "./config.js";
-const apiKey = config.weatherApiKey;
 import mcache from "memory-cache";
 import cors from "cors";
 import https from "https";
@@ -31,10 +30,6 @@ const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port, () => {
   console.log(`Server listening at https://localhost:${port}`);
 });
-
-// const csrfProtection = csrf({ cookie: true })
-
-// httpsServer.use(csrfProtection);
 
 app.get('/getCSRFToken', (req, res) => {
   res.json({ CSRFToken: req.CSRFToken() });

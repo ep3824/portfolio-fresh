@@ -66,10 +66,10 @@ export default function DailyWeather({ forecastDataState }) {
         let weatherCodeMin = weatherCodesMin[index];
         return (
           <Grid container key={index} width={"1400px"}>
-            <Grid item xs={1} md={3} pr={12}>
+            <Grid item xs={1} md={2} pr={12}>
               <Typography>{day}</Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={.7} md={.4}>
               <Typography variant="body2" sx={{ opacity: 0.8 }}>
                 <img
                   src="/images/waterDropClear.webp"
@@ -79,28 +79,36 @@ export default function DailyWeather({ forecastDataState }) {
                   style={{
                     verticalAlign: "middle",
                     marginRight: "2px",
-                    marginTop: "-4px",
+                    marginTop: "-6px",
                   }}
                 ></img>
-                {precipChance[index]}%
               </Typography>
             </Grid>
-            <Grid item xs={1} md={2} pr={3.5} pl={3.5}>
+            <Grid item xs={.4}>
+              {precipChance[index]}%
+            </Grid>
+            <Grid
+              item
+              xs={1}
+              md={1.7}
+              pr={{ xs: 3.5, md: 0 }}
+              pl={{ xs: 6, md: 8 }}
+            >
               <img
                 src={`/images/${weatherCodeMax}.webp`}
-                alt={`Weather max for ${day}`}
+                alt={`Weather condition in daylight for ${day}`}
                 height="25px"
               />
             </Grid>
 
-            <Grid item xs={1} md={2} pr={9}>
+            <Grid item xs={1} md={2} pr={6}>
               <img
                 src={`/images/${weatherCodeMin}.webp`}
-                alt={`Weather min for ${day}`}
+                alt={`Weather condition at night for ${day}`}
                 height="25px"
               />
             </Grid>
-            <Grid item xs={1} md={2} pr={3.5}>
+            <Grid item xs={1} md={1.4} pl={{ xs: 0, md: 6 }}>
               <Typography variant="h7">{tempsMax[index]}°</Typography>
             </Grid>
             <Grid item xs={1} md={1}>

@@ -30,6 +30,7 @@ Here are some features of this website:
 
 1. Some cities that populate with the state/municipality will cause the weather app to crash, ex: Rio de Janeiro populates as Rio-de-Janeiro-State-of-Rio-de-Janeiro-Brazil , which does not work with Tomorrow.io forecast API. I need to account for cities like this and parse out the municipality / state names ( as well as create an error message page ) (Update: appears semi fixed, need to test with more city names)
 2. Weather app spacing needs some tweaks on mobile
+3. ****High Severity**** Weather app will ocassionaly not render a new city and will go back to the default city (Frisco, TX). Need to find root cause and fix. 
 
 
 
