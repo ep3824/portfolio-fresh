@@ -14,8 +14,15 @@ import csrf from "csurf";
 //<----Middleware Start---->
 app.use(cors())
 app.disable("x-powered-by");
+
+function securePassword() {
+  var suffix = window.crypto.getRandomValues(new Uint32Array(1))[0];
+  var password = config.cookiePassword + suffix;
+  return password;
+}
+
 app.use(
-  cookieParser(Math.random().toString(), {
+  cookieParser(securePassword().toString(), {
     sameSite: "strict",
   })
 );
