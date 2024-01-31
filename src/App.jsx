@@ -10,6 +10,7 @@ import Contact from "./Contact.jsx";
 import About from "./About.jsx";
 import ProjectsSection from "./ProjectsSection.jsx";
 import axios from "axios";
+import { initGA, logPageView } from "../analytics.js";
 
 // This probably needs to be deleted, I don't think I want the elevation that comes with Paper
 const Item = styled(Paper)(({ theme }) => ({
@@ -29,6 +30,8 @@ const getCSRFToken = async () => {
 function App() {
   useEffect(() => {
     getCSRFToken();
+    initGA();
+    logPageView();
   }, []);
   return (
     <Router>
