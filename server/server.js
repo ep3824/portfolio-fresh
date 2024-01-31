@@ -16,7 +16,7 @@ app.use(cors())
 app.disable("x-powered-by");
 
 function securePassword() {
-  var suffix = window.crypto.getRandomValues(new Uint32Array(1))[0];
+  var suffix = crypto.getRandomValues(new Uint32Array(1))[0];
   var password = config.cookiePassword + suffix;
   return password;
 }
@@ -26,6 +26,7 @@ app.use(
     sameSite: "strict",
   })
 );
+
 const csrfProtection = csrf({ cookie: true })
 app.use(csrfProtection);
 
