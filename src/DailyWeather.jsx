@@ -69,7 +69,7 @@ export default function DailyWeather({ forecastDataState }) {
             <Grid item xs={1} sm={2} pr={12}>
               <Typography>{day}</Typography>
             </Grid>
-            <Grid item xs={.7} sm={.4}>
+            <Grid item xs={0.7} sm={0.4}>
               <Typography variant="body2" sx={{ opacity: 0.8 }}>
                 <img
                   src="/images/waterDropClear.webp"
@@ -84,14 +84,14 @@ export default function DailyWeather({ forecastDataState }) {
                 ></img>
               </Typography>
             </Grid>
-            <Grid item xs={.1}>
+            <Grid item xs={0.1}>
               {precipChance[index]}%
             </Grid>
             <Grid
               item
               xs={1}
               sm={4}
-              pr={{ xs: 3.5, sm: 0}}
+              pr={{ xs: 3.5, sm: 0 }}
               pl={{ xs: 6, sm: 24 }}
             >
               <img
