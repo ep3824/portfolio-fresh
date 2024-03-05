@@ -1,11 +1,9 @@
 import express from "express";
 const app = express();
-const port = 8443; // Use a port above 1024 to avoid requiring root privileges
+const port = 8443; 
 import config from "./config.js";
 import mcache from "memory-cache";
 import cors from "cors";
-import https from "https";
-import fs from "fs";
 import { query, validationResult } from "express-validator";
 import validator from "validator";
 import cookieParser from "cookie-parser";
@@ -30,13 +28,8 @@ app.use(
 const csrfProtection = csrf({ cookie: true })
 app.use(csrfProtection);
 
-const privateKey = fs.readFileSync("./private.key", "utf8");
-const certificate = fs.readFileSync("./certificate.pem", "utf8");
-const credentials = { key: privateKey, cert: certificate };
-const httpsServer = https.createServer(credentials, app);
-
-httpsServer.listen(port, () => {
-  console.log(`Server listening at https://localhost:${port}`);
+app.listen(port, () => {
+  console.log(`Server listening on http://localhost:${port}`);
 });
 
 app.get('/getCSRFToken', (req, res) => {
