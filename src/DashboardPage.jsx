@@ -8,7 +8,7 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import React from "react";
 
 // Create a dark theme
@@ -71,9 +71,9 @@ export default function DashboardPage() {
     return interpolateColors(currentColor, nextColor, factor);
   };
 
-  const updateLocalTime = (time) => {
+  const updateLocalTime = useCallback((time) => {
     setLocalTime(time);
-  };
+  }, []);
 
   const changeBackgroundColor = () => {
     setSunColor(getColorBasedOnTime());
@@ -97,7 +97,7 @@ export default function DashboardPage() {
           <Grid container sx={{ maxWidth: 1400, margin: "0 auto"}} padding={1}>
             <Grid item xs={12}>
               <div id="Dashboard"></div>
-              <Weather updateLocalTime={updateLocalTime}></Weather>
+              <Weather updateLocalTime={updateLocalTime} localTime={localTime}></Weather>
             </Grid>
           </Grid>
         </Item>

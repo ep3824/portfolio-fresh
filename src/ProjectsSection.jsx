@@ -1,8 +1,9 @@
 import { Grid } from "@mui/material";
 import ProjectCard from "./ProjectCard.jsx";
 import Typography from "@mui/material/Typography";
-import EPWebsiteSS from "/images/EPWebsiteSS.webp";
-import weatherPic from "/images/weatherPagePic.webp";
+import EPWebsiteSS from "/images/EPWebsiteSS.png";
+import weatherPic from "/images/weatherPagePic.png";
+import HOTeaser from "/images/HOTeaser.png";
 
 export default function ProjectsSection() {
   return (
@@ -26,18 +27,21 @@ export default function ProjectsSection() {
             title={"Weather App"}
             description={"An elegant weather app built with React and Material UI. Uses Tomorrow.io to fetch weather data."} 
             pageLink={"/dashboard-page"}
+            hasDemo={true}
           />
           <ProjectCard
             image={`${EPWebsiteSS}`}
             title={"This Website"}
-            description={"Created with React, Material UI, and deployed on AWS (WIP)"}
+            description={"Created with React & Material UI."}
             pageLink={"/"}
+            hasDemo={false}
           />
           <ProjectCard
-            image={`${EPWebsiteSS}`}
-            title={"Automation Scripts"}
-            description={"PowerShell and Python scripts to automate tasks."}
+            image={`${HOTeaser}`}
+            title={"React Native Game"}
+            description={"A multiplayer DnD-esque experience built with React Native (Expo) and powered by WebSockets. Coming soon."}
             pageLink={"/"}
+            hasDemo={false}
           />
         </Grid>
       </Grid>

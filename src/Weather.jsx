@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Grid, Box, Typography } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 import HourlyWeather from "./HourlyWeather.jsx";
 import styled from "@mui/material/styles/styled";
 import weatherCodes from "../weatherCodes.json";
@@ -10,7 +11,8 @@ import { useState } from "react";
 import ClothingRec from "./ClothingRec.jsx";
 import validator from "validator";
 
-export default function Weather({ updateLocalTime }) {
+export default function Weather({ updateLocalTime, localTime }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [forecastDataState, setForecastDataState] = React.useState(null);
   const [selectedCity, setSelectedCity] = useState({
     description: "Frisco, TX, USA",
@@ -26,11 +28,13 @@ export default function Weather({ updateLocalTime }) {
     //Only need 1 API call to get all the Weather data
     const fetchForecastData = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch(`/api/forecast?city=${cityNameNoState}`);
         if (response.ok) {
           const forecastData = await response.json();
           setForecastDataState(forecastData);
           updateLocalTime(forecastData.timelines.hourly[0].time);
+          setIsLoading(false);
         } else {
           console.error(
             `Failed to fetch weather data. Status: ${response.status}`
@@ -42,7 +46,7 @@ export default function Weather({ updateLocalTime }) {
     };
 
     fetchForecastData();
-  }, [selectedCity]); // When city changes, fetch weather data
+  }, [selectedCity, cityNameNoState, updateLocalTime]); // When city changes, fetch weather data
 
   function formatDateWithoutYear(inputDate) {
     return new Intl.DateTimeFormat("en-US", {
@@ -139,9 +143,16 @@ export default function Weather({ updateLocalTime }) {
                       {selectedCity.description}
                     </Typography>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={9} lg={3}>
                     <PlacesAutocomplete onCitySelect={handleCitySelect} />
                   </Grid>
+                  {
+                    isLoading ? (
+                      <Grid item xs={3} lg={5}>
+                        <CircularProgress/>
+                      </Grid>
+                    ) : null
+                  }
                 </Grid>
 
                 <Grid item xs={12}>
@@ -211,7 +222,7 @@ export default function Weather({ updateLocalTime }) {
               </Grid>
               <Grid item xs={12} md={12} pb={2}>
                 <DashWidget>
-                  <ClothingRec forecastDataState={forecastDataState} />
+                  <ClothingRec forecastDataState={forecastDataState} time={localTime}/>
                 </DashWidget>
               </Grid>
               {/* <Grid item xs={12} md={6} pb={2}>
@@ -229,7 +240,7 @@ export default function Weather({ updateLocalTime }) {
             </Grid>
           </Grid>
         ) : (
-          <p>Loading weather data...</p>
+          null
         )}
       </Box>
     </div>

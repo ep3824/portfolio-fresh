@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
 
-export default function ClothingRec({ forecastDataState }) {
+export default function ClothingRec({ forecastDataState, time }) {
   const clothingWeatherPair = {
     4001: {
       description: ["rainy"],
@@ -85,6 +85,18 @@ export default function ClothingRec({ forecastDataState }) {
     });
   }
 
+  function TimeConverter({ utcString }) {
+    const date = new Date(utcString);
+
+    const localTimeString = date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+
+    return <>{localTimeString}</>
+  }
+
   
     let isNight = false;
     let isCloudy = false;
@@ -110,7 +122,7 @@ export default function ClothingRec({ forecastDataState }) {
         </Typography>
         <Typography variant="body1" pb={4} textAlign={"left"}>
             {/* It's a {clothingWeatherPair[weatherCode].description} day, make sure to wear a {clothingWeatherPair[weatherCode].top} and {clothingWeatherPair[weatherCode].bottom}! */}
-            It is {isCold ? "cold" : "warm"} {isRainy ? " and rainy" : null} { isSnowy ? " and snowy" : null} { isFoggy ? " and foggy" : null}   today, so make sure to wear a {isCold ? "jacket" : "t-shirt"} and {isRainy ? "bring an umbrella" : "enjoy the clear skies"}!
+            As of <TimeConverter utcString={time}/> the weather is {isCold ? "cold" : "warm"} {isRainy ? " and rainy" : null} { isSnowy ? " and snowy" : null} { isFoggy ? " and foggy" : null} { isClear ? " and sunny" : null}   today, so make sure to wear a {isCold ? "jacket" : "t-shirt"} and {isRainy ? "bring an umbrella" : "bring a pair of sunglasses"}!
         </Typography>
         <Grid>
             

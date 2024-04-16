@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-export default function ReusableCard({ image, title, description, pageLink }) {
+export default function ReusableCard({ image, title, description, pageLink, hasDemo }) {
   //Demo Button
   const CustomButton = styled(Button)(() => ({
     backgroundImage: `linear-gradient(45deg, #026359, #0AA689)`,
@@ -70,9 +70,17 @@ export default function ReusableCard({ image, title, description, pageLink }) {
           {description}
         </Typography>
         <div>
-          <a href={pageLink} target="_blank" rel="noreferrer">
-            <CustomButton size="small" >Demo</CustomButton>
-          </a>
+          {
+            hasDemo ? (
+            <a href={pageLink} target="_blank" rel="noreferrer">
+              <CustomButton size="small" >Demo</CustomButton>
+            </a>
+            ) : 
+            <a href={pageLink} target="_blank" rel="noreferrer">
+              <CustomButton size="small" >Demo TBA</CustomButton>
+            </a>
+          }
+          
           {/* And for now, these will just link to my general GitHub page */}
           <a
             href="https://www.github.com/ep3824"
