@@ -46,7 +46,7 @@ export default function Weather({ updateLocalTime, localTime }) {
     } finally {
       setIsLoading(false);
     }
-  }, [setIsLoading, setForecastDataState, updateLocalTime]);
+  }, []);
 
  
   useEffect(() => {
