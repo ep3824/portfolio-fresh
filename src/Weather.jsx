@@ -7,7 +7,7 @@ import styled from "@mui/material/styles/styled";
 import weatherCodes from "../weatherCodes.json";
 import DailyWeather from "./DailyWeather";
 import PlacesAutocomplete from "./PlacesAutocomplete.jsx";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import ClothingRec from "./ClothingRec.jsx";
 import validator from "validator";
 
@@ -17,36 +17,42 @@ export default function Weather({ updateLocalTime, localTime }) {
   const [selectedCity, setSelectedCity] = useState({
     description: "Frisco, TX, USA",
   });
-  //Necessary to give API the dash version ("new-york" instead of "new york")
-  const cityNameDashes = selectedCity.description
-    .replace(/, /g, "-")
-    .replace(/ /g, "-");
-  
-  const cityNameNoState = cityNameDashes.split(/-State|-municipality|-province/)[0];
 
-  useEffect(() => {
-    //Only need 1 API call to get all the Weather data
-    const fetchForecastData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(`/api/forecast?city=${cityNameNoState}`);
-        if (response.ok) {
-          const forecastData = await response.json();
-          setForecastDataState(forecastData);
-          updateLocalTime(forecastData.timelines.hourly[0].time);
-          setIsLoading(false);
-        } else {
-          console.error(
-            `Failed to fetch weather data. Status: ${response.status}`
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching Forecast data:", error);
-      }
+  //Necessary to give API the dash version ("new-york" instead of "new york")
+    const formatCityName = (cityName) => {
+      return cityName
+        .replace(/, /g, '-')
+        .replace(/ /g, '-')
+        .split(/-State|-municipality|-province/)[0];
     };
 
-    fetchForecastData();
-  }, [selectedCity, cityNameNoState, updateLocalTime]); // When city changes, fetch weather data
+  const fetchForecastData = useCallback(async (cityNameNoState) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/forecast?city=${cityNameNoState}`);
+      if (response.ok) {
+        const forecastData = await response.json();
+        if (forecastData && forecastData.timelines && forecastData.timelines.hourly && forecastData.timelines.daily) {
+          setForecastDataState(forecastData);
+          updateLocalTime(forecastData.timelines.hourly[0].time);
+        } else {
+          console.error('API response missing required timelines:', forecastData);
+        }
+      } else {
+        console.error(`Failed to fetch weather data. Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error fetching Forecast data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [setIsLoading, setForecastDataState, updateLocalTime]);
+
+ 
+  useEffect(() => {
+    const cityNameNoState = formatCityName(selectedCity.description);
+    fetchForecastData(cityNameNoState);
+  }, [selectedCity, fetchForecastData]);
 
   function formatDateWithoutYear(inputDate) {
     return new Intl.DateTimeFormat("en-US", {
@@ -128,7 +134,7 @@ export default function Weather({ updateLocalTime, localTime }) {
   return (
     <div id="Dashboard" style={{ textAlign: "left" }}>
       <Box>
-        {forecastDataState ? (
+        {forecastDataState && forecastDataState.timelines ? (
           <Grid container>
             <Grid item xs={12}>
               <Box>
