@@ -1,6 +1,7 @@
 #!/bin/bash
 HASHES_FILE="/home/ethanp/portfolio-fresh/dist/hashes.json"
 CSP_HEADER="default-src 'self';"
+# Note: this adds unsafe inline
 
 # Check if the hash file exists and generate CSP directives accordingly
 if [ -f "$HASHES_FILE" ]; then
@@ -8,18 +9,18 @@ if [ -f "$HASHES_FILE" ]; then
     script_hashes=$(jq -r '. | to_entries | map(select(.key | endswith(".js"))) | .[] | .value' "$HASHES_FILE" | while read -r hash; do echo -n "'$hash' "; done)
 
     if [ -n "$script_hashes" ]; then
-        CSP_HEADER="${CSP_HEADER} script-src 'self' $script_hashes;"
+        CSP_HEADER="${CSP_HEADER} script-src 'self' 'unsafe-inline' $script_hashes https://www.googletagmanager.com;"
     fi
 
     # Append style-src hashes with single quotes around each hash
     style_hashes=$(jq -r '. | to_entries | map(select(.key | endswith(".css"))) | .[] | .value' "$HASHES_FILE" | while read -r hash; do echo -n "'$hash' "; done)
     
     if [ -n "$style_hashes" ]; then
-        CSP_HEADER="${CSP_HEADER} style-src 'self' $style_hashes;"
+        CSP_HEADER="${CSP_HEADER} style-src 'self' 'unsafe-inline' $style_hashes;"
     fi
 else
     # Default fallbacks if no hashes are generated
-    CSP_HEADER="${CSP_HEADER} script-src 'self'; style-src 'self';"
+    CSP_HEADER="${CSP_HEADER} script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
 fi
 
 # Additional directives
