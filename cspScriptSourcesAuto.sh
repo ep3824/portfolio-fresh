@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory containing your web files
-WEB_DIR="/home/ethanp/portfolio-fresh/dist"
+WEB_DIR="/home/ethanp/portfolio-fresh/dist/assets"
 
 # Start with a basic CSP directive allowing scripts from self
 CSP="script-src 'self'"
