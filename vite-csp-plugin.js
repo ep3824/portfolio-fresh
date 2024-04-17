@@ -13,6 +13,7 @@ export default function viteCSPPlugin() {
       console.log("All bundle filenames:", Object.keys(bundle)); // Log all files in the bundle
 
       for (const [filename, fileinfo] of Object.entries(bundle)) {
+        console.log("this is the file type:", fileinfo.type);
         if (fileinfo.type === 'asset' && (filename.endsWith('.js') || filename.endsWith('.css'))) {
           const filePath = resolve(outputDir, fileinfo.fileName);
           console.log("Processing file:", filename); // Log the filename being processed
