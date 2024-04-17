@@ -1,4 +1,5 @@
-import { promises as fs, createHash } from 'fs';
+import { promises as fs } from 'fs';
+import { createHash } from 'crypto';
 import { resolve } from 'path';
 
 export default function viteCSPPlugin() {
