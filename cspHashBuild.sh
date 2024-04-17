@@ -4,14 +4,14 @@ CSP_HEADER="default-src 'self';"
 
 # Check if the hash file exists and generate CSP directives accordingly
 if [ -f "$HASHES_FILE" ]; then
-    # Append script-src hashes
-    script_hashes=$(jq -r 'to_entries | map(select(.key | endswith(".js"))) | map(.value) | join(" ")' "$HASHES_FILE")
+    # Append script-src hashes with single quotes around each hash
+    script_hashes=$(jq -r 'to_entries | map(select(.key | endswith(".js"))) | .[] | "\x27" + .value + "\x27"' "$HASHES_FILE" | paste -sd' ' -)
     if [ -n "$script_hashes" ]; then
         CSP_HEADER="${CSP_HEADER} script-src 'self' $script_hashes;"
     fi
 
-    # Append style-src hashes
-    style_hashes=$(jq -r 'to_entries | map(select(.key | endswith(".css"))) | map(.value) | join(" ")' "$HASHES_FILE")
+    # Append style-src hashes with single quotes around each hash
+    style_hashes=$(jq -r 'to_entries | map(select(.key | endswith(".css"))) | .[] | "\x27" + .value + "\x27"' "$HASHES_FILE" | paste -sd' ' -)
     if [ -n "$style_hashes" ]; then
         CSP_HEADER="${CSP_HEADER} style-src 'self' $style_hashes;"
     fi
