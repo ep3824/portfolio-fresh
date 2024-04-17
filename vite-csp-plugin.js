@@ -1,26 +1,26 @@
-import { writeFileSync, readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import { createHash } from 'crypto';
 import { resolve } from 'path';
 
-
-
-export default function viteCSPPlugin() {
+export function viteCSPPlugin() {
   return {
     name: 'vite:csp-hash',
     enforce: 'post',
     generateBundle(options, bundle) {
-      console.log(bundle);
       const hashes = {};
-      Object.values(bundle).forEach((chunk) => {
-        console.log(chunk.fileName)
-        if (chunk.type === 'asset' && (chunk.fileName.endsWith('.js') || chunk.fileName.endsWith('.css'))) {
-          const filePath = resolve(options.dir || 'dist', chunk.fileName); // Adjust based on actual output directory
-          const content = readFileSync(filePath, 'utf8');
-          const hash = createHash('sha256').update(content).digest('base64');
-          hashes[chunk.fileName] = `sha256-${hash}`;
+      for (const [filename, fileinfo] of Object.entries(bundle)) {
+        if (fileinfo.type === 'asset' && (filename.endsWith('.js') || filename.endsWith('.css'))) {
+          const filePath = resolve(options.dir, filename);
+          try {
+            const content = readFileSync(filePath, 'utf8');
+            const hash = createHash('sha256').update(content).digest('base64');
+            hashes[filename] = `sha256-${hash}`;
+          } catch (err) {
+            console.error(`Failed to read file ${filePath}: ${err}`);
+          }
         }
-      });
-      writeFileSync('/home/ethanp/portfolio-fresh/hashes.json', JSON.stringify(hashes, null, 2));
+      }
+      console.log(hashes); // This will log the hashes
     }
   };
 }
