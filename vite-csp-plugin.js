@@ -1,6 +1,6 @@
-import { promises as fs } from 'fs';
-import { createHash } from 'crypto';
+import { promises as fs} from 'fs';
 import { resolve } from 'path';
+import { createHash } from 'crypto';
 
 export default function viteCSPPlugin() {
   return {
@@ -10,20 +10,21 @@ export default function viteCSPPlugin() {
       const hashes = {};
       const outputDir = outputOptions.dir || 'dist';
 
-      for (const [filename, fileinfo] of Object.entries(bundle)) {
-        console.log("Bundle filenames:", Object.keys(bundle));
+      console.log("All bundle filenames:", Object.keys(bundle)); // Log all files in the bundle
 
+      for (const [filename, fileinfo] of Object.entries(bundle)) {
         if (fileinfo.type === 'asset' && (filename.endsWith('.js') || filename.endsWith('.css'))) {
           const filePath = resolve(outputDir, fileinfo.fileName);
-          console.log("Attempting to hash file at path:", filePath);
-
+          console.log("Processing file:", filename); // Log the filename being processed
+          console.log("File path:", filePath); // Log the full file path
 
           try {
             const content = await fs.readFile(filePath, 'utf8');
             const hash = createHash('sha256').update(content).digest('base64');
             hashes[filename] = `sha256-${hash}`;
+            console.log(`Hashed ${filename}: ${hashes[filename]}`); // Log each hash generated
           } catch (err) {
-            console.error(`Failed to read file ${filePath}: ${err}`);
+            console.error(`Failed to read or hash file ${filePath}: ${err}`);
           }
         }
       }
