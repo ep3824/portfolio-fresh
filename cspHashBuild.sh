@@ -1,5 +1,5 @@
 #!/bin/bash
-HASHES_FILE="/home/ethanp/portfolio-fresh/hashes.json"
+HASHES_FILE="/home/ethanp/portfolio-fresh/dist/hashes.json"
 CSP_HEADER="default-src 'self';"
 
 if [ -f "$HASHES_FILE" ]; then
