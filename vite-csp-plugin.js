@@ -16,7 +16,7 @@ export default function viteCSPPlugin() {
             const filePath = resolve(outputDir, fileinfo.fileName);
   
             try {
-              const content = fs.readFileSync(filePath, 'utf8');
+              const content = fs.readFile(filePath, 'utf8');
               const hash = createHash('sha256').update(content).digest('base64');
               hashes[filename] = `sha256-${hash}`;
             } catch (err) {
