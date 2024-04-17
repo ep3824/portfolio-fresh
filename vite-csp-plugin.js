@@ -14,7 +14,7 @@ export default function viteCSPPlugin() {
 
       for (const [filename, fileinfo] of Object.entries(bundle)) {
         console.log("this is the file type:", fileinfo.type);
-        if (fileinfo.type === 'asset' && (filename.endsWith('.js') || filename.endsWith('.css'))) {
+        if (fileinfo.type === 'asset' || fileinfo.type === 'chunk' && (filename.endsWith('.js') || filename.endsWith('.css'))) {
           const filePath = resolve(outputDir, fileinfo.fileName);
           console.log("Processing file:", filename); // Log the filename being processed
           console.log("File path:", filePath); // Log the full file path
