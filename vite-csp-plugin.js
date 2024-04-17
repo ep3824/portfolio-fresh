@@ -9,6 +9,7 @@ export default function viteCSPPlugin() {
     async generateBundle(options, bundle) {
       const hashes = {};
       const outputDir = options.dir || 'dist';  // Ensure this is correctly set in your Vite config
+      console.log("outputDir is:", outputDir);
 
       for (const [filename, fileinfo] of Object.entries(bundle)) {
         if (fileinfo.type === 'asset' && (filename.endsWith('.js') || filename.endsWith('.css'))) {
