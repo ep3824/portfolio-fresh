@@ -1,36 +1,23 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-ZCMGL7M8WH"
-      nonce="${nonce}"
-    ></script>
+<head>
+    <!-- Remove any meta tags or scripts related to nonces -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCMGL7M8WH"></script>
     <script>
-      nonce="${nonce}"
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-ZCMGL7M8WH");
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-ZCMGL7M8WH');
     </script>
     <meta charset="UTF-8" />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#031719"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Ethan Parent Portfolio</title>
-  </head>
-
-  <body>
+</head>
+<body>
     <div id="root"></div>
-
-    <script type="module" nonce="${nonce}" src="/src/pages/main.jsx"></script>
-  </body>
+    <!-- Ensure all scripts use direct src references without nonces -->
+    <script type="module" src="/src/pages/main.jsx"></script>
+</body>
 </html>
