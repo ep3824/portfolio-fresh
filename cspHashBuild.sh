@@ -5,13 +5,13 @@ CSP_HEADER="default-src 'self';"
 # Check if the hash file exists and generate CSP directives accordingly
 if [ -f "$HASHES_FILE" ]; then
     # Append script-src hashes
-    script_hashes=$(jq -r 'to_entries | map(select(.key | endswith(".js"))) | map(.value | "\"\(.|tostring)\"") | join(" ")' "$HASHES_FILE")
+    script_hashes=$(jq -r 'to_entries | map(select(.key | endswith(".js"))) | map(.value) | join(" ")' "$HASHES_FILE")
     if [ -n "$script_hashes" ]; then
         CSP_HEADER="${CSP_HEADER} script-src 'self' $script_hashes;"
     fi
 
     # Append style-src hashes
-    style_hashes=$(jq -r 'to_entries | map(select(.key | endswith(".css"))) | map(.value | "\"\(.|tostring)\"") | join(" ")' "$HASHES_FILE")
+    style_hashes=$(jq -r 'to_entries | map(select(.key | endswith(".css"))) | map(.value) | join(" ")' "$HASHES_FILE")
     if [ -n "$style_hashes" ]; then
         CSP_HEADER="${CSP_HEADER} style-src 'self' $style_hashes;"
     fi
