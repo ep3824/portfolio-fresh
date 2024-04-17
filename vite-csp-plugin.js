@@ -9,8 +9,10 @@ export default function viteCSPPlugin() {
     name: 'vite:csp-hash',
     enforce: 'post',
     generateBundle(options, bundle) {
+      console.log(bundle);
       const hashes = {};
       Object.values(bundle).forEach((chunk) => {
+        console.log(chunk.fileName)
         if (chunk.type === 'asset' && (chunk.fileName.endsWith('.js') || chunk.fileName.endsWith('.css'))) {
           const filePath = resolve(options.dir || 'dist', chunk.fileName); // Adjust based on actual output directory
           const content = readFileSync(filePath, 'utf8');
