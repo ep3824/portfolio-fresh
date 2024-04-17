@@ -1,6 +1,8 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
+import { createHash } from 'crypto';
 
-function viteCSPPlugin() {
+
+export function viteCSPPlugin() {
   const hashes = {};
 
   return {
