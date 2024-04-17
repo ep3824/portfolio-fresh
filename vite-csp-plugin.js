@@ -11,8 +11,12 @@ export default function viteCSPPlugin() {
       const outputDir = outputOptions.dir || 'dist';
 
       for (const [filename, fileinfo] of Object.entries(bundle)) {
+        console.log("Bundle filenames:", Object.keys(bundle));
+
         if (fileinfo.type === 'asset' && (filename.endsWith('.js') || filename.endsWith('.css'))) {
           const filePath = resolve(outputDir, fileinfo.fileName);
+          console.log("Attempting to hash file at path:", filePath);
+
 
           try {
             const content = await fs.readFile(filePath, 'utf8');
