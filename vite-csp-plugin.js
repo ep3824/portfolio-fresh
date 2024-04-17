@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import { createHash } from 'crypto';
-import { resolve } from 'path';
+import { resolve, join } from 'path';
 
 export default function viteCSPPlugin() {
   return {
@@ -22,7 +22,15 @@ export default function viteCSPPlugin() {
           }
         }
       }
-      console.log(hashes); // Logs the hashes or shows where the read failures are
+
+      // Writing hashes to a JSON file
+      if (Object.keys(hashes).length > 0) {
+        const hashesPath = join(outputDir, 'hashes.json');
+        await fs.writeFile(hashesPath, JSON.stringify(hashes, null, 2));
+        console.log(`CSP hashes written to ${hashesPath}`);
+      } else {
+        console.log('No hashes generated.');
+      }
     }
   };
 }
