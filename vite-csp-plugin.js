@@ -2,7 +2,7 @@ import { writeFileSync, readFileSync } from 'fs';
 import { createHash } from 'crypto';
 
 
-export function viteCSPPlugin() {
+export default function viteCSPPlugin() {
   const hashes = {};
 
   return {
