@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { createHash } from 'crypto';
 import { resolve } from 'path';
 
-export function viteCSPPlugin() {
+export default function viteCSPPlugin() {
   return {
     name: 'vite:csp-hash',
     enforce: 'post',
