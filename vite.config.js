@@ -1,11 +1,12 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
+import viteCSPPlugin from './vite-csp-plugin';
 import react from "@vitejs/plugin-react-swc";
 import dotenv from "dotenv";
 dotenv.config();
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), viteCSPPlugin()],
   server: {
     proxy: {
       "/api": {
