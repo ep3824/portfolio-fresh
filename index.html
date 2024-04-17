@@ -5,8 +5,10 @@
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-ZCMGL7M8WH"
+      nonce="${nonce}"
     ></script>
     <script>
+      nonce="${nonce}"
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -29,6 +31,6 @@
   <body>
     <div id="root"></div>
 
-    <script type="module" src="/src/pages/main.jsx"></script>
+    <script type="module" nonce="${nonce}" src="/src/pages/main.jsx"></script>
   </body>
 </html>
