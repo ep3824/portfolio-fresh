@@ -1,15 +1,13 @@
 #!/bin/bash
 
 # Directory containing your web files
-WEB_DIR="/home/ethanp/portfolio-fresh/dist/assets"
+WEB_DIR="/home/ethanp/portfolio-fresh/dist"
 
 # Start with a basic CSP directive allowing scripts from self
 CSP="script-src 'self'"
 
-# Use grep to find all occurrences of script sources from external URLs
-# This example assumes scripts are included in a standard way in HTML or JS files
-# and that URLs are quoted with double quotes
-grep -hoE "src=\"https?://[^\"]+" $WEB_DIR/*.{html,js} | \
+# Use find and grep to search recursively for external script URLs in HTML and JS files
+find $WEB_DIR -type f \( -name "*.html" -or -name "*.js" \) -exec grep -hoE "src=\"https?://[^\"]+" {} \; | \
 cut -d\" -f2 | \
 sort -u | \
 while read -r url; do
@@ -21,6 +19,5 @@ done
 # Output the final CSP string
 echo "Content-Security-Policy: $CSP;"
 
-# Optionally, you can write this to a file or directly into your nginx or Apache config
-# For example, for Nginx you might do:
+# Optionally, write this to a file or directly into your nginx or Apache config
 echo "add_header Content-Security-Policy \"$CSP;\" always;" > /usr/local/openresty/nginx/conf/snippets/csp.conf
