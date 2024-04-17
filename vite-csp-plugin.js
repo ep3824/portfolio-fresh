@@ -1,8 +1,11 @@
 import { promises as fs } from 'fs';
 import { createHash } from 'crypto';
 import { resolve, join } from 'path';
+import { setTimeout } from 'timers/promises';
 
 export default function viteCSPPlugin() {
+
+    
   return {
     name: 'vite:csp-hash',
     enforce: 'post',
@@ -15,6 +18,7 @@ export default function viteCSPPlugin() {
         if (fileinfo.type === 'asset' && (filename.endsWith('.js') || filename.endsWith('.css'))) {
           const filePath = resolve(outputDir, filename);
           console.log("file path is:", filePath)
+          await setTimeout(1000);
           try {
             const content = await fs.readFile(filePath, 'utf8');
             const hash = createHash('sha256').update(content).digest('base64');
