@@ -7,4 +7,4 @@ if [ -f "$HASHES_FILE" ]; then
     CSP_HEADER="$CSP_HEADER $hashes"
 fi
 
-echo "add_header Content-Security-Policy \"$CSP_HEADER\" always;" > /etc/nginx/snippets/csp.conf
+echo "add_header Content-Security-Policy \"$CSP_HEADER\" always;" > /usr/local/openresty/nginx/conf/snippets/csp.conf
