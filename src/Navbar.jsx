@@ -1,29 +1,25 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import {
-  Box,
-  Drawer,
-  CssBaseline,
-  AppBar as MuiAppBar,
-  Toolbar,
-  List,
-  IconButton,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import IconButton from "@mui/material/IconButton";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import {
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-import {
-  Dashboard as DashboardIcon,
-  Description as DescriptionIcon,
-  ContactPage as ContactPageIcon,
-  Code as CodeIcon,
-} from "@mui/icons-material";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import DescriptionIcon from "@mui/icons-material/Description";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
+import CodeIcon from "@mui/icons-material/Code";
+
 
 // import EPLogo from "../public/images/EPLogo.webp";
 

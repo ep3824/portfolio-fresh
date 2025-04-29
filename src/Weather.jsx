@@ -1,15 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import { Grid, Box, Typography } from "@mui/material";
-import CircularProgress from '@mui/material/CircularProgress';
-import HourlyWeather from "./HourlyWeather.jsx";
+
+// Granular @mui/material imports
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 import styled from "@mui/material/styles/styled";
-import weatherCodes from "../weatherCodes.json";
+
+// Project/component imports
+import HourlyWeather from "./HourlyWeather.jsx";
 import DailyWeather from "./DailyWeather";
 import PlacesAutocomplete from "./PlacesAutocomplete.jsx";
-import { useState, useCallback } from "react";
 import ClothingRec from "./ClothingRec.jsx";
+import weatherCodes from "../weatherCodes.json";
+
+// Utility
 import validator from "validator";
+
 
 export default function Weather({ updateLocalTime, localTime }) {
   const [isLoading, setIsLoading] = useState(false);

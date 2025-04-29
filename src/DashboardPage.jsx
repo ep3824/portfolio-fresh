@@ -1,4 +1,5 @@
-import { Grid, Paper } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import "@fontsource-variable/red-hat-text";
 import Navbar2 from "./Navbar2";

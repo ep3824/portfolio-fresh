@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import trendLogo from "/images/trendLogoWhite.webp";
 import grinLogo from "/images/grinLogoTransparent.webp";
 import tPayLogo from "/images/tPay.webp";

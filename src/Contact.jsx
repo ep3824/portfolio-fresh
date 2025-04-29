@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import EmailIcon from "@mui/icons-material/Email";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";

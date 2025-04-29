@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import SkillBar from "./SkillBar.jsx";
 import Bio from "./Bio.jsx";
 

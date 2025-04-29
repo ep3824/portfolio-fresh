@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import ProjectCard from "./ProjectCard.jsx";
 import Typography from "@mui/material/Typography";
 import EPWebsiteSS from "/images/EPWebsiteSS.png";
