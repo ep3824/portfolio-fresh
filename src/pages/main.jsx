@@ -18,7 +18,7 @@ const nonce = document.documentElement.dataset.nonce;
 
 // 2) Create an Emotion cache tied to that nonce
 const emotionCache = createCache({
-  key: "mui",     // you can pick any prefix, 'mui' is conventional for MUI
+  key: "css",     // you can pick any prefix, 'mui' is conventional for MUI
   nonce,          // this is what makes `<style nonce="…">` happen
 });
 
