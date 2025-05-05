@@ -24,7 +24,7 @@
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "dotenv": "^16.3.1",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "express-validator": "^7.0.1",
     "memory-cache": "^0.2.0",
     "openai": "^4.24.2",
